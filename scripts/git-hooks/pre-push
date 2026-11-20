@@ -1,0 +1,28 @@
+#!/bin/sh
+# GEO Intelligence Lab — local guard: refuse any push that creates, updates or deletes a protected branch.
+# Covers: git push origin main | HEAD:main | :main (delete) | --all | --mirror | any refspec landing on main.
+# Git passes one line per ref being updated on stdin: <local ref> <local sha> <remote ref> <remote sha>.
+# Limitation: `git push --no-verify` skips hooks. Server-side branch protection is the real control.
+# Captain-approved one-off override:  GEOLAB_ALLOW_PROTECTED_PUSH=yes git push origin main
+
+PROTECTED="refs/heads/main refs/heads/master"
+remote_name="$1"
+blocked=""
+while read -r local_ref local_sha remote_ref remote_sha; do
+  for p in $PROTECTED; do
+    if [ "$remote_ref" = "$p" ]; then
+      blocked="$blocked $remote_ref"
+    fi
+  done
+done
+
+if [ -n "$blocked" ]; then
+  if [ "$GEOLAB_ALLOW_PROTECTED_PUSH" = "yes" ]; then
+    echo "pre-push: WARNING override used for:$blocked (remote: $remote_name)" >&2
+    exit 0
+  fi
+  echo "pre-push: BLOCKED push to protected branch:$blocked (remote: $remote_name)" >&2
+  echo "pre-push: main меняется только через Pull Request с разрешения капитана. См. CLAUDE.md / AGENTS.md." >&2
+  exit 1
+fi
+exit 0

@@ -125,7 +125,7 @@ python -m pytest -q
 ```
 - **`pytest`** находит файлы `tests/test_*.py` и запускает функции `test_*`.
 - **`-q`** — краткий вывод.
-- Ожидается: `25 passed` (число растёт по мере работы). Любое `failed` — **не коммитить в main**, сначала исправить.
+- Ожидается: `25 passed` (число растёт по мере работы). Любое `failed` — **не коммитить и не пушить**, сначала исправить.
 
 ---
 
@@ -224,26 +224,33 @@ git merge feature/source-intel       # влить ветку в текущую (
 git remote -v
 # origin  https://github.com/Zufics2/TrAIHaRd-hackathonwinners2026.git
 ```
-Первый push:
-```zsh
-git push -u origin main
-```
-- **`origin`** — имя удалённого репозитория, **`main`** — ветка.
-- **`-u`** — запомнить связь, дальше достаточно `git push`.
+> **Правило:** `main` меняется только через Pull Request с разрешения капитана. Прямой push, commit и merge в `main` запрещены (`CLAUDE.md`, `AGENTS.md`, `docs/GIT_INCIDENT_2026-11-20.md`).
+
 - Вход: на этом Mac Git хранит данные входа в Связке ключей (`credential.helper = osxkeychain`). Если пароль спрашивают — подходят Personal Access Token, Git Credential Manager (`brew install --cask git-credential-manager`, открывает браузер) или SSH-ключ (`git remote set-url origin git@github.com:Zufics2/TrAIHaRd-hackathonwinners2026.git`). Пароль от аккаунта GitHub **не** подходит.
 - `Permission denied` / `403` — у вашего аккаунта нет прав на запись в `Zufics2/...`. Обходить нельзя: попросите владельца репозитория добавить вас в Collaborators.
 
-Отправить свою ветку:
+Отправить свою ветку (всегда с явным именем ветки):
 ```zsh
+git branch --show-current        # убедиться, что вы на своей ветке
 git push -u origin feat/core-app
 ```
-- **Никогда** не используйте `git push --force` в `main`.
+- **`origin`** — имя удалённого репозитория, **`feat/core-app`** — ветка. **`-u`** — запомнить связь.
+- Запрещено: `git push --force`, `git push --no-verify`, `git push --all`, `git push origin main`.
 
-Получить изменения коллег:
+Влить свою ветку в `main` — **только через Pull Request** на GitHub (Compare & pull request → ревью капитана → Merge). Делает капитан.
+
+Посмотреть изменения коллег, ничего не меняя:
 ```zsh
-git pull --rebase origin main
+git fetch origin
+git log --oneline feat/core-app..origin/main   # что есть в main и нет у вас
 ```
-- **`--rebase`** — поставить ваши локальные коммиты поверх свежих, без лишних merge-коммитов.
+Забрать `main` в свою ветку — только при чистом `git status` и с согласия капитана: `git merge origin/main`.
+
+Защита от случайного push в `main` (ставится с разрешения капитана):
+```zsh
+cp scripts/git-hooks/pre-push .git/hooks/pre-push && chmod +x .git/hooks/pre-push
+```
+Hook блокирует любой push, затрагивающий `main`. Обходится через `--no-verify`, поэтому настоящая защита — branch protection на GitHub.
 
 ---
 
@@ -288,7 +295,8 @@ codex
 ```zsh
 cd ~/Desktop/TrAIHaRd-hackathonwinners2026
 source .venv/bin/activate
-git pull --rebase origin main
+git status                       # чисто? ветка правильная?
+git fetch origin                 # только посмотреть, без изменений
 python -m pytest -q
 streamlit run app.py
 ```

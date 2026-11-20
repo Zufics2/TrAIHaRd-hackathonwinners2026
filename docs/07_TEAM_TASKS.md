@@ -4,7 +4,7 @@
 
 | Роль | Кто |
 |---|---|
-| Основной разработчик (код, интеграция, импорт данных, merge в `main`) | **Claude Code** на MacBook #1 (P1) |
+| Основной разработчик (код, интеграция, импорт данных) — работает только в `feat/core-app` | **Claude Code** на MacBook #1 (P1) |
 | Эксперимент и QA | **Codex** (`codex/qa-experiments`) |
 | Research: источники, 2ГИС/Яндекс/соцсети, конкуренты, бренды, правки | **P2** (MacBook #2) |
 | Реальные наблюдения AI + питч | **P3** (Windows) |
@@ -16,7 +16,7 @@
 
 | Ветка | Кто | Рабочая папка |
 |---|---|---|
-| `main` | интеграция (merge делает только P1) | `~/Desktop/TrAIHaRd-hackathonwinners2026` (сейчас на `feat/core-app`) |
+| `main` | стабильная интеграция: только Pull Request с разрешения капитана | `~/Desktop/TrAIHaRd-hackathonwinners2026` (сейчас на `feat/core-app`) |
 | `feat/core-app` | P1 + Claude Code | та же |
 | `codex/qa-experiments` | Codex | **`~/Desktop/TrAIHaRd-codex`** — отдельный git worktree, уже создан |
 | `research/brand-sources` | P2 | свой клон на MacBook #2 |
@@ -60,8 +60,8 @@
 2. Проверка: дашборд у P1 → «Импорт наблюдений» → загрузить файл. Есть ошибки — таблица «строка · поле · причина» → исправить в Sheets → загрузить снова. **Ничего не правим руками в CSV на MacBook #1.**
 3. Без ошибок → кнопка «Сохранить» (файл кладётся в `data/raw/manual/` без изменений; одноимённый файл не перезаписывается).
 4. Скриншоты → `assets/evidence/` (AirDrop/Telegram «Избранное» → P1).
-5. P1: `python -m pytest -q` → commit `data: P3 gemini baseline (N rows)` в `feat/core-app` → merge в `main` → push.
-6. Участники с Git вместо шагов 2–4 делают commit в свою ветку и push. P1 сливает ветку после валидатора: `cd src && ../.venv/bin/python -m geolab.contract observations ../data/raw/manual/<file>`.
+5. Claude: `python -m pytest -q` → commit `data: P3 gemini baseline (N rows)` в `feat/core-app` → push `feat/core-app`. В `main` — только через PR после разрешения капитана.
+6. Участники с Git вместо шагов 2–4 делают commit в свою ветку и push. Капитан сливает ветку через PR после валидатора: `cd src && ../.venv/bin/python -m geolab.contract observations ../data/raw/manual/<file>`.
 
 ## Приоритеты
 
