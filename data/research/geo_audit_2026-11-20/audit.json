@@ -1,0 +1,1640 @@
+{
+ "_meta": {
+  "user_agent": "GeoIntelligenceLab-Hackathon/0.1 (research prototype)",
+  "note": "read-only; robots.txt respected; production unchanged",
+  "redaction": "CMS session-token values (sessid / bitrix_sessid) replaced by REDACTED; 'sha256' = raw fetched bytes (raw copy in git-ignored data/private/geo_snapshots_raw/), 'sha256_redacted' = tracked file; visible text identical"
+ },
+ "centr_krasok": {
+  "https://centr-krasok.kz/": {
+   "url": "https://centr-krasok.kz/",
+   "snapshot": "data/research/geo_audit_2026-11-20/html/centr-krasok.kz.html",
+   "status": 200,
+   "final_url": "https://centr-krasok.kz/",
+   "fetched_at": "2026-11-20T12:15:06+00:00",
+   "x_robots_tag": null,
+   "sha256": "f927ceee93c691f574ebbe314dc4fa4facd9254b7a2ebbd40a90d8cc7b327390",
+   "sha256_redacted": "dcea180a2fa25de5a55c0f104b073051ff6fede4d27a49b0e9cae6b0969e6e52",
+   "title": "Центр Красок #1",
+   "meta_description": "Мы предлагаем широкий ассортимент лакокрасочной продукции и декоративных отделочных материалов европейских брендов.",
+   "meta_robots": "index, follow",
+   "canonical": null,
+   "h1": [],
+   "h2": [
+    "ПОПУЛЯРНЫЕ ТОВАРЫ",
+    "БРЕНДЫ С КОТОРЫМИ МЫ РАБОТАЕМ",
+    "НАМ ДОВЕРЯЮТ ЛУЧШИЕ КОМПАНИИ"
+   ],
+   "h3_count": 6,
+   "jsonld_types": [
+    "WebSite"
+   ],
+   "jsonld": [
+    {
+     "@context": "https://schema.org",
+     "@type": "WebSite",
+     "name": "ᐉ Центр Красок #1 Интернет-магазин строительных красок в Алматы",
+     "url": "https://centr-krasok.kz/"
+    }
+   ],
+   "visible_chars": 8001,
+   "city_mentions": {
+    "astana": 5,
+    "almaty": 10,
+    "karaganda": 1
+   },
+   "phones": [
+    "+7 (777) 292-84-01",
+    "+7 778 061 50 00"
+   ],
+   "internal_links": 254,
+   "has_hreflang": false,
+   "astana_snippets": [
+    "ль ваш город алматы? да нет, выбрать другой выберите город: не выбран актау актобе алматы астана атырау жанаозен жезказган караганды кокшетау конаев костанай кызылорда павлодар петропавловск семей тал",
+    "x 56 250 kzt в корзину краска dulux professional diamond max protect мат bс 2,25л остаток астана: 1 шт артикул 5539701 бренд dulux 42 550 kzt в корзину краска dulux easy/легко обновить обои мат bc 2,2",
+    "в корзину краска dulux easy/легко обновить обои мат bc 2,25л остаток алматы: 1 шт остаток астана: 2 шт артикул 5733765 бренд dulux 19 580 kzt в корзину краска dulux professional bindo 3 глубокоматовая",
+    "зину краска dulux professional bindo 20 полуматовая bc 0,9л остаток алматы: 14 шт остаток астана: 5 шт артикул 5309526 бренд dulux 10 280 kzt в корзину краски по интерьеру для гостиной для детской для"
+   ]
+  },
+  "https://centr-krasok.kz/about/contacts/": {
+   "url": "https://centr-krasok.kz/about/contacts/",
+   "snapshot": "data/research/geo_audit_2026-11-20/html/centr-krasok.kz__about__contacts.html",
+   "status": 200,
+   "final_url": "https://centr-krasok.kz/about/contacts/",
+   "fetched_at": "2026-11-20T12:15:07+00:00",
+   "x_robots_tag": null,
+   "sha256": "92347a372412f77056597fde59d52770d02a5fc6220009ac8dd547a1892df4e1",
+   "sha256_redacted": "ee399e4b07eba55c5518d519be2662a03845aca34e292a449593a59727c7aafb",
+   "title": "Контакты",
+   "meta_description": "На сегодняшний день наша компания является официальным дистрибьютором известных европейских брендов, которые зарекомендовали себя на мировом рынке, как производители качественной, экологически чистой лакокрасочной продукции. Вся продукция подтверждена сертификатами европейских лабораторий и рекомендована для использования в детских дошкольных учебных и лечебных учреждениях.",
+   "meta_robots": "index, follow",
+   "canonical": null,
+   "h1": [
+    "Наши контакты"
+   ],
+   "h2": [
+    "Алматы",
+    "Астана"
+   ],
+   "h3_count": 0,
+   "jsonld_types": [
+    "WebSite"
+   ],
+   "jsonld": [
+    {
+     "@context": "https://schema.org",
+     "@type": "WebSite",
+     "name": "ᐉ Центр Красок #1 Интернет-магазин строительных красок в Алматы",
+     "url": "https://centr-krasok.kz/"
+    }
+   ],
+   "visible_chars": 3114,
+   "city_mentions": {
+    "astana": 5,
+    "almaty": 10,
+    "karaganda": 1
+   },
+   "phones": [
+    "+7 (777) 292-84-01"
+   ],
+   "internal_links": 122,
+   "has_hreflang": false,
+   "astana_snippets": [
+    "ль ваш город алматы? да нет, выбрать другой выберите город: не выбран актау актобе алматы астана атырау жанаозен жезказган караганды кокшетау конаев костанай кызылорда павлодар петропавловск семей тал",
+    "ы, ул. кабдолова 1/8, блок 1, 1 ряд, линия d, 21 бутик с 10:00 до 20:00 загрузка карты... астана +7 (777) 292-84-01 г. астана, ул. мангилик ел, 29/2 с 10:00 до 20:00 загрузка карты... каталог о компан",
+    " 1 ряд, линия d, 21 бутик с 10:00 до 20:00 загрузка карты... астана +7 (777) 292-84-01 г. астана, ул. мангилик ел, 29/2 с 10:00 до 20:00 загрузка карты... каталог о компании покупателям сотрудничество",
+    "я d, 21 бутик с 10:00 до 20:00 загрузка карты... астана +7 (777) 292-84-01 г. астана, ул. мангилик ел, 29/2 с 10:00 до 20:00 загрузка карты... каталог о компании покупателям сотрудничество лучшие това"
+   ]
+  },
+  "https://centr-krasok.kz/about/delivery/": {
+   "url": "https://centr-krasok.kz/about/delivery/",
+   "snapshot": "data/research/geo_audit_2026-11-20/html/centr-krasok.kz__about__delivery.html",
+   "status": 200,
+   "final_url": "https://centr-krasok.kz/about/delivery/",
+   "fetched_at": "2026-11-20T12:15:08+00:00",
+   "x_robots_tag": null,
+   "sha256": "ff8041ef1ca96ccdd9fe2d371899b59d9ca8e3438244ad828eaf25724b1a3bc3",
+   "sha256_redacted": "f6a2afb6f87ebcc058d657d67abaa2f7074752d116baf98e8445d86fdda5ba1d",
+   "title": "Доставка",
+   "meta_description": "На сегодняшний день наша компания является официальным дистрибьютором известных европейских брендов, которые зарекомендовали себя на мировом рынке, как производители качественной, экологически чистой лакокрасочной продукции. Вся продукция подтверждена сертификатами европейских лабораторий и рекомендована для использования в детских дошкольных учебных и лечебных учреждениях.",
+   "meta_robots": "index, follow",
+   "canonical": null,
+   "h1": [],
+   "h2": [
+    "Стоимость доставки курьером",
+    "Время доставки",
+    "Место доставки",
+    "Правила"
+   ],
+   "h3_count": 0,
+   "jsonld_types": [
+    "WebSite"
+   ],
+   "jsonld": [
+    {
+     "@context": "https://schema.org",
+     "@type": "WebSite",
+     "name": "ᐉ Центр Красок #1 Интернет-магазин строительных красок в Алматы",
+     "url": "https://centr-krasok.kz/"
+    }
+   ],
+   "visible_chars": 5953,
+   "city_mentions": {
+    "astana": 2,
+    "almaty": 5,
+    "karaganda": 1
+   },
+   "phones": [
+    "+7 (777) 292-84-01",
+    "+7 778 061 5000"
+   ],
+   "internal_links": 122,
+   "has_hreflang": false,
+   "astana_snippets": [
+    "ль ваш город алматы? да нет, выбрать другой выберите город: не выбран актау актобе алматы астана атырау жанаозен жезказган караганды кокшетау конаев костанай кызылорда павлодар петропавловск семей тал",
+    "сти статьи контакты алматы пн-вс с 10:00 до 20:00 +7 (777) 292-84-01 info@centr-krasok.kz астана пн-вс с 10:00 до 20:00 +7 (777) 292-84-01 тоо «экспонента1» юридический адрес: республика казахстан, ау"
+   ]
+  },
+  "https://centr-krasok.kz/about/": {
+   "url": "https://centr-krasok.kz/about/",
+   "snapshot": "data/research/geo_audit_2026-11-20/html/centr-krasok.kz__about.html",
+   "status": 200,
+   "final_url": "https://centr-krasok.kz/about/",
+   "fetched_at": "2026-11-20T12:15:10+00:00",
+   "x_robots_tag": null,
+   "sha256": "f9df1ed8a9d029ba03d12d4b1d869b85c288172488be7fa7e3af693c483078ed",
+   "sha256_redacted": "9f3fb810c00d0734bc4ddc27960bd06370fd08ef61f8ef881880a32fa249e6c7",
+   "title": "О магазине - Центр Красок #1",
+   "meta_description": "На сегодняшний день наша компания является официальным дистрибьютором известных европейских брендов, которые зарекомендовали себя на мировом рынке, как производители качественной, экологически чистой лакокрасочной продукции. Вся продукция подтверждена сертификатами европейских лабораторий и рекомендована для использования в детских дошкольных учебных и лечебных учреждениях.",
+   "meta_robots": "index, follow",
+   "canonical": null,
+   "h1": [],
+   "h2": [
+    "Наши возможности",
+    "Наши салоны"
+   ],
+   "h3_count": 2,
+   "jsonld_types": [
+    "WebSite"
+   ],
+   "jsonld": [
+    {
+     "@context": "https://schema.org",
+     "@type": "WebSite",
+     "name": "ᐉ Центр Красок #1 Интернет-магазин строительных красок в Алматы",
+     "url": "https://centr-krasok.kz/"
+    }
+   ],
+   "visible_chars": 4089,
+   "city_mentions": {
+    "astana": 3,
+    "almaty": 6,
+    "karaganda": 1
+   },
+   "phones": [
+    "+7 (777) 292-84-01"
+   ],
+   "internal_links": 121,
+   "has_hreflang": false,
+   "astana_snippets": [
+    "ль ваш город алматы? да нет, выбрать другой выберите город: не выбран актау актобе алматы астана атырау жанаозен жезказган караганды кокшетау конаев костанай кызылорда павлодар петропавловск семей тал",
+    " салоны сезонные скидки программы лояльности карты постоянных клиентов наши салоны алматы астана мы всегда рады общению с нашими клиентами. если у вас есть какие-либо пожелания, предложения, замечания",
+    "сти статьи контакты алматы пн-вс с 10:00 до 20:00 +7 (777) 292-84-01 info@centr-krasok.kz астана пн-вс с 10:00 до 20:00 +7 (777) 292-84-01 тоо «экспонента1» юридический адрес: республика казахстан, ау"
+   ]
+  },
+  "https://centr-krasok.kz/brands/": {
+   "url": "https://centr-krasok.kz/brands/",
+   "snapshot": "data/research/geo_audit_2026-11-20/html/centr-krasok.kz__brands.html",
+   "status": 200,
+   "final_url": "https://centr-krasok.kz/brands/",
+   "fetched_at": "2026-11-20T12:15:11+00:00",
+   "x_robots_tag": null,
+   "sha256": "daa74ce89f7084005a6084572ad1aaf7b07e63f66bcdd0d2d286e6a006f8f2c8",
+   "sha256_redacted": "029c65a014e08cc02729e07fea060930cd24fb846a7f9dab42c18da91c8052b2",
+   "title": "Бренды - Центр Красок #1",
+   "meta_description": "Мы предлагаем широкий ассортимент лакокрасочной продукции и декоративных отделочных материалов европейских брендов.",
+   "meta_robots": "index, follow",
+   "canonical": null,
+   "h1": [],
+   "h2": [],
+   "h3_count": 0,
+   "jsonld_types": [
+    "WebSite"
+   ],
+   "jsonld": [
+    {
+     "@context": "https://schema.org",
+     "@type": "WebSite",
+     "name": "ᐉ Центр Красок #1 Интернет-магазин строительных красок в Алматы",
+     "url": "https://centr-krasok.kz/"
+    }
+   ],
+   "visible_chars": 2796,
+   "city_mentions": {
+    "astana": 2,
+    "almaty": 5,
+    "karaganda": 1
+   },
+   "phones": [
+    "+7 (777) 292-84-01"
+   ],
+   "internal_links": 168,
+   "has_hreflang": false,
+   "astana_snippets": [
+    "ль ваш город алматы? да нет, выбрать другой выберите город: не выбран актау актобе алматы астана атырау жанаозен жезказган караганды кокшетау конаев костанай кызылорда павлодар петропавловск семей тал",
+    "сти статьи контакты алматы пн-вс с 10:00 до 20:00 +7 (777) 292-84-01 info@centr-krasok.kz астана пн-вс с 10:00 до 20:00 +7 (777) 292-84-01 тоо «экспонента1» юридический адрес: республика казахстан, ау"
+   ]
+  },
+  "https://centr-krasok.kz/catalog/dulux/": {
+   "url": "https://centr-krasok.kz/catalog/dulux/",
+   "snapshot": "data/research/geo_audit_2026-11-20/html/centr-krasok.kz__catalog__dulux.html",
+   "status": 200,
+   "final_url": "https://centr-krasok.kz/catalog/dulux/",
+   "fetched_at": "2026-11-20T12:15:12+00:00",
+   "x_robots_tag": null,
+   "sha256": "ac83642b3c93f125a799f9be03baa099565274d2bcd1e15fcfc1e2002c3221fe",
+   "sha256_redacted": "4508be2c0f29a2c704e2b174e0e89b2f4601d5eec387b7908d628b23ef7c95d2",
+   "title": "Dulux",
+   "meta_description": "Интернет-магазин Центр красок #1 предлагает купить оригинальные краски Dulux у официального дилера европейского производителя.",
+   "meta_robots": "index, follow",
+   "canonical": null,
+   "h1": [
+    "Dulux",
+    "Dulux"
+   ],
+   "h2": [
+    "О красках Dulux",
+    "Преимущества бренда Dulux:",
+    "Почему выбирают нас?"
+   ],
+   "h3_count": 28,
+   "jsonld_types": [
+    "WebSite"
+   ],
+   "jsonld": [
+    {
+     "@context": "https://schema.org",
+     "@type": "WebSite",
+     "name": "ᐉ Центр Красок #1 Интернет-магазин строительных красок в Алматы",
+     "url": "https://centr-krasok.kz/"
+    }
+   ],
+   "visible_chars": 11178,
+   "city_mentions": {
+    "astana": 27,
+    "almaty": 33,
+    "karaganda": 1
+   },
+   "phones": [
+    "+7 (777) 292-84-01",
+    "+7 778 061 50 00"
+   ],
+   "internal_links": 202,
+   "has_hreflang": false,
+   "astana_snippets": [
+    "ль ваш город алматы? да нет, выбрать другой выберите город: не выбран актау актобе алматы астана атырау жанаозен жезказган караганды кокшетау конаев костанай кызылорда павлодар петропавловск семей тал",
+    ": 0 показать dulux все сортировать по: по умолчанию по умолчанию популярности цена по возрастанию цена по убыванию алфавиту показать на странице: 10 20 30 40 50 60 найдено 98 товаров dulux англия 2,25",
+    "9 л краска dulux professional diamond max protect мат bс 9л остаток алматы: 91 шт остаток астана: 1 шт - шт + артикул 5834295 144 100 kzt в корзину dulux англия 1 л краска dulux ultra resist гостиные ",
+    "ия 1 л краска dulux ultra resist гостиные и офисы мат bw 1л остаток алматы: 65 шт остаток астана: 13 шт - шт + артикул 5747799 14 800 kzt в корзину dulux англия 9 л краска dulux professional bindo 3 г"
+   ]
+  },
+  "https://centr-krasok.kz/catalog/bindo_7_1/kraska_dulux_professional_bindo_7_matovaya_bc_0_9l/": {
+   "url": "https://centr-krasok.kz/catalog/bindo_7_1/kraska_dulux_professional_bindo_7_matovaya_bc_0_9l/",
+   "snapshot": "data/research/geo_audit_2026-11-20/html/centr-krasok.kz__catalog__bindo_7_1__kraska_dulux_professional_bindo_7_matovaya_bc_0_9l.html",
+   "status": 200,
+   "final_url": "https://centr-krasok.kz/catalog/bindo_7_1/kraska_dulux_professional_bindo_7_matovaya_bc_0_9l/",
+   "fetched_at": "2026-11-20T12:15:14+00:00",
+   "x_robots_tag": null,
+   "sha256": "be9fe956e5d1839efcaad23fbe3fe217105cdec6112baf82fda6ecfbf1b3bfab",
+   "sha256_redacted": "1f287f2313eb8a7d2ad0e09196940d51bc1d500e04b19b1ca1f141f10bcde84a",
+   "title": "Купить Краска Dulux Professional BINDO 7 матовая BC 0,9л",
+   "meta_description": "У нас можно купить Краска Dulux Professional BINDO 7 матовая BC 0,9л в разделе BINDO 7 за 7 270 KZT",
+   "meta_robots": "index, follow",
+   "canonical": null,
+   "h1": [
+    "Краска Dulux Professional BINDO 7 матовая BC 0,9л"
+   ],
+   "h2": [
+    "Колеровка",
+    "Купить в 1 клик"
+   ],
+   "h3_count": 6,
+   "jsonld_types": [
+    "WebSite"
+   ],
+   "jsonld": [
+    {
+     "@context": "https://schema.org",
+     "@type": "WebSite",
+     "name": "ᐉ Центр Красок #1 Интернет-магазин строительных красок в Алматы",
+     "url": "https://centr-krasok.kz/"
+    }
+   ],
+   "visible_chars": 107267,
+   "city_mentions": {
+    "astana": 2,
+    "almaty": 12,
+    "karaganda": 1
+   },
+   "phones": [
+    "+7 (777) 292-84-01"
+   ],
+   "internal_links": 150,
+   "has_hreflang": false,
+   "astana_snippets": [
+    "ль ваш город алматы? да нет, выбрать другой выберите город: не выбран актау актобе алматы астана атырау жанаозен жезказган караганды кокшетау конаев костанай кызылорда павлодар петропавловск семей тал",
+    "сти статьи контакты алматы пн-вс с 10:00 до 20:00 +7 (777) 292-84-01 info@centr-krasok.kz астана пн-вс с 10:00 до 20:00 +7 (777) 292-84-01 тоо «экспонента1» юридический адрес: республика казахстан, ау"
+   ]
+  }
+ },
+ "svet_kz": {
+  "https://svet.kz/": {
+   "url": "https://svet.kz/",
+   "snapshot": "data/research/geo_audit_2026-11-20/html/svet.kz.html",
+   "status": 200,
+   "final_url": "https://svet.kz/",
+   "fetched_at": "2026-11-20T12:15:15+00:00",
+   "x_robots_tag": null,
+   "sha256": "e1cc3173775ceb1ec039d3a15774bd27f6561968d010d9c617c5cd8ab0abd340",
+   "sha256_redacted": "72fbcebce6478899e0d19dafda008cc69072d8603af16de76ae791530001d147",
+   "title": "Люстры и светильники в Алматы и Астане — интернет-магазин SVET.KZ",
+   "meta_description": "SVET.KZ — люстры, бра, споты, трековые системы и лампы: 35 000+ товаров, официальный дилер Maytoni. Доставка по Алматы и Казахстану от 1 дня.",
+   "meta_robots": "noyaca",
+   "canonical": "https://svet.kz/",
+   "h1": [
+    "Люстры и светильники в Алматы и Астане"
+   ],
+   "h2": [
+    "Новинки",
+    "Скидки",
+    "Бренды",
+    "Салоны SVET.KZ",
+    "Отзывы клиентов",
+    "Интернет-магазин люстр и светильников SVET.KZ",
+    "Вопросы о магазине"
+   ],
+   "h3_count": 32,
+   "jsonld_types": [
+    "ContactPoint",
+    "GeoCoordinates",
+    "OpeningHoursSpecification",
+    "Organization",
+    "PostalAddress",
+    "Store",
+    "WebSite"
+   ],
+   "jsonld": [
+    {
+     "@context": "https://schema.org",
+     "@graph": [
+      {
+       "@type": "Organization",
+       "@id": "https://svet.kz/#organization",
+       "name": "SVET.KZ",
+       "url": "https://svet.kz/",
+       "logo": "https://svet.kz/local/templates/svetilniki/images/logo/svet_logo_ld.png",
+       "telephone": "+7 777 292-84-01",
+       "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+7 777 292-84-01",
+        "contactType": "customer service",
+        "areaServed": "KZ"
+       },
+       "sameAs": [
+        "https://www.instagram.com/svet.kz_abis/",
+        "https://www.facebook.com/svet.kz.online/",
+        "https://www.youtube.com/channel/UCUWOxQkEzqwY4yafVWNFS9Q",
+        "https://maps.app.goo.gl/pLt3E4Zyma9DGZkZ9"
+       ]
+      },
+      {
+       "@type": "WebSite",
+       "@id": "https://svet.kz/#website",
+       "name": "SVET.KZ",
+       "url": "https://svet.kz/",
+       "inLanguage": "ru",
+       "publisher": {
+        "@id": "https://svet.kz/#organization"
+       }
+      },
+      {
+       "@type": "Store",
+       "@id": "https://svet.kz/contact/#salon-1",
+       "name": "SVET.KZ — ТК ARMADA",
+       "url": "https://svet.kz/contact/",
+       "telephone": "+7 777 292-84-01",
+       "image": "https://svet.kz/local/templates/svetilniki/images/logo/svet_logo_ld.png",
+       "parentOrganization": {
+        "@id": "https://svet.kz/#organization"
+       },
+       "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "ТК ARMADA, ул. Кабдолова, 1/8, Блок 1, бутики 28, 32, 35, 26а",
+        "addressLocality": "Алматы",
+        "addressCountry": "KZ"
+       },
+       "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 43.2358089,
+        "longitude": 76.8436656
+       },
+       "hasMap": "https://maps.app.goo.gl/egLfN4ys7v8aSNjF8",
+       "sameAs": [
+        "https://2gis.kz/almaty/firm/70000001043802009"
+       ],
+       "openingHoursSpecification": [
+        {
+         "@type": "OpeningHoursSpecification",
+         "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday"
+         ],
+         "opens": "10:00",
+         "closes": "20:00"
+        }
+       ]
+      },
+      {
+       "@type": "Store",
+       "@id": "https://svet.kz/contact/#salon-2",
+       "name": "SVET.KZ — Жибек Жолы",
+       "url": "https://svet.kz/contact/",
+       "telephone": "+7 777 292-84-01",
+       "image": "https://svet.kz/local/templates/svetilniki/images/logo/svet_logo_ld.png",
+       "parentOrganization": {
+        "@id": "https://svet.kz/#organization"
+       },
+       "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "пр. Жибек Жолы, 135/10а, бутики А3, А4",
+        "addressLocality": "Алматы",
+        "addressCountry": "KZ"
+       },
+       "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 43.2611415,
+        "longitude": 76.9297032
+       },
+       "hasMap": "https://www.google.com/maps/search/?api=1&query=43.2611415,76.9297032",
+       "sameAs": [
+        "https://2gis.kz/almaty/firm/70000001043802177"
+       ],
+       "openingHoursSpecification": [
+        {
+         "@type": "OpeningHoursSpecification",
+         "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday"
+         ],
+         "opens": "10:00",
+         "closes": "20:00"
+        }
+       ]
+      },
+      {
+       "@type": "Store",
+       "@id": "https://svet.kz/contact/#salon-3",
+       "name": "SVET.KZ — Мангилик Ел (Астана)",
+       "url": "https://svet.kz/contact/",
+       "telephone": "+7 777 292-84-01",
+       "image": "https://svet.kz/local/templates/svetilniki/images/logo/svet_logo_ld.png",
+       "parentOrganization": {
+        "@id": "https://svet.kz/#organization"
+       },
+       "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "ул. Мангилик Ел, 29/2",
+        "addressLocality": "Астана",
+        "addressCountry": "KZ"
+       },
+       "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 51.1081574,
+        "longitude": 71.4301024
+       },
+       "hasMap": "https://maps.app.goo.gl/Ht7L758eoxj2iJW8A",
+       "sameAs": [
+        "https://2gis.kz/astana/inside/9570784863380157/firm/70000001090884645"
+       ],
+       "openingHoursSpecification": [
+        {
+         "@type": "OpeningHoursSpecification",
+         "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday"
+         ],
+         "opens": "10:00",
+         "closes": "20:00"
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "visible_chars": 15907,
+   "city_mentions": {
+    "astana": 16,
+    "almaty": 22,
+    "karaganda": 0
+   },
+   "phones": [
+    "+7 (777) 292-84-01"
+   ],
+   "internal_links": 497,
+   "has_hreflang": false,
+   "astana_snippets": [
+    "люстры и светильники в алматы и астане — интернет-магазин svet.kz каталог +7 (777) 292-84-01 обратный звонок 0 люстры по типу все люстры потол",
+    "ка? загрузите — найдём такой же или похожие найти по фото люстры и светильники в алматы и астане люстры гостиная, спальня, кухня светильники точечные, гипсовые, лофт трековые системы магнитные и шиноп",
+    "35/10а бутики а3, а4 ежедневно 10:00–20:00 доставка по алматы — 3 500 ₸ 2гис google карты астана мангилик ел ул. мангилик ел, 29/2 ежедневно 10:00–20:00 заказы в астану — доставкой 2гис google карты о",
+    "бутики а3, а4 ежедневно 10:00–20:00 доставка по алматы — 3 500 ₸ 2гис google карты астана мангилик ел ул. мангилик ел, 29/2 ежедневно 10:00–20:00 заказы в астану — доставкой 2гис google карты отзывы к"
+   ]
+  },
+  "https://svet.kz/contact/": {
+   "url": "https://svet.kz/contact/",
+   "snapshot": "data/research/geo_audit_2026-11-20/html/svet.kz__contact.html",
+   "status": 200,
+   "final_url": "https://svet.kz/contact/",
+   "fetched_at": "2026-11-20T12:15:16+00:00",
+   "x_robots_tag": null,
+   "sha256": "c1c6ff7601c7c142791b247950e14916febbf2a7cfda67f14211eb7133d4b884",
+   "sha256_redacted": "c4a446f41c18bccec560a8a09b6073adc12b21e6165815d81d37893dfea48f40",
+   "title": "Контактная информация - интернет-магазин осветительных приборов Svet.kz",
+   "meta_description": "Осветительные приборы в интернет-магазине Svet.kz с доставкой по Алматы и Казахстану. Адреса офисов, телефоны и время работы магазина а Алматы",
+   "meta_robots": null,
+   "canonical": null,
+   "h1": [
+    "Контакты Svet.kz"
+   ],
+   "h2": [],
+   "h3_count": 3,
+   "jsonld_types": [
+    "ContactPoint",
+    "GeoCoordinates",
+    "OpeningHoursSpecification",
+    "Organization",
+    "PostalAddress",
+    "Store",
+    "WebSite"
+   ],
+   "jsonld": [
+    {
+     "@context": "https://schema.org",
+     "@graph": [
+      {
+       "@type": "Organization",
+       "@id": "https://svet.kz/#organization",
+       "name": "SVET.KZ",
+       "url": "https://svet.kz/",
+       "logo": "https://svet.kz/local/templates/svetilniki/images/logo/svet_logo_ld.png",
+       "telephone": "+7 777 292-84-01",
+       "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+7 777 292-84-01",
+        "contactType": "customer service",
+        "areaServed": "KZ"
+       },
+       "sameAs": [
+        "https://www.instagram.com/svet.kz_abis/",
+        "https://www.facebook.com/svet.kz.online/",
+        "https://www.youtube.com/channel/UCUWOxQkEzqwY4yafVWNFS9Q",
+        "https://maps.app.goo.gl/pLt3E4Zyma9DGZkZ9"
+       ]
+      },
+      {
+       "@type": "WebSite",
+       "@id": "https://svet.kz/#website",
+       "name": "SVET.KZ",
+       "url": "https://svet.kz/",
+       "inLanguage": "ru",
+       "publisher": {
+        "@id": "https://svet.kz/#organization"
+       }
+      },
+      {
+       "@type": "Store",
+       "@id": "https://svet.kz/contact/#salon-1",
+       "name": "SVET.KZ — ТК ARMADA",
+       "url": "https://svet.kz/contact/",
+       "telephone": "+7 777 292-84-01",
+       "image": "https://svet.kz/local/templates/svetilniki/images/logo/svet_logo_ld.png",
+       "parentOrganization": {
+        "@id": "https://svet.kz/#organization"
+       },
+       "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "ТК ARMADA, ул. Кабдолова, 1/8, Блок 1, бутики 28, 32, 35, 26а",
+        "addressLocality": "Алматы",
+        "addressCountry": "KZ"
+       },
+       "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 43.2358089,
+        "longitude": 76.8436656
+       },
+       "hasMap": "https://maps.app.goo.gl/egLfN4ys7v8aSNjF8",
+       "sameAs": [
+        "https://2gis.kz/almaty/firm/70000001043802009"
+       ],
+       "openingHoursSpecification": [
+        {
+         "@type": "OpeningHoursSpecification",
+         "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday"
+         ],
+         "opens": "10:00",
+         "closes": "20:00"
+        }
+       ]
+      },
+      {
+       "@type": "Store",
+       "@id": "https://svet.kz/contact/#salon-2",
+       "name": "SVET.KZ — Жибек Жолы",
+       "url": "https://svet.kz/contact/",
+       "telephone": "+7 777 292-84-01",
+       "image": "https://svet.kz/local/templates/svetilniki/images/logo/svet_logo_ld.png",
+       "parentOrganization": {
+        "@id": "https://svet.kz/#organization"
+       },
+       "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "пр. Жибек Жолы, 135/10а, бутики А3, А4",
+        "addressLocality": "Алматы",
+        "addressCountry": "KZ"
+       },
+       "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 43.2611415,
+        "longitude": 76.9297032
+       },
+       "hasMap": "https://www.google.com/maps/search/?api=1&query=43.2611415,76.9297032",
+       "sameAs": [
+        "https://2gis.kz/almaty/firm/70000001043802177"
+       ],
+       "openingHoursSpecification": [
+        {
+         "@type": "OpeningHoursSpecification",
+         "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday"
+         ],
+         "opens": "10:00",
+         "closes": "20:00"
+        }
+       ]
+      },
+      {
+       "@type": "Store",
+       "@id": "https://svet.kz/contact/#salon-3",
+       "name": "SVET.KZ — Мангилик Ел (Астана)",
+       "url": "https://svet.kz/contact/",
+       "telephone": "+7 777 292-84-01",
+       "image": "https://svet.kz/local/templates/svetilniki/images/logo/svet_logo_ld.png",
+       "parentOrganization": {
+        "@id": "https://svet.kz/#organization"
+       },
+       "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "ул. Мангилик Ел, 29/2",
+        "addressLocality": "Астана",
+        "addressCountry": "KZ"
+       },
+       "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 51.1081574,
+        "longitude": 71.4301024
+       },
+       "hasMap": "https://maps.app.goo.gl/Ht7L758eoxj2iJW8A",
+       "sameAs": [
+        "https://2gis.kz/astana/inside/9570784863380157/firm/70000001090884645"
+       ],
+       "openingHoursSpecification": [
+        {
+         "@type": "OpeningHoursSpecification",
+         "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday"
+         ],
+         "opens": "10:00",
+         "closes": "20:00"
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "visible_chars": 6718,
+   "city_mentions": {
+    "astana": 5,
+    "almaty": 13,
+    "karaganda": 0
+   },
+   "phones": [
+    "+7 (777) 292-84-01"
+   ],
+   "internal_links": 357,
+   "has_hreflang": false,
+   "astana_snippets": [
+    "0:00 позвонить написать в whatsapp отправить e-mail г. алматы-армада г.алматы- жибек жолы астана алматы, ул. кабдолова, 1/8 тк armada, блок 1, бутик 28, бутик 32, бутик 35, бутик 26а +7 (777) 292-84-0",
+    " google maps скопировать адрес ежедневно: 10:00–20:00 парковка у входа загрузить карту г. астана, ул. мангилик ел, 29/2 +7 (777) 292-84-01 открыть в 2гис открыть в google maps скопировать адрес ежедне",
+    " скопировать адрес ежедневно: 10:00–20:00 парковка у входа загрузить карту г. астана, ул. мангилик ел, 29/2 +7 (777) 292-84-01 открыть в 2гис открыть в google maps скопировать адрес ежедневно: 10:00–2",
+    ", бутики 28, 32, 35, 26а тц жибек жолы, проспект жибек жолы, 135/10а а3, a4 бутик, 1 этаж астана ул. мангилик ел, 29/2 договор публичной оферты политика конфиденциальности © 2009-2026 svet.kz интернет"
+   ]
+  },
+  "https://svet.kz/pay-delivery/": {
+   "url": "https://svet.kz/pay-delivery/",
+   "snapshot": "data/research/geo_audit_2026-11-20/html/svet.kz__pay-delivery.html",
+   "status": 200,
+   "final_url": "https://svet.kz/pay-delivery/",
+   "fetched_at": "2026-11-20T12:15:18+00:00",
+   "x_robots_tag": null,
+   "sha256": "d2e01e0433ea2666d944f4dca4c80f053594a5869ce67be2f88898395e1afad7",
+   "sha256_redacted": "158332c7811ffdca587aa1683a25cff7bdd440d706ecaacd97ad26bc4d6b7b42",
+   "title": "Доставка и оплата: Алматы 3 500 ₸, Казахстан 7 000 ₸ | SVET.KZ",
+   "meta_description": "Доставка SVET.KZ: по Алматы курьером — 3 500 ₸, в другие города Казахстана — 7 000 ₸, от 1 дня. Оплата через Kaspi.kz, картой или по счёту.",
+   "meta_robots": null,
+   "canonical": "https://svet.kz/pay-delivery/",
+   "h1": [
+    "Доставка и оплата"
+   ],
+   "h2": [
+    "Стоимость и срок доставки",
+    "Как заказать",
+    "Оплата",
+    "Документы и организации",
+    "Доставка по городам",
+    "Вопросы о доставке"
+   ],
+   "h3_count": 4,
+   "jsonld_types": [],
+   "jsonld": [],
+   "visible_chars": 7700,
+   "city_mentions": {
+    "astana": 4,
+    "almaty": 13,
+    "karaganda": 2
+   },
+   "phones": [
+    "+7 (777) 292-84-01"
+   ],
+   "internal_links": 359,
+   "has_hreflang": false,
+   "astana_snippets": [
+    " запросу, уточните у менеджера другие города казахстана 7 000 ₸ от 1 дня; перевозка dpd в астану — 1–3 рабочих дня, в шымкент и караганду — 1–2 транспортной компанией dpd заказ от 800 000 ₸ стоимость ",
+    "ацией. доставка по городам условия для отдельных городов собраны на страницах «доставка в астану» , «доставка в шымкент» и «доставка в караганду» . вопросы о доставке сколько стоит доставка в другие г",
+    ", бутики 28, 32, 35, 26а тц жибек жолы, проспект жибек жолы, 135/10а а3, a4 бутик, 1 этаж астана ул. мангилик ел, 29/2 договор публичной оферты политика конфиденциальности © 2009-2026 svet.kz интернет",
+    ", 32, 35, 26а тц жибек жолы, проспект жибек жолы, 135/10а а3, a4 бутик, 1 этаж астана ул. мангилик ел, 29/2 договор публичной оферты политика конфиденциальности © 2009-2026 svet.kz интернет-магазин св"
+   ]
+  },
+  "https://svet.kz/about/": {
+   "url": "https://svet.kz/about/",
+   "snapshot": "data/research/geo_audit_2026-11-20/html/svet.kz__about.html",
+   "status": 200,
+   "final_url": "https://svet.kz/about/",
+   "fetched_at": "2026-11-20T12:15:19+00:00",
+   "x_robots_tag": null,
+   "sha256": "9ec59b32223b13d1686a331e10ea13580962fe90f4820e8a091affcd0f4386c9",
+   "sha256_redacted": "7de7d3723be96003a70b87ddf8aecb77be10eaf2733adabd1cf1b046fd1dcc76",
+   "title": "О магазине - интернет-магазин осветительных приборов Svet.kz",
+   "meta_description": "Осветительные приборы в интернет-магазине Svet.kz с доставкой по Алматы и Казахстану. Преимущества компании и выгодные предложения по лучшим ценам, акции и распродажи каждую неделю",
+   "meta_robots": null,
+   "canonical": "https://svet.kz/about/",
+   "h1": [
+    "О магазине SVET.KZ"
+   ],
+   "h2": [],
+   "h3_count": 0,
+   "jsonld_types": [],
+   "jsonld": [],
+   "visible_chars": 6961,
+   "city_mentions": {
+    "astana": 2,
+    "almaty": 4,
+    "karaganda": 0
+   },
+   "phones": [
+    "+7 (777) 292-84-01"
+   ],
+   "internal_links": 354,
+   "has_hreflang": false,
+   "astana_snippets": [
+    ", бутики 28, 32, 35, 26а тц жибек жолы, проспект жибек жолы, 135/10а а3, a4 бутик, 1 этаж астана ул. мангилик ел, 29/2 договор публичной оферты политика конфиденциальности © 2009-2026 svet.kz интернет",
+    ", 32, 35, 26а тц жибек жолы, проспект жибек жолы, 135/10а а3, a4 бутик, 1 этаж астана ул. мангилик ел, 29/2 договор публичной оферты политика конфиденциальности © 2009-2026 svet.kz интернет-магазин св"
+   ]
+  },
+  "https://svet.kz/brands/maytoni/": {
+   "url": "https://svet.kz/brands/maytoni/",
+   "snapshot": "data/research/geo_audit_2026-11-20/html/svet.kz__brands__maytoni.html",
+   "status": 200,
+   "final_url": "https://svet.kz/brands/maytoni/",
+   "fetched_at": "2026-11-20T12:15:20+00:00",
+   "x_robots_tag": null,
+   "sha256": "dbfc98b580d7d1ed89bc0c3db87d7cfd1748e6f48b01ab1a3bbeecd4decba598",
+   "sha256_redacted": "4f36c5c7273fef3b9f45269aa94ab7b6cfbfa2cbe5d1419e8693c4e1849affad",
+   "title": "Maytoni — люстры и светильники: купить в Алматы | SVET.KZ",
+   "meta_description": "SVET.KZ — официальный дилер Maytoni (Майтони): люстры, трековые системы, бра и ленты, 4 600+ моделей в продаже, доставка по Казахстану от 1 дня.",
+   "meta_robots": null,
+   "canonical": "https://svet.kz/brands/maytoni/",
+   "h1": [
+    "Maytoni — люстры и светильники"
+   ],
+   "h2": [
+    "О бренде Maytoni",
+    "Как выбрать светильник Maytoni",
+    "Коллекции Maytoni",
+    "Как заказать",
+    "Вопросы о Maytoni"
+   ],
+   "h3_count": 35,
+   "jsonld_types": [
+    "Brand",
+    "ItemList",
+    "ListItem",
+    "Offer",
+    "Product"
+   ],
+   "jsonld": [
+    {
+     "@context": "https://schema.org",
+     "@type": "ItemList",
+     "itemListElement": [
+      {
+       "@type": "ListItem",
+       "position": 1,
+       "url": "https://svet.kz/products/nastennyy-svetilnik-bra-maytoni-yora-mod532wl-l6bsk/",
+       "name": "Настенный светильник (бра) Maytoni Yora MOD532WL-L6BSK",
+       "item": {
+        "@type": "Product",
+        "name": "Настенный светильник (бра) Maytoni Yora MOD532WL-L6BSK",
+        "url": "https://svet.kz/products/nastennyy-svetilnik-bra-maytoni-yora-mod532wl-l6bsk/",
+        "image": "https://svet.kz/upload/iblock/669/wyogcpv7fbliyk8pkbuiz0cdc308e33m/mini_acmilan_nastennyy_svetilnik_bra_maytoni_yora_mod532wl_l6bsk.jpg",
+        "brand": {
+         "@type": "Brand",
+         "name": "Maytoni"
+        },
+        "offers": {
+         "@type": "Offer",
+         "price": 108300,
+         "priceCurrency": "KZT",
+         "url": "https://svet.kz/products/nastennyy-svetilnik-bra-maytoni-yora-mod532wl-l6bsk/",
+         "availability": "https://schema.org/BackOrder"
+        }
+       }
+      },
+      {
+       "@type": "ListItem",
+       "position": 2,
+       "url": "https://svet.kz/products/nastennyy-svetilnik-bra-freya-bora-fr2065wl-01bs/",
+       "name": "Настенный светильник (бра) Freya Bora FR2065WL-01BS",
+       "item": {
+        "@type": "Product",
+        "name": "Настенный светильник (бра) Freya Bora FR2065WL-01BS",
+        "url": "https://svet.kz/products/nastennyy-svetilnik-bra-freya-bora-fr2065wl-01bs/",
+        "image": "https://svet.kz/upload/iblock/c64/cugskggguuob1qw2qi9pts2ewmflw9ak/mini_acmilan_nastennyy_svetilnik_bra_freya_bora_fr2065wl_01bs.jpg",
+        "brand": {
+         "@type": "Brand",
+         "name": "Freya"
+        },
+        "offers": {
+         "@type": "Offer",
+         "price": 31900,
+         "priceCurrency": "KZT",
+         "url": "https://svet.kz/products/nastennyy-svetilnik-bra-freya-bora-fr2065wl-01bs/",
+         "availability": "https://schema.org/BackOrder"
+        }
+       }
+      },
+      {
+       "@type": "ListItem",
+       "position": 3,
+       "url": "https://svet.kz/products/podvesnoy-svetilnik-maytoni-yora-mod532pl-l36bsk/",
+       "name": "Подвесной светильник Maytoni Yora MOD532PL-L36BSK",
+       "item": {
+        "@type": "Product",
+        "name": "Подвесной светильник Maytoni Yora MOD532PL-L36BSK",
+        "url": "https://svet.kz/products/podvesnoy-svetilnik-maytoni-yora-mod532pl-l36bsk/",
+        "image": "https://svet.kz/upload/iblock/923/ucc20fk17773qdn0l7gqkp2f0b7vd3eq/mini_acmilan_podvesnoy_svetilnik_maytoni_yora_mod532pl_l36bsk.jpg",
+        "brand": {
+         "@type": "Brand",
+         "name": "Maytoni"
+        },
+        "offers": {
+         "@type": "Offer",
+         "price": 1592600,
+         "priceCurrency": "KZT",
+         "url": "https://svet.kz/products/podvesnoy-svetilnik-maytoni-yora-mod532pl-l36bsk/",
+         "availability": "https://schema.org/InStock"
+        }
+       }
+      },
+      {
+       "@type": "ListItem",
+       "position": 4,
+       "url": "https://svet.kz/products/svetilnik-maytoni-technical-zoom-dl032-2-01w-1-n/",
+       "name": "Встраиваемый светильник Maytoni Technical Zoom DL032-2-01W-1(N)",
+       "item": {
+        "@type": "Product",
+        "name": "Встраиваемый светильник Maytoni Technical Zoom DL032-2-01W-1(N)",
+        "url": "https://svet.kz/products/svetilnik-maytoni-technical-zoom-dl032-2-01w-1-n/",
+        "image": "https://svet.kz/upload/iblock/f11/1a0p5f6m6wwngaxugl5s095b2c29apn5/mini_acmilan_vstraivaemyy_svetilnik_maytoni_technical_zoom_dl032_2_01w_1_n.jpg",
+        "brand": {
+         "@type": "Brand",
+         "name": "Technical"
+        },
+        "offers": {
+         "@type": "Offer",
+         "price": 6400,
+         "priceCurrency": "KZT",
+         "url": "https://svet.kz/products/svetilnik-maytoni-technical-zoom-dl032-2-01w-1-n/",
+         "availability": "https://schema.org/InStock"
+        }
+       }
+      },
+      {
+       "@type": "ListItem",
+       "position": 5,
+       "url": "https://svet.kz/products/podvesnoy-svetilnik-maytoni-bloom-mod531pl-01w1/",
+       "name": "Подвесной светильник Maytoni Bloom MOD531PL-01W1",
+       "item": {
+        "@type": "Product",
+        "name": "Подвесной светильник Maytoni Bloom MOD531PL-01W1",
+        "url": "https://svet.kz/products/podvesnoy-svetilnik-maytoni-bloom-mod531pl-01w1/",
+        "image": "https://svet.kz/upload/iblock/a1a/lnbj8g4c051edanaa5bks856z9h59utl/mini_svet_podvesnoy_svetilnik_maytoni_bloom_mod531pl_01w1_almaty_dostavka_po_kazakhstanu_.jpg",
+        "brand": {
+         "@type": "Brand",
+         "name": "Maytoni"
+        },
+        "offers": {
+         "@type": "Offer",
+         "price": 213500,
+         "priceCurrency": "KZT",
+         "url": "https://svet.kz/products/podvesnoy-svetilnik-maytoni-bloom-mod531pl-01w1/",
+         "availability": "https://schema.org/InStock"
+        }
+       }
+      },
+      {
+       "@type": "ListItem",
+       "position": 6,
+       "url": "https://svet.kz/products/svetilnik-maytoni-technical-points-tr195-3-10w4k-m-b-n/",
+       "name": "Трековый светильник Maytoni Technical Points Trinity 10 Вт, черный, TR195-3-10W4K-M-B(N)",
+       "item": {
+        "@type": "Product",
+        "name": "Трековый светильник Maytoni Technical Points Trinity 10 Вт, черный, TR195-3-10W4K-M-B(N)",
+        "url": "https://svet.kz/products/svetilnik-maytoni-technical-points-tr195-3-10w4k-m-b-n/",
+        "image": "https://svet.kz/upload/iblock/152/x7xutc8d1omfdulzv1p72v348emn2rj1/mini_acmilan_trekovyy_svetilnik_maytoni_technical_points_trinity_10_vt_chernyy_tr195_3_10w4k_m_b_n.jpg",
+        "brand": {
+         "@type": "Brand",
+         "name": "Technical"
+        },
+        "offers": {
+         "@type": "Offer",
+         "price": 38200,
+         "priceCurrency": "KZT",
+         "url": "https://svet.kz/products/svetilnik-maytoni-technical-points-tr195-3-10w4k-m-b-n/",
+         "availability": "https://schema.org/BackOrder"
+        }
+       }
+      },
+      {
+       "@type": "ListItem",
+       "position": 7,
+       "url": "https://svet.kz/products/svetilnik-maytoni-technical-atom-dl024-2-03w-1-n/",
+       "name": "Встраиваемый светильник Maytoni Technical Atom DL024-2-03W-1(N)",
+       "item": {
+        "@type": "Product",
+        "name": "Встраиваемый светильник Maytoni Technical Atom DL024-2-03W-1(N)",
+        "url": "https://svet.kz/products/svetilnik-maytoni-technical-atom-dl024-2-03w-1-n/",
+        "image": "https://svet.kz/upload/iblock/a1c/snhsk34hu7m26g6hah5z49zh919j8sk3/mini_acmilan_vstraivaemyy_svetilnik_maytoni_technical_atom_dl024_2_03w_1_n.jpg",
+        "brand": {
+         "@type": "Brand",
+         "name": "Technical"
+        },
+        "offers": {
+         "@type": "Offer",
+         "price": 26000,
+         "priceCurrency": "KZT",
+         "url": "https://svet.kz/products/svetilnik-maytoni-technical-atom-dl024-2-03w-1-n/",
+         "availability": "https://schema.org/BackOrder"
+        }
+       }
+      },
+      {
+       "@type": "ListItem",
+       "position": 8,
+       "url": "https://svet.kz/products/podvesnoy-svetilnik-freya-trace-fr5635pl-l6am1/",
+       "name": "Подвесной светильник Freya Trace FR5635PL-L6AM1",
+       "item": {
+        "@type": "Product",
+        "name": "Подвесной светильник Freya Trace FR5635PL-L6AM1",
+        "url": "https://svet.kz/products/podvesnoy-svetilnik-freya-trace-fr5635pl-l6am1/",
+        "image": "https://svet.kz/upload/iblock/eba/o8t7fdaq9n85vbdotxkd7w1i5ru5fajn/mini_svet_podvesnoy_svetilnik_freya_trace_fr5635pl_l6am1_almaty_dostavka_po_kazakhstanu_.jpg",
+        "brand": {
+         "@type": "Brand",
+         "name": "Freya"
+        },
+        "offers": {
+         "@type": "Offer",
+         "price": 69500,
+         "priceCurrency": "KZT",
+         "url": "https://svet.kz/products/podvesnoy-svetilnik-freya-trace-fr5635pl-l6am1/",
+         "availability": "https://schema.org/InStock"
+        }
+       }
+      },
+      {
+       "@type": "ListItem",
+       "position": 9,
+       "url": "https://svet.kz/products/pryamoy-konnektor-pitaniya-maytoni-technical-tra239pc-42b/",
+       "name": "Прямой коннектор питания Maytoni Technical Exility X TRA239PC-42B",
+       "item": {
+        "@type": "Product",
+        "name": "Прямой коннектор питания Maytoni Technical Exility X TRA239PC-42B",
+        "url": "https://svet.kz/products/pryamoy-konnektor-pitaniya-maytoni-technical-tra239pc-42b/",
+        "image": "https://svet.kz/upload/iblock/0c9/2hms1dhxmtu7lz36dv8keo2w26p63u6w/mini_acmilan_pryamoy_konnektor_pitaniya_maytoni_technical_exility_x_tra239pc_42b.jpg",
+        "brand": {
+         "@type": "Brand",
+         "name": "Technical"
+        },
+        "offers": {
+         "@type": "Offer",
+         "price": 4100,
+         "priceCurrency": "KZT",
+         "url": "https://svet.kz/products/pryamoy-konnektor-pitaniya-maytoni-technical-tra239pc-42b/",
+         "availability": "https://schema.org/InStock"
+        }
+       }
+      },
+      {
+       "@type": "ListItem",
+       "position": 10,
+       "url": "https://svet.kz/products/lyustra-freya-capella-fr4017pl-03bbz/",
+       "name": "Люстра Freya Capella FR4017PL-03BBZ",
+       "item": {
+        "@type": "Product",
+        "name": "Люстра Freya Capella FR4017PL-03BBZ",
+        "url": "https://svet.kz/products/lyustra-freya-capella-fr4017pl-03bbz/",
+        "image": "https://svet.kz/upload/iblock/1ee/op82lt0gewf9483slr9a8dlg3jnl40po/mini_acmilan_lyustra_freya_capella_fr4017pl_03bbz.jpg",
+        "brand": {
+         "@type": "Brand",
+         "name": "Freya"
+        },
+        "offers": {
+         "@type": "Offer",
+         "price": 41800,
+         "priceCurrency": "KZT",
+         "url": "https://svet.kz/products/lyustra-freya-capella-fr4017pl-03bbz/",
+         "availability": "https://schema.org/BackOrder"
+        }
+       }
+      }
+     ]
+    }
+   ],
+   "visible_chars": 16971,
+   "city_mentions": {
+    "astana": 4,
+    "almaty": 7,
+    "karaganda": 0
+   },
+   "phones": [
+    "+7 (777) 292-84-01"
+   ],
+   "internal_links": 550,
+   "has_hreflang": false,
+   "astana_snippets": [
+    " доставка по алматы и казахстану от 1 дня — условия на странице «доставка и оплата» , для астаны — «доставка в астану» . звоните: +7 (777) 292-84-01 . позицию, которой нет на складе, можно заказать — ",
+    " казахстану от 1 дня — условия на странице «доставка и оплата» , для астаны — «доставка в астану» . звоните: +7 (777) 292-84-01 . позицию, которой нет на складе, можно заказать — менеджер сообщит срок",
+    ", бутики 28, 32, 35, 26а тц жибек жолы, проспект жибек жолы, 135/10а а3, a4 бутик, 1 этаж астана ул. мангилик ел, 29/2 договор публичной оферты политика конфиденциальности © 2009-2026 svet.kz интернет",
+    ", 32, 35, 26а тц жибек жолы, проспект жибек жолы, 135/10а а3, a4 бутик, 1 этаж астана ул. мангилик ел, 29/2 договор публичной оферты политика конфиденциальности © 2009-2026 svet.kz интернет-магазин св"
+   ]
+  },
+  "https://svet.kz/katalog/lyustry/": {
+   "url": "https://svet.kz/katalog/lyustry/",
+   "snapshot": "data/research/geo_audit_2026-11-20/html/svet.kz__katalog__lyustry.html",
+   "status": 200,
+   "final_url": "https://svet.kz/katalog/lyustry/",
+   "fetched_at": "2026-11-20T12:15:21+00:00",
+   "x_robots_tag": null,
+   "sha256": "a793e10a902b1ca04ea578829d7ead468844778d644ce2f1e2b4cfa410aa3a94",
+   "sha256_redacted": "00789ef4bd6dbd8b2303ee661a68349fc7a7fedc12ed0ca684d0ac756c4d8a57",
+   "title": "Люстры — купить в Алматы, Астане и по Казахстану | SVET.KZ",
+   "meta_description": "Люстры подвесные, потолочные, хрустальные и с вентилятором — 8 800+ моделей в продаже. Доставка по Алматы и Казахстану от 1 дня.",
+   "meta_robots": null,
+   "canonical": "https://svet.kz/katalog/lyustry/",
+   "h1": [
+    "Люстры"
+   ],
+   "h2": [
+    "Как выбрать люстру: размер, потолок, лампы",
+    "Люстры по комнатам",
+    "Бренды люстр",
+    "Где купить люстру",
+    "Вопросы о люстрах",
+    "Ещё модели раздела"
+   ],
+   "h3_count": 41,
+   "jsonld_types": [
+    "Brand",
+    "ItemList",
+    "ListItem",
+    "Offer",
+    "Product"
+   ],
+   "jsonld": [
+    {
+     "@context": "https://schema.org",
+     "@type": "ItemList",
+     "itemListElement": [
+      {
+       "@type": "ListItem",
+       "position": 1,
+       "url": "https://svet.kz/products/podvesnaya_lyustra_maytoni_zaragoza_h001cl_05bs/",
+       "name": "Подвесная люстра Maytoni Zaragoza H001CL-05BS",
+       "item": {
+        "@type": "Product",
+        "name": "Подвесная люстра Maytoni Zaragoza H001CL-05BS",
+        "url": "https://svet.kz/products/podvesnaya_lyustra_maytoni_zaragoza_h001cl_05bs/",
+        "image": "https://svet.kz/upload/iblock/b3a/k858rmg9jnbl3j3zi2hye4ko4xdfago2/mini_svet_podvesnaya_lyustra_maytoni_zaragoza_h001cl_05bs_almaty_dostavka_po_kazakhstanu_.jpeg",
+        "brand": {
+         "@type": "Brand",
+         "name": "Maytoni"
+        },
+        "offers": {
+         "@type": "Offer",
+         "price": 172000,
+         "priceCurrency": "KZT",
+         "url": "https://svet.kz/products/podvesnaya_lyustra_maytoni_zaragoza_h001cl_05bs/",
+         "availability": "https://schema.org/InStock"
+        }
+       }
+      },
+      {
+       "@type": "ListItem",
+       "position": 2,
+       "url": "https://svet.kz/products/potolochnaya_lyustra_maytoni_nostalgia_mod048cl_06g/",
+       "name": "Потолочная люстра Maytoni Nostalgia MOD048CL-06G",
+       "item": {
+        "@type": "Product",
+        "name": "Потолочная люстра Maytoni Nostalgia MOD048CL-06G",
+        "url": "https://svet.kz/products/potolochnaya_lyustra_maytoni_nostalgia_mod048cl_06g/",
+        "image": "https://svet.kz/upload/iblock/59e/fofsq7ohz305yxx574bo5i1snpmt8hri/mini_svet_potolochnaya_lyustra_maytoni_nostalgia_mod048cl_06g_almaty_dostavka_po_kazakhstanu_.jpeg",
+        "brand": {
+         "@type": "Brand",
+         "name": "Maytoni"
+        },
+        "offers": {
+         "@type": "Offer",
+         "price": 216700,
+         "priceCurrency": "KZT",
+         "url": "https://svet.kz/products/potolochnaya_lyustra_maytoni_nostalgia_mod048cl_06g/",
+         "availability": "https://schema.org/InStock"
+        }
+       }
+      },
+      {
+       "@type": "ListItem",
+       "position": 3,
+       "url": "https://svet.kz/products/podvesnaya_svetodiodnaya_lyustra_maytoni_tessara_mod081pl_l50g3k/",
+       "name": "Подвесная светодиодная люстра Maytoni Tessara MOD081PL-L50G3K",
+       "item": {
+        "@type": "Product",
+        "name": "Подвесная светодиодная люстра Maytoni Tessara MOD081PL-L50G3K",
+        "url": "https://svet.kz/products/podvesnaya_svetodiodnaya_lyustra_maytoni_tessara_mod081pl_l50g3k/",
+        "image": "https://svet.kz/upload/iblock/789/z35lfz6d1ipr2quhdngvxnug8ec7rgvi/mini_svet_podvesnye_podvesnaya_svetodiodnaya_lyustra_maytoni_tessara_mod081pl_l50g3k_dostavka_po_kaz.jpeg",
+        "brand": {
+         "@type": "Brand",
+         "name": "Maytoni"
+        },
+        "offers": {
+         "@type": "Offer",
+         "price": 264400,
+         "priceCurrency": "KZT",
+         "url": "https://svet.kz/products/podvesnaya_svetodiodnaya_lyustra_maytoni_tessara_mod081pl_l50g3k/",
+         "availability": "https://schema.org/InStock"
+        }
+       }
+      },
+      {
+       "@type": "ListItem",
+       "position": 4,
+       "url": "https://svet.kz/products/podvesnaya_lyustra_maytoni_ring_mod013pl_06b/",
+       "name": "Подвесная люстра Maytoni Ring MOD013PL-06B",
+       "item": {
+        "@type": "Product",
+        "name": "Подвесная люстра Maytoni Ring MOD013PL-06B",
+        "url": "https://svet.kz/products/podvesnaya_lyustra_maytoni_ring_mod013pl_06b/",
+        "image": "https://svet.kz/upload/iblock/c26/7xd2wgeiaffitykl03cotk93gw7a0wkx/mini_svet_podvesnye_podvesnaya_lyustra_maytoni_ring_mod013pl_06b_dostavka_po_kazakhstanu_.jpeg",
+        "brand": {
+         "@type": "Brand",
+         "name": "Maytoni"
+        },
+        "offers": {
+         "@type": "Offer",
+         "price": 159300,
+         "priceCurrency": "KZT",
+         "url": "https://svet.kz/products/podvesnaya_lyustra_maytoni_ring_mod013pl_06b/",
+         "availability": "https://schema.org/InStock"
+        }
+       }
+      },
+      {
+       "@type": "ListItem",
+       "position": 5,
+       "url": "https://svet.kz/products/podvesnaya_lyustra_maytoni_grace_arm247_06_r/",
+       "name": "Подвесная люстра Maytoni Grace RC247-PL-06-R",
+       "item": {
+        "@type": "Product",
+        "name": "Подвесная люстра Maytoni Grace RC247-PL-06-R",
+        "url": "https://svet.kz/products/podvesnaya_lyustra_maytoni_grace_arm247_06_r/",
+        "image": "https://svet.kz/upload/iblock/8a1/f4luvnrhnbo4z3qoghao5shweh3gcr3w/mini_svet_podvesnye_podvesnaya_lyustra_maytoni_grace_rc247_pl_06_r_dostavka_po_kazakhstanu_.jpeg",
+        "brand": {
+         "@type": "Brand",
+         "name": "Maytoni"
+        },
+        "offers": {
+         "@type": "Offer",
+         "price": 197500,
+         "priceCurrency": "KZT",
+         "url": "https://svet.kz/products/podvesnaya_lyustra_maytoni_grace_arm247_06_r/",
+         "availability": "https://schema.org/BackOrder"
+        }
+       }
+      },
+      {
+       "@type": "ListItem",
+       "position": 6,
+       "url": "https://svet.kz/products/podvesnaya_lyustra_maytoni_erich_mod221_pl_05_g/",
+       "name": "Подвесная люстра Maytoni Erich MOD221-PL-05-G",
+       "item": {
+        "@type": "Product",
+        "name": "Подвесная люстра Maytoni Erich MOD221-PL-05-G",
+        "url": "https://svet.kz/products/podvesnaya_lyustra_maytoni_erich_mod221_pl_05_g/",
+        "image": "https://svet.kz/upload/iblock/085/nbdb7r7ymwqc7yn34j2muq13lnmnvjc4/mini_svet_podvesnye_podvesnaya_lyustra_maytoni_erich_mod221_pl_05_g_dostavka_po_kazakhstanu_.jpeg",
+        "brand": {
+         "@type": "Brand",
+         "name": "Maytoni"
+        },
+        "offers": {
+         "@type": "Offer",
+         "price": 181600,
+         "priceCurrency": "KZT",
+         "url": "https://svet.kz/products/podvesnaya_lyustra_maytoni_erich_mod221_pl_05_g/",
+         "availability": "https://schema.org/BackOrder"
+        }
+       }
+      },
+      {
+       "@type": "ListItem",
+       "position": 7,
+       "url": "https://svet.kz/products/podvesnaya_lyustra_maytoni_vigo_mod031pl_12b/",
+       "name": "Подвесная люстра Maytoni Vigo MOD031PL-12B",
+       "item": {
+        "@type": "Product",
+        "name": "Подвесная люстра Maytoni Vigo MOD031PL-12B",
+        "url": "https://svet.kz/products/podvesnaya_lyustra_maytoni_vigo_mod031pl_12b/",
+        "image": "https://svet.kz/upload/iblock/659/udg7p3lkwg3pjhye1bksqg3tw213z852/mini_svet_podvesnye_podvesnaya_lyustra_maytoni_vigo_mod031pl_12b_dostavka_po_kazakhstanu_.jpeg",
+        "brand": {
+         "@type": "Brand",
+         "name": "Maytoni"
+        },
+        "offers": {
+         "@type": "Offer",
+         "price": 188000,
+         "priceCurrency": "KZT",
+         "url": "https://svet.kz/products/podvesnaya_lyustra_maytoni_vigo_mod031pl_12b/",
+         "availability": "https://schema.org/BackOrder"
+        }
+       }
+      },
+      {
+       "@type": "ListItem",
+       "position": 8,
+       "url": "https://svet.kz/products/lyustra_maytoni_mod379pl_l17b3k/",
+       "name": "Люстра Maytoni MOD379PL-L17B3K",
+       "item": {
+        "@type": "Product",
+        "name": "Люстра Maytoni MOD379PL-L17B3K",
+        "url": "https://svet.kz/products/lyustra_maytoni_mod379pl_l17b3k/",
+        "image": "https://svet.kz/upload/iblock/768/2tju5ioc60c0rtm9b8bztuahhdjf90z5/mini_svet_podvesnye_lyustra_maytoni_mod379pl_l17b3k_dostavka_po_kazakhstanu_.jpeg",
+        "brand": {
+         "@type": "Brand",
+         "name": "Maytoni"
+        },
+        "offers": {
+         "@type": "Offer",
+         "price": 375900,
+         "priceCurrency": "KZT",
+         "url": "https://svet.kz/products/lyustra_maytoni_mod379pl_l17b3k/",
+         "availability": "https://schema.org/BackOrder"
+        }
+       }
+      },
+      {
+       "@type": "ListItem",
+       "position": 9,
+       "url": "https://svet.kz/products/podvesnaya_lyustra_maytoni_mod302pl_10cg/",
+       "name": "Подвесная люстра Maytoni MOD302PL-10CG",
+       "item": {
+        "@type": "Product",
+        "name": "Подвесная люстра Maytoni MOD302PL-10CG",
+        "url": "https://svet.kz/products/podvesnaya_lyustra_maytoni_mod302pl_10cg/",
+        "image": "https://svet.kz/upload/iblock/875/689vkj9d84kwodv90tj8zdirqmpc8n75/mini_svet_podvesnye_podvesnaya_lyustra_maytoni_mod302pl_10cg_dostavka_po_kazakhstanu_.jpeg",
+        "brand": {
+         "@type": "Brand",
+         "name": "Maytoni"
+        },
+        "offers": {
+         "@type": "Offer",
+         "price": 356800,
+         "priceCurrency": "KZT",
+         "url": "https://svet.kz/products/podvesnaya_lyustra_maytoni_mod302pl_10cg/",
+         "availability": "https://schema.org/BackOrder"
+        }
+       }
+      },
+      {
+       "@type": "ListItem",
+       "position": 10,
+       "url": "https://svet.kz/products/podvesnaya_lyustra_maytoni_mod225pl_06b/",
+       "name": "Подвесная люстра Maytoni MOD225PL-06B",
+       "item": {
+        "@type": "Product",
+        "name": "Подвесная люстра Maytoni MOD225PL-06B",
+        "url": "https://svet.kz/products/podvesnaya_lyustra_maytoni_mod225pl_06b/",
+        "image": "https://svet.kz/upload/iblock/85a/3s27stg2au5a09tel57sk6slo22i2ces/mini_svet_podvesnye_podvesnaya_lyustra_maytoni_mod225pl_06b_dostavka_po_kazakhstanu_.jpeg",
+        "brand": {
+         "@type": "Brand",
+         "name": "Maytoni"
+        },
+        "offers": {
+         "@type": "Offer",
+         "price": 277100,
+         "priceCurrency": "KZT",
+         "url": "https://svet.kz/products/podvesnaya_lyustra_maytoni_mod225pl_06b/",
+         "availability": "https://schema.org/BackOrder"
+        }
+       }
+      }
+     ]
+    }
+   ],
+   "visible_chars": 17778,
+   "city_mentions": {
+    "astana": 9,
+    "almaty": 7,
+    "karaganda": 1
+   },
+   "phones": [
+    "+7 (777) 292-84-01"
+   ],
+   "internal_links": 599,
+   "has_hreflang": false,
+   "astana_snippets": [
+    "люстры — купить в алматы, астане и по казахстану | svet.kz каталог +7 (777) 292-84-01 обратный звонок 0 люстры по типу все люстры потоло",
+    "ладу показан в карточке, а люстру, которой сейчас нет в наличии, можно заказать. заказы в астану привозим доставкой. доставка по алматы и казахстану — условия на странице «доставка и оплата» , для аст",
+    "оставкой. доставка по алматы и казахстану — условия на странице «доставка и оплата» , для астаны — «доставка в астану» . отправляем в любой город казахстана — в караганду, павлодар, шымкент, актау и д",
+    " алматы и казахстану — условия на странице «доставка и оплата» , для астаны — «доставка в астану» . отправляем в любой город казахстана — в караганду, павлодар, шымкент, актау и другие — транспортной "
+   ]
+  },
+  "https://svet.kz/products/podvesnoy_svetilnik_maytoni_mod272pl_l12bs3k/": {
+   "url": "https://svet.kz/products/podvesnoy_svetilnik_maytoni_mod272pl_l12bs3k/",
+   "snapshot": "data/research/geo_audit_2026-11-20/html/svet.kz__products__podvesnoy_svetilnik_maytoni_mod272pl_l12bs3k.html",
+   "status": 200,
+   "final_url": "https://svet.kz/products/podvesnoy_svetilnik_maytoni_mod272pl_l12bs3k/",
+   "fetched_at": "2026-11-20T12:15:23+00:00",
+   "x_robots_tag": null,
+   "sha256": "eafbcb660ebb8eb373700d41ea0b9d493a2effdd929faec03f9f5f1280861ca2",
+   "sha256_redacted": "e1eaa6c08c2edc9a6ec9b642b3eb6189bb8fe46934a362ae7ad5839cfd99e2a0",
+   "title": "Подвесной светильник Maytoni MOD272PL-L12BS3K — купить в Алматы",
+   "meta_description": "Подвесной светильник Maytoni MOD272PL-L12BS3K: характеристики, фото, цена и наличие. 8 Вт, 3000 K. Доставка по Алматы и Казахстану от 1 дня.",
+   "meta_robots": null,
+   "canonical": "https://svet.kz/products/podvesnoy_svetilnik_maytoni_mod272pl_l12bs3k/",
+   "h1": [
+    "Подвесной светильник Maytoni MOD272PL-L12BS3K"
+   ],
+   "h2": [
+    "Параметры",
+    "Покупка и доставка",
+    "Параметры",
+    "Покупка и доставка"
+   ],
+   "h3_count": 21,
+   "jsonld_types": [
+    "Brand",
+    "BreadcrumbList",
+    "DefinedRegion",
+    "ListItem",
+    "MonetaryAmount",
+    "Offer",
+    "OfferShippingDetails",
+    "Organization",
+    "Product",
+    "QuantitativeValue",
+    "ShippingDeliveryTime"
+   ],
+   "jsonld": [
+    {
+     "@context": "https://schema.org",
+     "@type": "BreadcrumbList",
+     "itemListElement": [
+      {
+       "@type": "ListItem",
+       "position": 1,
+       "name": "Люстры",
+       "item": "https://svet.kz/katalog/lyustry/"
+      },
+      {
+       "@type": "ListItem",
+       "position": 2,
+       "name": "Подвесные люстры и светильники",
+       "item": "https://svet.kz/katalog/lyustry/bolshie-lyustry/"
+      },
+      {
+       "@type": "ListItem",
+       "position": 3,
+       "name": "Подвесной светильник Maytoni MOD272PL-L12BS3K"
+      }
+     ]
+    },
+    {
+     "@context": "https://schema.org/",
+     "@type": "Product",
+     "name": "Подвесной светильник Maytoni MOD272PL-L12BS3K",
+     "url": "https://svet.kz/products/podvesnoy_svetilnik_maytoni_mod272pl_l12bs3k/",
+     "image": [
+      "https://svet.kz/upload/iblock/6a7/wckm0e7gp04sfbqnkz58b3q5gu3en445/svet_podvesnye_podvesnoy_svetilnik_maytoni_mod272pl_l12bs3k_dostavka_po_kazakhstanu_.jpeg",
+      "https://svet.kz/upload/iblock/297/uzri73fgopx7v4mx2nfzzpcbhu68j141/a2578ed1_8d69_11ee_80bc_50ebf6b348b6_91df26be_dc9c_11f0_965f_d7d618613f84.jpeg",
+      "https://svet.kz/upload/iblock/15d/1061uexw72pz4kyu2si3h5whrvngew56/a2578ed1_8d69_11ee_80bc_50ebf6b348b6_643693b4_8c28_11ef_965e_e7fb2448ac0c.jpeg",
+      "https://svet.kz/upload/iblock/46a/3g6iio6jupnnlvvxzrsy0kiazva0450y/a2578ed1_8d69_11ee_80bc_50ebf6b348b6_51ae9020_b84b_11f0_965f_d7d618613f84.jpeg",
+      "https://svet.kz/upload/iblock/aa0/pdp2z9sfq23ac1n9lrbihfvez5689lxy/a2578ed1_8d69_11ee_80bc_50ebf6b348b6_8858d245_a37b_11ee_80bc_50ebf6b348b6.jpeg"
+     ],
+     "sku": "MOD272PL-L12BS3K",
+     "mpn": "MOD272PL-L12BS3K",
+     "brand": {
+      "@type": "Brand",
+      "name": "Maytoni"
+     },
+     "offers": {
+      "@type": "Offer",
+      "url": "https://svet.kz/products/podvesnoy_svetilnik_maytoni_mod272pl_l12bs3k/",
+      "priceCurrency": "KZT",
+      "price": 106760,
+      "availability": "https://schema.org/InStock",
+      "itemCondition": "https://schema.org/NewCondition",
+      "seller": {
+       "@type": "Organization",
+       "name": "SVET.KZ"
+      },
+      "shippingDetails": [
+       {
+        "@type": "OfferShippingDetails",
+        "shippingRate": {
+         "@type": "MonetaryAmount",
+         "value": 3500,
+         "currency": "KZT"
+        },
+        "shippingDestination": {
+         "@type": "DefinedRegion",
+         "addressCountry": "KZ",
+         "addressRegion": "75"
+        },
+        "deliveryTime": {
+         "@type": "ShippingDeliveryTime",
+         "handlingTime": {
+          "@type": "QuantitativeValue",
+          "minValue": 0,
+          "maxValue": 1,
+          "unitCode": "DAY"
+         },
+         "transitTime": {
+          "@type": "QuantitativeValue",
+          "minValue": 1,
+          "maxValue": 3,
+          "unitCode": "DAY"
+         }
+        }
+       },
+       {
+        "@type": "OfferShippingDetails",
+        "shippingRate": {
+         "@type": "MonetaryAmount",
+         "value": 7000,
+         "currency": "KZT"
+        },
+        "shippingDestination": {
+         "@type": "DefinedRegion",
+         "addressCountry": "KZ"
+        },
+        "deliveryTime": {
+         "@type": "ShippingDeliveryTime",
+         "handlingTime": {
+          "@type": "QuantitativeValue",
+          "minValue": 0,
+          "maxValue": 1,
+          "unitCode": "DAY"
+         },
+         "transitTime": {
+          "@type": "QuantitativeValue",
+          "minValue": 1,
+          "maxValue": 3,
+          "unitCode": "DAY"
+         }
+        }
+       }
+      ]
+     },
+     "description": "Подвесной светильник Maytoni MOD272PL-L12BS3K. Стиль — «модерн». Арматура — металл, цвет черный; плафоны — стекло, цвет коньячный. Размеры: высота 3840 мм (3,84 м), диаметр 80 мм. Свет: встроенные светодиоды, мощность 8 Вт, световой поток 920 лм, тёплый свет 3000 K, Ra 80. Степень защиты IP20 — для сухих помещений."
+    }
+   ],
+   "visible_chars": 17090,
+   "city_mentions": {
+    "astana": 2,
+    "almaty": 8,
+    "karaganda": 0
+   },
+   "phones": [
+    "+7 (777) 292-84-01"
+   ],
+   "internal_links": 451,
+   "has_hreflang": false,
+   "astana_snippets": [
+    ", бутики 28, 32, 35, 26а тц жибек жолы, проспект жибек жолы, 135/10а а3, a4 бутик, 1 этаж астана ул. мангилик ел, 29/2 договор публичной оферты политика конфиденциальности © 2009-2026 svet.kz интернет",
+    ", 32, 35, 26а тц жибек жолы, проспект жибек жолы, 135/10а а3, a4 бутик, 1 этаж астана ул. мангилик ел, 29/2 договор публичной оферты политика конфиденциальности © 2009-2026 svet.kz интернет-магазин св"
+   ]
+  },
+  "https://svet.kz/dostavka/astana/": {
+   "url": "https://svet.kz/dostavka/astana/",
+   "snapshot": "data/research/geo_audit_2026-11-20/html/svet.kz__dostavka__astana.html",
+   "status": 200,
+   "final_url": "https://svet.kz/dostavka/astana/",
+   "fetched_at": "2026-11-20T12:15:24+00:00",
+   "x_robots_tag": null,
+   "sha256": "20d6666c41c11790a20b3218c50f2d347265d7a39ac85e3883cdfdffd8e651ad",
+   "sha256_redacted": "a44ae54fab766b076c80e5e497dd10c37377dd04d5a202bb7461b39b09b7ea91",
+   "title": "Доставка светильников и люстр в Астану | SVET.KZ",
+   "meta_description": "Люстры, светильники и лампы с доставкой в Астану транспортной компанией DPD — 7 000 ₸, перевозка 1–3 рабочих дня.",
+   "meta_robots": null,
+   "canonical": "https://svet.kz/dostavka/astana/",
+   "h1": [
+    "Доставка светильников в Астану"
+   ],
+   "h2": [
+    "Как заказать",
+    "Стоимость и срок",
+    "Подобрать в каталоге",
+    "Помощь с выбором"
+   ],
+   "h3_count": 0,
+   "jsonld_types": [],
+   "jsonld": [],
+   "visible_chars": 7455,
+   "city_mentions": {
+    "astana": 8,
+    "almaty": 5,
+    "karaganda": 0
+   },
+   "phones": [
+    "+7 (777) 292-84-01"
+   ],
+   "internal_links": 371,
+   "has_hreflang": false,
+   "astana_snippets": [
+    "доставка светильников и люстр в астану | svet.kz каталог +7 (777) 292-84-01 обратный звонок 0 люстры по типу все люстры потолочные люстры-вент",
+    "имерка главная каталог сравнение по фото избранное 0 корзина доставка и оплата доставка в астану доставка светильников в астану доставим люстры, светильники и лампы с svet.kz в астану транспортной ком",
+    "е по фото избранное 0 корзина доставка и оплата доставка в астану доставка светильников в астану доставим люстры, светильники и лампы с svet.kz в астану транспортной компанией dpd: 7 000 ₸, перевозка ",
+    " в астану доставка светильников в астану доставим люстры, светильники и лампы с svet.kz в астану транспортной компанией dpd: 7 000 ₸, перевозка 1–3 рабочих дня. заказ — на сайте, с междугородней доста"
+   ]
+  }
+ }
+}

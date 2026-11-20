@@ -29,8 +29,8 @@ cd ~/Desktop/TrAIHaRd-hackathonwinners2026/src
 | brand_type | `unbranded`, `branded`, `competitor-branded` |
 | provider | `chatgpt_search`, `gemini`, `perplexity`, `google_ai_mode`, `google_ai_overview`, `copilot`, `yandex_alice`, `other` |
 | search_mode | `search_on`, `unknown`. Ответы без поиска (`search_off`) **не являются** наблюдениями AI-поиска — не импортируются |
-| data_type | `REAL_SEARCH` (API), `MANUAL_VERIFIED` (ручной сбор из интерфейса + доказательство), `CONTROLLED_EXPERIMENT` (только experiment engine), `SYNTHETIC_DEMO` (только `data/samples/`) |
-| verification_status | `pending`, `verified`, `rejected` |
+| data_type | `REAL_SEARCH` (API), `MANUAL_VERIFIED` (ручной сбор из интерфейса + доказательство), `MANUAL_REPORTED` (v1.2: ручной сбор, ответ предоставлен участником **без** скриншота/ссылки — только со статусом `self_attested`), `CONTROLLED_EXPERIMENT` (только experiment engine), `SYNTHETIC_DEMO` (только `data/samples/`) |
+| verification_status | `pending`, `verified`, `rejected`, `self_attested` (v1.2) |
 | entity_level | `manufacturer`, `retailer` |
 | source_type | `client_site`, `retailer_site`, `manufacturer_site`, `map_directory`, `marketplace`, `social`, `review_q&a`, `media`, `encyclopedia`, `other_web` |
 | implementation_type | `SITE_CONTENT`, `PRODUCT_CARD`, `BRAND_PAGE`, `RETAILER_PAGE`, `CATEGORY_PAGE`, `STRUCTURED_DATA`, `INTERNAL_LINK`, `LOCAL_BUSINESS_PROFILE`, `PRODUCT_CATALOG`, `VERIFIED_THIRD_PARTY_MENTION`, `SOCIAL_CONTENT`, `VERIFIED_REVIEW_RESPONSE` |
@@ -41,8 +41,10 @@ cd ~/Desktop/TrAIHaRd-hackathonwinners2026/src
 
 ## 3. Правило KPI
 
-**Реальные KPI** = строки с `data_type ∈ {REAL_SEARCH, MANUAL_VERIFIED}` **и** `verification_status = verified`.
+**Реальные (verified) KPI** = строки с `data_type ∈ {REAL_SEARCH, MANUAL_VERIFIED}` **и** `verification_status = verified`. `MANUAL_REPORTED` никогда не бывает verified.
+**Предварительные показатели (блок A)** = все реальные строки, кроме `rejected` (`pending`, `self_attested`, `verified`), с явной маркировкой.
 `pending` видны в разделах «Наблюдения» и «Источники» с пометкой, но не входят в KPI. `rejected` скрыты.
+`self_attested` — текст ответа предоставил участник (например, в документе), подтвердил, что это настоящий ответ AI, но скриншота / share-ссылки нет: видны как наблюдения и в **предварительных** показателях (явно маркированных), **никогда** не становятся `verified` и не входят в verified KPI.
 `verified` требует `verified_by`, по возможности — **другого** участника (если тот же человек, будет предупреждение).
 `SYNTHETIC_DEMO` показывается только при включённом переключателе «Режим SYNTHETIC_DEMO», и тогда реальные данные скрыты.
 Результаты эксперимента показываются только в разделе «Контролируемый эксперимент».
@@ -127,3 +129,9 @@ SOURCE PRESENCE ≠ AI CITATION: `cited_in_response_ids` пусто, если ц
 - Одинаковый текст ответа у одного prompt+provider с разными ID — предупреждение (вероятная повторная вставка).
 - Файл с тем же именем загружается как новая версия: заменяет старую целиком, только явной кнопкой.
 - Baseline v1: `data/prompts/baseline_v1.csv` (12 ID); предзаполненные листы — `data/templates/prefilled_*_baseline_v1.csv`.
+
+## 8. Уточнения v1.2 (2026-11-20 17:00) — новое значение словаря, столбцы те же
+
+- `data_type = MANUAL_REPORTED` ⇔ `verification_status = self_attested` (кроме `rejected`).
+- `verification_status = self_attested`: `evidence_link` пустой (иначе ошибка — используйте `pending`), `notes` обязательно описывает, откуда сохранился текст, `verified_by` пустой.
+- Staged-импорт (`python -m geolab.staging`): строки из `data/staging/<batch>/` переносятся в `data/raw/manual/` только после того, как человек подтвердил точный текст запроса и сборщика в `resolution.csv` (с указанием источника каждого факта). Точное совпадение запроса с `prompts.csv` → существующий `prompt_id`; иначе новый промпт с ID участника и полной классификацией. Перевод в `verified` — только при существующем доказательстве и `verified_by` ≠ `collector`.

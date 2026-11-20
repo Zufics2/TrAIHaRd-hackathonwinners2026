@@ -1,0 +1,146 @@
+[
+ {
+  "card": "GEO-01",
+  "claim": "Страница доставки в Астану существует",
+  "url": "https://svet.kz/dostavka/astana/",
+  "result": "PASS",
+  "evidence": "люстры, светильники и лампы с svet.kz в Астану транспортной компанией DPD: 7 000 ₸, перевозка 1–3 рабочих дня. Заказ — на сайте, с междугородне",
+  "fetched_at": "2026-11-20T15:28:45+00:00",
+  "sha256": "e2a6e8c796b7202be9f0c65146b93c61fefab947c186ab92f1ad7520a22c3564"
+ },
+ {
+  "card": "GEO-01",
+  "claim": "На ней НЕТ блока о салоне в Астане (адрес только в футере)",
+  "url": "https://svet.kz/dostavka/astana/",
+  "result": "PASS",
+  "evidence": "слов «салон/шоурум/самовывоз» нет",
+  "fetched_at": "2026-11-20T15:28:45+00:00",
+  "sha256": "e2a6e8c796b7202be9f0c65146b93c61fefab947c186ab92f1ad7520a22c3564"
+ },
+ {
+  "card": "GEO-01",
+  "claim": "Категория люстр описывает Астану через доставку",
+  "url": "https://svet.kz/katalog/lyustry/",
+  "result": "PASS",
+  "evidence": "н в карточке, а люстру, которой сейчас нет в наличии, можно заказать. Заказы в Астану привозим доставкой. Доставка по Алматы и Казахстану — условия на странице «Доставка и оп",
+  "fetched_at": "2026-11-20T15:28:46+00:00",
+  "sha256": "84bf4ef48e3adcfce0e5da0dba9276cae95323b99e581589a960a4d21547c17b"
+ },
+ {
+  "card": "GEO-01",
+  "claim": "Салон в Астане опубликован как Store в JSON-LD",
+  "url": "https://svet.kz/contact/",
+  "result": "PASS",
+  "evidence": "zation\"}, \"address\": {\"@type\": \"PostalAddress\", \"streetAddress\": \"ул. Мангилик Ел, 29/2\", \"addressLocality\": \"Астана\", \"addressCountry\": \"KZ\"}, \"geo\": {\"@typ",
+  "fetched_at": "2026-11-20T15:28:48+00:00",
+  "sha256": "5a00888c21615b384ec59db251732726e742c41f44bc4e78f88d011ef9d03e83"
+ },
+ {
+  "card": "GEO-03",
+  "claim": "Адрес Центра Красок в Астане опубликован на странице контактов",
+  "url": "https://centr-krasok.kz/about/contacts/",
+  "result": "PASS",
+  "evidence": "0 до 20:00 загрузка карты... Астана +7 (777) 292-84-01 г. Астана, ул. Мангилик Ел, 29/2 с 10:00 до 20:00 загрузка карты... Каталог О компании Покупателям Сот",
+  "fetched_at": "2026-11-20T15:28:51+00:00",
+  "sha256": "c317cef25169b399613a4fa1d05886bc4e8f48a9c84089da436858a206fb2d52"
+ },
+ {
+  "card": "GEO-03",
+  "claim": "На странице контактов нет JSON-LD Store / LocalBusiness / Organization",
+  "url": "https://centr-krasok.kz/about/contacts/",
+  "result": "PASS",
+  "evidence": "[{\"@context\": \"https://schema.org\", \"@type\": \"WebSite\", \"name\": \"ᐉ Центр Красок #1 Интернет-магазин строительных красок в Алматы\", \"url\": \"https://centr-krasok.",
+  "fetched_at": "2026-11-20T15:28:51+00:00",
+  "sha256": "c317cef25169b399613a4fa1d05886bc4e8f48a9c84089da436858a206fb2d52"
+ },
+ {
+  "card": "GEO-03",
+  "claim": "WebSite.name на главной упоминает только Алматы",
+  "url": "https://centr-krasok.kz/",
+  "result": "PASS",
+  "evidence": "ite\", \"name\": \"ᐉ Центр Красок #1 Интернет-магазин строительных красок в Алматы\", \"url\": \"https://centr-krasok.kz/\"}]",
+  "fetched_at": "2026-11-20T15:28:53+00:00",
+  "sha256": "adea96fdd5630c803872d850ecc50c0bc21248035ff1f3eb998227a56639c56d"
+ },
+ {
+  "card": "GEO-05",
+  "claim": "robots.txt закрывает фильтр-URL (Disallow: /*/filter/)",
+  "url": "https://centr-krasok.kz/robots.txt",
+  "result": "PASS",
+  "evidence": "User-Agent: *\nDisallow: /*/filter/\nDisallow: /bitrix/\nDisallow: /local/\nDisallow: /personal/\nDisallow: /",
+  "fetched_at": "2026-11-20T15:28:58+00:00",
+  "sha256": "aa4e5f4273b7e9a64cc302e0a3df9e0be0f8f44d239490360fb051cdd480f95f"
+ },
+ {
+  "card": "GEO-05",
+  "claim": "У категории Dulux нет rel=canonical",
+  "url": "https://centr-krasok.kz/catalog/dulux/",
+  "result": "PASS",
+  "evidence": "canonical отсутствует",
+  "fetched_at": "2026-11-20T15:28:55+00:00",
+  "sha256": "44a608662d13f1551777e04dd56b7bb05f6bd5a399e605daf42ed777f3d8914f"
+ },
+ {
+  "card": "GEO-05",
+  "claim": "H1 «Dulux» повторяется",
+  "url": "https://centr-krasok.kz/catalog/dulux/",
+  "result": "PASS",
+  "evidence": "h1=['Dulux', 'Dulux']",
+  "fetched_at": "2026-11-20T15:28:55+00:00",
+  "sha256": "44a608662d13f1551777e04dd56b7bb05f6bd5a399e605daf42ed777f3d8914f"
+ },
+ {
+  "card": "GEO-07",
+  "claim": "Телефон +7 777 292-84-01 на контактах SVET.KZ",
+  "url": "https://svet.kz/contact/",
+  "result": "PASS",
+  "evidence": "ия - интернет-магазин осветительных приборов Svet.kz Каталог +7 (777) 292-84-01 Обратный звонок 0 Люстры По типу Все люстры Потолочные Люстры-вентиля",
+  "fetched_at": "2026-11-20T15:28:48+00:00",
+  "sha256": "5a00888c21615b384ec59db251732726e742c41f44bc4e78f88d011ef9d03e83"
+ },
+ {
+  "card": "GEO-07",
+  "claim": "Номер 245-88-88 (назван AI) на контактах SVET.KZ отсутствует",
+  "url": "https://svet.kz/contact/",
+  "result": "PASS",
+  "evidence": "не найден",
+  "fetched_at": "2026-11-20T15:28:48+00:00",
+  "sha256": "5a00888c21615b384ec59db251732726e742c41f44bc4e78f88d011ef9d03e83"
+ },
+ {
+  "card": "XX-003",
+  "claim": "Категория люстр SVET.KZ заявляет отправку в Караганду",
+  "url": "https://svet.kz/katalog/lyustry/",
+  "result": "PASS",
+  "evidence": " Астаны — «Доставка в Астану» . Отправляем в любой город Казахстана — в Караганду, Павлодар, Шымкент, Актау и другие — транспортной компанией, срок от ",
+  "fetched_at": "2026-11-20T15:28:46+00:00",
+  "sha256": "84bf4ef48e3adcfce0e5da0dba9276cae95323b99e581589a960a4d21547c17b"
+ },
+ {
+  "card": "XX-003",
+  "claim": "На контактах SVET.KZ адрес в Караганде не опубликован",
+  "url": "https://svet.kz/contact/",
+  "result": "PASS",
+  "evidence": "адреса в Караганде нет",
+  "fetched_at": "2026-11-20T15:28:48+00:00",
+  "sha256": "5a00888c21615b384ec59db251732726e742c41f44bc4e78f88d011ef9d03e83"
+ },
+ {
+  "card": "XX-003",
+  "claim": "На контактах Центра Красок адрес в Караганде не опубликован (есть только в списке городов)",
+  "url": "https://centr-krasok.kz/about/contacts/",
+  "result": "PASS",
+  "evidence": "адреса в Караганде нет",
+  "fetched_at": "2026-11-20T15:28:51+00:00",
+  "sha256": "c317cef25169b399613a4fa1d05886bc4e8f48a9c84089da436858a206fb2d52"
+ },
+ {
+  "card": "CK-005",
+  "claim": "Число товаров в категории «Для детской» (live)",
+  "url": "https://centr-krasok.kz/catalog/dlya_detskoy/",
+  "result": "PASS",
+  "evidence": "нию Цена по убыванию Алфавиту Показать на странице: 10 20 30 40 50 60 Найдено 2 товаров Dulux Англия 2,25 л Краска Dulux Ultra Resist Для детской BC 2,25 О",
+  "fetched_at": "2026-11-20T15:28:57+00:00",
+  "sha256": "990469be5df47d83d16b73a9681e48a1e85640a9f63774a6c2dbbac6e8cab336"
+ }
+]

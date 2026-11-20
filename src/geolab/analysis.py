@@ -21,7 +21,7 @@ BULLET_RE = re.compile(r"^\s*[-*•]\s+(.+)$")
 
 RECOMMEND_CUES = (
     "рекоменд", "совету", "советую", "лучш", "стоит обратить", "обратите внимание",
-    "подойд", "хороший выбор", "надёжн", "надежн", "популярн", "топ",
+    "подойд", "хороший выбор", "надёжн", "надежн", "популярн", "топ", "первый выбор", "в первую очередь",
     "recommend", "best", "top",
 )
 NEGATIVE_CUES = ("не рекоменд", "не стоит", "избегайте", "не советую", "не продает", "не продают", "нет в ассортименте",
@@ -31,7 +31,8 @@ NEGATIVE_CUES = ("не рекоменд", "не стоит", "избегайте
 # never against the query string (https://evil.example/?next=https://2gis.kz/ is NOT a map directory).
 SOURCE_TYPES = {
     "map_directory": ("2gis.kz", "2gis.ru", "2gis.com", "yandex.kz/maps", "yandex.ru/maps", "yandex.com/maps",
-                      "maps.google.com", "maps.app.goo.gl", "google.com/maps", "google.kz/maps", "goo.gl/maps"),
+                      "maps.google.com", "maps.app.goo.gl", "google.com/maps", "google.kz/maps", "goo.gl/maps",
+                      "jsprav.ru", "zoon.kz", "zoon.ru", "spr.kz"),  # business directories (address / phone cards)
     "marketplace": ("kaspi.kz", "wildberries.ru", "wildberries.kz", "wb.ru", "ozon.ru", "ozon.kz", "satu.kz", "market.kz",
                     "olx.kz", "flip.kz", "halykmarket.kz", "e-katalog.kz"),
     "social": ("instagram.com", "facebook.com", "youtube.com", "youtu.be", "tiktok.com", "t.me", "vk.com",
@@ -100,13 +101,13 @@ CYR_WORD = re.compile(r"^[а-я]+$")
 CYR_VOWEL_END = re.compile(r"[аеиоуыэюяй]$")
 
 
-def _alias_pattern(alias: str) -> re.Pattern:
+def _alias_pattern(alias: str, keep_case: bool = False) -> re.Pattern:
     """Exact match for single-word aliases. In multi-word Cyrillic aliases each word may take a
     Russian case ending ("Центр Красок" -> "Центре Красок", "Центра Красок")."""
-    words = normalize(alias).split()
+    words = (alias.replace("ё", "е") if keep_case else normalize(alias)).split()
     parts = []
     for w in words:
-        if len(words) > 1 and CYR_WORD.match(w) and len(w) >= 4:
+        if len(words) > 1 and CYR_WORD.match(w.lower()) and len(w) >= 4:
             stem = CYR_VOWEL_END.sub("", w)
             parts.append(re.escape(stem) + r"[а-я]{0,3}")
         else:
@@ -126,7 +127,7 @@ def _cs_pattern(alias: str) -> re.Pattern:
 
 
 def _patterns(entity: Entity) -> list[tuple[re.Pattern, bool]]:
-    key = (entity.id, entity.name, entity.aliases, entity.domains, entity.case_sensitive)
+    key = (entity.id, entity.name, entity.aliases, entity.domains, entity.case_sensitive, entity.case_sensitive_aliases)  # exclude_preceding: applied in find_entity_spans
     pats = _PATTERN_CACHE.get(key)
     if pats is None:
         aliases = sorted(set(entity.aliases) | {entity.name} | set(entity.domains), key=len, reverse=True)
@@ -134,6 +135,8 @@ def _patterns(entity: Entity) -> list[tuple[re.Pattern, bool]]:
         # domains are always case-insensitive.
         pats = [(_cs_pattern(a), True) if entity.case_sensitive and a not in entity.domains else (_alias_pattern(a), False)
                 for a in aliases if a]
+        # proper-name forms matched in their written case, Russian endings allowed ("в Центре Красок", not "центры красок")
+        pats += [(_alias_pattern(a, keep_case=True), True) for a in sorted(entity.case_sensitive_aliases, key=len, reverse=True)]
         _PATTERN_CACHE[key] = pats
     return pats
 
@@ -144,9 +147,13 @@ def find_entity_spans(text: str, entity: Entity) -> list[int]:
     raw = text.replace("ё", "е")  # same length as norm, positions align
     hits: set[int] = set()
     covered: list[tuple[int, int]] = []
+    excl = {normalize(w) for w in entity.exclude_preceding}
     for p, cs in pats:  # longest alias first; skip overlaps so "Центр Красок №1" counts once
         for m in p.finditer(raw if cs else norm):
             if any(s <= m.start() < e for s, e in covered):
+                continue
+            prev = re.findall(r"\w+", norm[max(0, m.start() - 40):m.start()])
+            if excl and prev and prev[-1] in excl:
                 continue
             covered.append((m.start(), m.end()))
             hits.add(m.start())
@@ -214,7 +221,7 @@ def extract_citations(text: str, registry: Registry, extra_urls: list[str] | Non
 SENT_BOUNDARY = re.compile(r"[.!?…](?=\s|$)|\n")
 # Words that introduce a list of suggestions (in addition to RECOMMEND_CUES).
 LIST_INTRO_CUES = ("вариант", "можно купить", "купить можно", "где купить", "стоит рассмотреть", "рассмотрите",
-                   "подойдут", "подходят", "советую", "посмотрите", "обратите внимание", "options", "consider")
+                   "подойдут", "подходят", "советую", "посмотрите", "обратите внимание", "стоит посетить", "в следующих", "options", "consider")
 MARKUP_LEAD = re.compile(r"^[\s*_#>\[\]`\"'«“(]+")
 
 
@@ -236,20 +243,76 @@ def _head_entity(item: str, entities: list[Entity]) -> str | None:
         if not spans:
             continue
         prefix = MARKUP_LEAD.sub("", item[:spans[0]])
-        if len(re.findall(r"\w+", prefix)) <= 1 and (best is None or spans[0] < best[0]):
+        words = re.findall(r"\w+", prefix)
+        if words and IMPERATIVE_RE.search(words[0].lower()):  # "Проверьте Dulux" is an instruction (G09)
+            continue
+        if len(words) <= 1 and (best is None or spans[0] < best[0]):
             best = (spans[0], e.id)
     return best[1] if best else None
 
 
+IMPERATIVE_RE = re.compile(r"(?:ите|йте|ьте|ете)$")  # Russian plural imperative: проверьте, откройте, посмотрите
+SOURCE_LINE_RE = re.compile(r"^[ \t]*(?:источники?|ссылки|sources?)[ \t]*:.*$", re.I | re.M)
+SOURCE_CHIP_RE = re.compile(r"\b[\w-]+(?:\.[\w-]+)+\+\d+\b")  # ChatGPT source chips: "svet.kz+1"
+CLAUSE_BOUNDARY = re.compile(r"[,;:—–]|\s(?:но|а|однако)\s")
+
+
+def mask_sources(text: str) -> str:
+    """Answer text with URLs, source chips and 'Источники:' lines blanked (same length, positions kept).
+    A store that appears ONLY as a link is cited, not mentioned in the answer (G10)."""
+    def blank(m: re.Match) -> str:
+        return " " * len(m.group(0))
+    for rx in (URL_RE, SOURCE_CHIP_RE, SOURCE_LINE_RE):
+        text = rx.sub(blank, text)
+    return text
+
+
+def _clause_around(text: str, pos: int) -> tuple[str, str]:
+    """(clause, part of the clause before pos) inside the sentence containing pos."""
+    sent_start = 0
+    for m in SENT_BOUNDARY.finditer(text, 0, pos):
+        sent_start = m.end()
+    start = sent_start
+    for m in CLAUSE_BOUNDARY.finditer(text, sent_start, pos):
+        start = m.end()
+    m = CLAUSE_BOUNDARY.search(text, pos)
+    s = SENT_BOUNDARY.search(text, pos)
+    end = min(x.start() for x in (m, s) if x) if (m or s) else len(text)
+    return text[start:end], text[start:pos]
+
+
+def _intro(lines: list[str]) -> str:
+    """Introduction of a list = the last line ending with ':' among the 3 lines before it, else those
+    3 lines. Real ChatGPT answers put a heading and an image caption between the intro and item 1."""
+    tail = lines[-3:]
+    for ln in reversed(tail):
+        if ln.rstrip().endswith(":"):
+            return ln
+    return "\n".join(tail)
+
+
 def _list_items(text: str) -> list[dict]:
-    """Numbered/bulleted items with the line that introduces their list."""
-    items, intro = [], ""
+    """Numbered/bulleted items with the text that introduces their list. Items "2.", "3." … of a
+    numbered list keep the intro of item "1." even when detail lines sit between them."""
+    items, recent, intro, list_intro, last_num = [], [], "", "", None
     for line in text.splitlines():
-        m = NUMBERED_RE.match(line) or BULLET_RE.match(line)
+        num = NUMBERED_RE.match(line)
+        m = num or BULLET_RE.match(line)
         if m:
-            items.append({"text": m.groups()[-1], "numbered": bool(NUMBERED_RE.match(line)), "intro": intro})
+            if recent:
+                intro, recent = _intro(recent), []
+            item_intro = intro
+            if num:
+                n = int(num.group(1))
+                if last_num is not None and n == last_num + 1:
+                    item_intro = list_intro
+                else:
+                    list_intro = intro
+                last_num = n
+            items.append({"text": m.groups()[-1], "numbered": bool(num), "intro": item_intro,
+                          "num": int(num.group(1)) if num else None})
         elif line.strip():
-            intro = line
+            recent.append(line)
     return items
 
 
@@ -270,22 +333,30 @@ def _has(text: str, cues) -> bool:
 
 
 def analyze_answer(text: str, registry: Registry, cited_urls: list[str] | None = None) -> AnswerAnalysis:
-    """Ranking: >=2 numbered items each headed by an entity. Recommendation (heuristic):
-    a recommendation cue in the entity's sentence, OR the entity heads an item of a list whose
-    introduction suggests options / of an explicit ranking without a neutral intro.
-    Neutral lists ("Упомянутые названия:") and negated items are not recommendations (QA-002)."""
+    """Mentions are searched in the answer text WITHOUT links (G10).
+    Ranking: >=2 numbered items headed by an entity, in a list introduced as options/recommendations
+    (or with no intro); a neutral catalogue ("Каталог производителей:") is not a ranking (G09).
+    Rank = the item's own number, so unknown stores do not compress positions (G08).
+    Recommendation (heuristic): heads an item of an options list / explicit ranking, OR a positive cue
+    in the sentence that is not part of a negation and no negation in the entity's own clause (G09)."""
     entities = list(registry.entities.values())
     res = AnswerAnalysis()
-    items = _list_items(text)
+    body = mask_sources(text)
+    items = _list_items(body)
     for it in items:
         it["head"] = _head_entity(it["text"], entities)
-    ranked = [it["head"] for it in items if it["numbered"] and it["head"]]
+        it["rank_list"] = it["numbered"] and not _has(it["intro"], NEGATIVE_CUES) and (
+            not it["intro"].strip() or _has(it["intro"], RECOMMEND_CUES + LIST_INTRO_CUES))
+    ranked = [(it["num"], it["head"]) for it in items if it["rank_list"] and it["head"]]
     res.has_ranking = len(ranked) >= 2
+    first_rank: dict[str, int] = {}
     if res.has_ranking:
-        res.ranked_entities = list(dict.fromkeys(ranked))
-    norm_text = normalize(text)
+        for num, head in ranked:
+            first_rank.setdefault(head, num)
+        res.ranked_entities = list(first_rank)
+    norm_text = normalize(body)
     for e in entities:
-        spans = find_entity_spans(text, e)
+        spans = find_entity_spans(body, e)
         if not spans:
             continue
         recommended = False
@@ -293,16 +364,21 @@ def analyze_answer(text: str, registry: Registry, cited_urls: list[str] | None =
             if it["head"] != e.id or _has(it["text"], NEGATIVE_CUES):
                 continue
             intro_ok = _has(it["intro"], RECOMMEND_CUES + LIST_INTRO_CUES) and not _has(it["intro"], NEGATIVE_CUES)
-            if intro_ok or (it["numbered"] and res.has_ranking and not it["intro"].strip()):
+            if intro_ok or (it["rank_list"] and res.has_ranking and not it["intro"].strip()):
                 recommended = True
                 break
         if not recommended:
             for pos in spans:
                 sent = _sentence_around(norm_text, pos)
-                if not any(c in sent for c in NEGATIVE_CUES) and any(c in sent for c in RECOMMEND_CUES):
+                positive = sent
+                for c in NEGATIVE_CUES:
+                    positive = positive.replace(c, " ")
+                clause, before = _clause_around(norm_text, pos)
+                negated = any(c in clause for c in NEGATIVE_CUES) or re.search(r"(?:^|\s)(?:не|кроме)\s+(?:\S+\s+)?$", before)
+                if not negated and any(c in positive for c in RECOMMEND_CUES):
                     recommended = True
                     break
-        rank = res.ranked_entities.index(e.id) + 1 if e.id in res.ranked_entities else None
+        rank = first_rank.get(e.id)
         res.mentions[e.id] = Mention(e.id, e.level, spans[0], len(spans), recommended, rank)
     res.citations = extract_citations(text, registry, cited_urls)
     return res

@@ -1,0 +1,391 @@
+{
+ "n": 10,
+ "evidence": {
+  "self_attested": 10
+ },
+ "per_answer": [
+  {
+   "response_id": "OBS-001",
+   "provider": "gemini",
+   "stage": "retailer_discovery",
+   "city": "almaty",
+   "query": "Где купить качественную интерьерную краску для дома в Алматы?",
+   "client": "centr_krasok",
+   "client_mentioned": true,
+   "client_recommended": true,
+   "client_rank": null,
+   "ranked": [],
+   "unique_urls": 0,
+   "client_site_cited": false,
+   "evidence": "self_attested"
+  },
+  {
+   "response_id": "OBS-002",
+   "provider": "gemini",
+   "stage": "retailer_discovery",
+   "city": "astana",
+   "query": "Какие магазины красок для ремонта есть в Астане?",
+   "client": "centr_krasok",
+   "client_mentioned": false,
+   "client_recommended": false,
+   "client_rank": null,
+   "ranked": [],
+   "unique_urls": 0,
+   "client_site_cited": false,
+   "evidence": "self_attested"
+  },
+  {
+   "response_id": "OBS-003",
+   "provider": "chatgpt_search",
+   "stage": "retailer_discovery",
+   "city": "karaganda",
+   "query": "Где в Караганде купить краску для стен и потолков?",
+   "client": "centr_krasok",
+   "client_mentioned": false,
+   "client_recommended": false,
+   "client_rank": null,
+   "ranked": [
+    "stroymart",
+    "dvenadtsat_mesyatsev",
+    "laki_kraski",
+    "caparol_center"
+   ],
+   "unique_urls": 3,
+   "client_site_cited": false,
+   "evidence": "self_attested"
+  },
+  {
+   "response_id": "OBS-004",
+   "provider": "chatgpt_search",
+   "stage": "retailer_discovery",
+   "city": "almaty",
+   "query": "Где купить люстру для дома в Алматы? Посоветуй проверенные магазины.",
+   "client": "svet_kz",
+   "client_mentioned": true,
+   "client_recommended": true,
+   "client_rank": 1,
+   "ranked": [
+    "svet_kz",
+    "artlamp",
+    "tekled",
+    "elektrokompleks",
+    "luis_lighting"
+   ],
+   "unique_urls": 9,
+   "client_site_cited": true,
+   "evidence": "self_attested"
+  },
+  {
+   "response_id": "OBS-005",
+   "provider": "gemini",
+   "stage": "retailer_discovery",
+   "city": "astana",
+   "query": "Какие магазины люстр и светильников лучше в Астане?",
+   "client": "svet_kz",
+   "client_mentioned": false,
+   "client_recommended": false,
+   "client_rank": null,
+   "ranked": [],
+   "unique_urls": 7,
+   "client_site_cited": false,
+   "evidence": "self_attested"
+  },
+  {
+   "response_id": "OBS-006",
+   "provider": "chatgpt_search",
+   "stage": "retailer_discovery",
+   "city": "karaganda",
+   "query": "Где в Караганде большой выбор люстр для квартиры?",
+   "client": "svet_kz",
+   "client_mentioned": false,
+   "client_recommended": false,
+   "client_rank": null,
+   "ranked": [
+    "haydi",
+    "tekled",
+    "svetotekhnika_plus",
+    "global_light"
+   ],
+   "unique_urls": 2,
+   "client_site_cited": false,
+   "evidence": "self_attested"
+  },
+  {
+   "response_id": "BR-G-PA-001",
+   "provider": "gemini",
+   "stage": "bridge",
+   "city": "almaty",
+   "query": "Где в Алматы можно купить интерьерную краску Dulux с колеровкой?",
+   "client": "centr_krasok",
+   "client_mentioned": true,
+   "client_recommended": true,
+   "client_rank": 2,
+   "ranked": [
+    "paintcenter",
+    "centr_krasok",
+    "dulux"
+   ],
+   "unique_urls": 1,
+   "client_site_cited": false,
+   "evidence": "self_attested"
+  },
+  {
+   "response_id": "BR-C-PA-001",
+   "provider": "chatgpt_search",
+   "stage": "bridge",
+   "city": "almaty",
+   "query": "Где в Алматы можно купить интерьерную краску Dulux с колеровкой?",
+   "client": "centr_krasok",
+   "client_mentioned": true,
+   "client_recommended": true,
+   "client_rank": 2,
+   "ranked": [
+    "paintcenter",
+    "centr_krasok"
+   ],
+   "unique_urls": 2,
+   "client_site_cited": true,
+   "evidence": "self_attested"
+  },
+  {
+   "response_id": "BR-G-CH-001",
+   "provider": "gemini",
+   "stage": "bridge",
+   "city": "almaty",
+   "query": "В каких магазинах Алматы продаются люстры Maytoni?",
+   "client": "svet_kz",
+   "client_mentioned": true,
+   "client_recommended": true,
+   "client_rank": 1,
+   "ranked": [
+    "svet_kz",
+    "svetilniki_kz",
+    "nova_svet",
+    "masterskaya_uyuta"
+   ],
+   "unique_urls": 8,
+   "client_site_cited": true,
+   "evidence": "self_attested"
+  },
+  {
+   "response_id": "BR-C-CH-001",
+   "provider": "chatgpt_search",
+   "stage": "bridge",
+   "city": "almaty",
+   "query": "В каких магазинах Алматы продаются люстры Maytoni?",
+   "client": "svet_kz",
+   "client_mentioned": true,
+   "client_recommended": true,
+   "client_rank": 1,
+   "ranked": [
+    "svet_kz"
+   ],
+   "unique_urls": 3,
+   "client_site_cited": true,
+   "evidence": "self_attested"
+  }
+ ],
+ "metrics": {
+  "B · Retailer discovery|centr_krasok": {
+   "answers": 3,
+   "mention_rate": 0.3333333333333333,
+   "recommendation_rate": 0.3333333333333333,
+   "top3_rate": 0.0,
+   "ranked_answers": 1,
+   "citation_rate": 0.0,
+   "answers_with_citations": 1
+  },
+  "C · Brand → retailer bridge|centr_krasok": {
+   "answers": 2,
+   "mention_rate": 1.0,
+   "recommendation_rate": 1.0,
+   "top3_rate": 1.0,
+   "ranked_answers": 2,
+   "citation_rate": 0.5,
+   "answers_with_citations": 2
+  },
+  "B · ChatGPT Search|centr_krasok": {
+   "answers": 1,
+   "mention_rate": 0.0,
+   "recommendation_rate": 0.0,
+   "top3_rate": 0.0,
+   "ranked_answers": 1,
+   "citation_rate": 0.0,
+   "answers_with_citations": 1
+  },
+  "B · Gemini|centr_krasok": {
+   "answers": 2,
+   "mention_rate": 0.5,
+   "recommendation_rate": 0.5,
+   "top3_rate": null,
+   "ranked_answers": 0,
+   "citation_rate": null,
+   "answers_with_citations": 0
+  },
+  "B · Алматы|centr_krasok": {
+   "answers": 1,
+   "mention_rate": 1.0,
+   "recommendation_rate": 1.0,
+   "top3_rate": null,
+   "ranked_answers": 0,
+   "citation_rate": null,
+   "answers_with_citations": 0
+  },
+  "B · Астана|centr_krasok": {
+   "answers": 1,
+   "mention_rate": 0.0,
+   "recommendation_rate": 0.0,
+   "top3_rate": null,
+   "ranked_answers": 0,
+   "citation_rate": null,
+   "answers_with_citations": 0
+  },
+  "B · Караганда|centr_krasok": {
+   "answers": 1,
+   "mention_rate": 0.0,
+   "recommendation_rate": 0.0,
+   "top3_rate": 0.0,
+   "ranked_answers": 1,
+   "citation_rate": 0.0,
+   "answers_with_citations": 1
+  },
+  "B · Retailer discovery|svet_kz": {
+   "answers": 3,
+   "mention_rate": 0.3333333333333333,
+   "recommendation_rate": 0.3333333333333333,
+   "top3_rate": 0.5,
+   "ranked_answers": 2,
+   "citation_rate": 0.3333333333333333,
+   "answers_with_citations": 3
+  },
+  "C · Brand → retailer bridge|svet_kz": {
+   "answers": 2,
+   "mention_rate": 1.0,
+   "recommendation_rate": 1.0,
+   "top3_rate": 1.0,
+   "ranked_answers": 2,
+   "citation_rate": 1.0,
+   "answers_with_citations": 2
+  },
+  "B · ChatGPT Search|svet_kz": {
+   "answers": 2,
+   "mention_rate": 0.5,
+   "recommendation_rate": 0.5,
+   "top3_rate": 0.5,
+   "ranked_answers": 2,
+   "citation_rate": 0.5,
+   "answers_with_citations": 2
+  },
+  "B · Gemini|svet_kz": {
+   "answers": 1,
+   "mention_rate": 0.0,
+   "recommendation_rate": 0.0,
+   "top3_rate": null,
+   "ranked_answers": 0,
+   "citation_rate": 0.0,
+   "answers_with_citations": 1
+  },
+  "B · Алматы|svet_kz": {
+   "answers": 1,
+   "mention_rate": 1.0,
+   "recommendation_rate": 1.0,
+   "top3_rate": 1.0,
+   "ranked_answers": 1,
+   "citation_rate": 1.0,
+   "answers_with_citations": 1
+  },
+  "B · Астана|svet_kz": {
+   "answers": 1,
+   "mention_rate": 0.0,
+   "recommendation_rate": 0.0,
+   "top3_rate": null,
+   "ranked_answers": 0,
+   "citation_rate": 0.0,
+   "answers_with_citations": 1
+  },
+  "B · Караганда|svet_kz": {
+   "answers": 1,
+   "mention_rate": 0.0,
+   "recommendation_rate": 0.0,
+   "top3_rate": 0.0,
+   "ranked_answers": 1,
+   "citation_rate": 0.0,
+   "answers_with_citations": 1
+  }
+ },
+ "sov": {
+  "paint": {
+   "centr_krasok": 1,
+   "mir_krasok": 1,
+   "premium_color": 1,
+   "belyi_dom": 1,
+   "dvenadtsat_mesyatsev": 2,
+   "stroymart": 2,
+   "baumarkt": 1,
+   "studiya_tsveta_tikkurila": 1,
+   "inside_art": 1,
+   "tambour": 1,
+   "kokos": 1,
+   "megastroy": 1,
+   "olx": 1,
+   "laki_kraski": 1,
+   "caparol_center": 1,
+   "domsad": 1,
+   "raduga": 1
+  },
+  "chandelier": {
+   "svet_kz": 1,
+   "artlamp": 1,
+   "tekled": 3,
+   "elektrokompleks": 1,
+   "luis_lighting": 1,
+   "m_light": 1,
+   "mitris": 1,
+   "svetolux": 1,
+   "haydi": 1,
+   "svetotekhnika_plus": 1,
+   "global_light": 1
+  }
+ },
+ "source_types": {
+  "retailer_site": 18,
+  "client_site": 6,
+  "map_directory": 9,
+  "marketplace": 1,
+  "manufacturer_site": 1
+ },
+ "domains": {
+  "12.kz": 1,
+  "karaganda.domsad.kz": 1,
+  "raduga.kz": 1,
+  "svet.kz": 5,
+  "artlamp.kz": 1,
+  "zharykalemy.kz": 1,
+  "tekled.kz": 1,
+  "tekledgroup.com": 1,
+  "elkom.kz": 1,
+  "yandex.kz": 2,
+  "google.com": 6,
+  "mitris.kz": 1,
+  "svetolux.kz": 1,
+  "haydi.kz": 1,
+  "paintcenter.kz": 1,
+  "centr-krasok.kz": 1,
+  "alma-ata.jsprav.ru": 1,
+  "svetilniki.kz": 1,
+  "novasvet.kz": 1,
+  "vmasterskoy.kz": 1,
+  "artvance.kz": 1,
+  "zions.kz": 1,
+  "maytoni-shop.kz": 1,
+  "kaspi.kz": 1,
+  "maytoni.am": 1
+ },
+ "citation_coverage": [
+  8,
+  10
+ ],
+ "link_appearances": 35,
+ "unique_urls_global": 33,
+ "unique_domains": 25
+}

@@ -83,3 +83,14 @@ def build(manifest: Path, out_dir: Path | None = None, delay: float = 1.0) -> li
 if __name__ == "__main__":
     for line in build(Path(sys.argv[1])):
         print(line)
+
+
+# CMS session/CSRF tokens embedded in public HTML (Bitrix: "bitrix_sessid", hidden <input name="sessid">).
+# They identify the crawler's own anonymous session, but are session-like values: never store them.
+SESSION_TOKEN_RE = re.compile(
+    r"""((?:bitrix_)?sessid["']?\s*[:=]\s*["']|name=["']sessid["'][^>]*?value=["'])([A-Za-z0-9]{16,})""", re.I)
+
+
+def redact_session_tokens(html: str) -> tuple[str, int]:
+    """Replace session-token VALUES with 'REDACTED' (visible page text is unaffected). Returns (html, count)."""
+    return SESSION_TOKEN_RE.subn(lambda m: m.group(1) + "REDACTED", html)

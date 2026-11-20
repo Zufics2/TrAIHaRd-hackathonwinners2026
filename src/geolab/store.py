@@ -48,7 +48,9 @@ def load_observations(include_samples: bool = False, real_dirs=None) -> tuple[li
     if include_samples:
         sources += [(p, True) for p in _files([SAMPLES_DIR]) if "observations" in p.name]
     for path, synthetic_ok in sources:
-        valid, iss = C.validate_file("observations", path, prompts=prompts, allow_synthetic=synthetic_ok, existing_keys=seen)
+        channel = "api" if (path.parent.name == "api" and path.parent.parent.name == "raw") else "manual"
+        valid, iss = C.validate_file("observations", path, prompts=prompts, allow_synthetic=synthetic_ok, existing_keys=seen,
+                                     channel=channel)
         issues += [{"file": path.name, **i.as_dict()} for i in iss]
         for r in valid:
             if synthetic_ok and r["data_type"] != "SYNTHETIC_DEMO":
@@ -69,7 +71,10 @@ def load_observations(include_samples: bool = False, real_dirs=None) -> tuple[li
 
 
 def is_real_kpi_row(r: dict) -> bool:
-    return r["data_type"] in C.REAL_DATA_TYPES and r["verification_status"] == "verified"
+    # MANUAL_REPORTED (no evidence) can never be a verified KPI row, even if a file claims so
+    return (r["data_type"] in C.REAL_DATA_TYPES and r["data_type"] != "MANUAL_REPORTED" and r["verification_status"] == "verified"
+            and bool(r.get("verified_by")) and r.get("verified_by") != r.get("collector")
+            and bool(r.get("evidence_link")))  # defence in depth (G06): evidence for every data_type, incl. REAL_SEARCH
 
 
 def safe_name(name: str) -> str:

@@ -1,0 +1,163 @@
+[
+ {
+  "file": "data/research/geo_audit_2026-11-20/html/centr-krasok.kz.html",
+  "tokens_redacted": 2,
+  "visible_text_identical": true,
+  "sha256_raw": "f927ceee93c691f574ebbe314dc4fa4facd9254b7a2ebbd40a90d8cc7b327390",
+  "sha256_redacted": "dcea180a2fa25de5a55c0f104b073051ff6fede4d27a49b0e9cae6b0969e6e52"
+ },
+ {
+  "file": "data/research/geo_audit_2026-11-20/html/centr-krasok.kz__about.html",
+  "tokens_redacted": 1,
+  "visible_text_identical": true,
+  "sha256_raw": "f9df1ed8a9d029ba03d12d4b1d869b85c288172488be7fa7e3af693c483078ed",
+  "sha256_redacted": "9f3fb810c00d0734bc4ddc27960bd06370fd08ef61f8ef881880a32fa249e6c7"
+ },
+ {
+  "file": "data/research/geo_audit_2026-11-20/html/centr-krasok.kz__about__contacts.html",
+  "tokens_redacted": 1,
+  "visible_text_identical": true,
+  "sha256_raw": "92347a372412f77056597fde59d52770d02a5fc6220009ac8dd547a1892df4e1",
+  "sha256_redacted": "ee399e4b07eba55c5518d519be2662a03845aca34e292a449593a59727c7aafb"
+ },
+ {
+  "file": "data/research/geo_audit_2026-11-20/html/centr-krasok.kz__about__delivery.html",
+  "tokens_redacted": 1,
+  "visible_text_identical": true,
+  "sha256_raw": "ff8041ef1ca96ccdd9fe2d371899b59d9ca8e3438244ad828eaf25724b1a3bc3",
+  "sha256_redacted": "f6a2afb6f87ebcc058d657d67abaa2f7074752d116baf98e8445d86fdda5ba1d"
+ },
+ {
+  "file": "data/research/geo_audit_2026-11-20/html/centr-krasok.kz__brands.html",
+  "tokens_redacted": 1,
+  "visible_text_identical": true,
+  "sha256_raw": "daa74ce89f7084005a6084572ad1aaf7b07e63f66bcdd0d2d286e6a006f8f2c8",
+  "sha256_redacted": "029c65a014e08cc02729e07fea060930cd24fb846a7f9dab42c18da91c8052b2"
+ },
+ {
+  "file": "data/research/geo_audit_2026-11-20/html/centr-krasok.kz__catalog__bindo_7_1__kraska_dulux_professional_bindo_7_matovaya_bc_0_9l.html",
+  "tokens_redacted": 1,
+  "visible_text_identical": true,
+  "sha256_raw": "be9fe956e5d1839efcaad23fbe3fe217105cdec6112baf82fda6ecfbf1b3bfab",
+  "sha256_redacted": "1f287f2313eb8a7d2ad0e09196940d51bc1d500e04b19b1ca1f141f10bcde84a"
+ },
+ {
+  "file": "data/research/geo_audit_2026-11-20/html/centr-krasok.kz__catalog__dulux.html",
+  "tokens_redacted": 2,
+  "visible_text_identical": true,
+  "sha256_raw": "9ea0e84936f997aee87e8d42e7918017c859bdb356a5730acea77bab410f9fb5",
+  "sha256_redacted": "4508be2c0f29a2c704e2b174e0e89b2f4601d5eec387b7908d628b23ef7c95d2"
+ },
+ {
+  "file": "data/research/geo_audit_2026-11-20/html/svet.kz.html",
+  "tokens_redacted": 2,
+  "visible_text_identical": true,
+  "sha256_raw": "e1cc3173775ceb1ec039d3a15774bd27f6561968d010d9c617c5cd8ab0abd340",
+  "sha256_redacted": "72fbcebce6478899e0d19dafda008cc69072d8603af16de76ae791530001d147"
+ },
+ {
+  "file": "data/research/geo_audit_2026-11-20/html/svet.kz__about.html",
+  "tokens_redacted": 2,
+  "visible_text_identical": true,
+  "sha256_raw": "9ec59b32223b13d1686a331e10ea13580962fe90f4820e8a091affcd0f4386c9",
+  "sha256_redacted": "7de7d3723be96003a70b87ddf8aecb77be10eaf2733adabd1cf1b046fd1dcc76"
+ },
+ {
+  "file": "data/research/geo_audit_2026-11-20/html/svet.kz__brands__maytoni.html",
+  "tokens_redacted": 2,
+  "visible_text_identical": true,
+  "sha256_raw": "dbfc98b580d7d1ed89bc0c3db87d7cfd1748e6f48b01ab1a3bbeecd4decba598",
+  "sha256_redacted": "4f36c5c7273fef3b9f45269aa94ab7b6cfbfa2cbe5d1419e8693c4e1849affad"
+ },
+ {
+  "file": "data/research/geo_audit_2026-11-20/html/svet.kz__contact.html",
+  "tokens_redacted": 1,
+  "visible_text_identical": true,
+  "sha256_raw": "c1c6ff7601c7c142791b247950e14916febbf2a7cfda67f14211eb7133d4b884",
+  "sha256_redacted": "c4a446f41c18bccec560a8a09b6073adc12b21e6165815d81d37893dfea48f40"
+ },
+ {
+  "file": "data/research/geo_audit_2026-11-20/html/svet.kz__dostavka__astana.html",
+  "tokens_redacted": 2,
+  "visible_text_identical": true,
+  "sha256_raw": "20d6666c41c11790a20b3218c50f2d347265d7a39ac85e3883cdfdffd8e651ad",
+  "sha256_redacted": "a44ae54fab766b076c80e5e497dd10c37377dd04d5a202bb7461b39b09b7ea91"
+ },
+ {
+  "file": "data/research/geo_audit_2026-11-20/html/svet.kz__katalog__lyustry.html",
+  "tokens_redacted": 2,
+  "visible_text_identical": true,
+  "sha256_raw": "a793e10a902b1ca04ea578829d7ead468844778d644ce2f1e2b4cfa410aa3a94",
+  "sha256_redacted": "00789ef4bd6dbd8b2303ee661a68349fc7a7fedc12ed0ca684d0ac756c4d8a57"
+ },
+ {
+  "file": "data/research/geo_audit_2026-11-20/html/svet.kz__pay-delivery.html",
+  "tokens_redacted": 2,
+  "visible_text_identical": true,
+  "sha256_raw": "d2e01e0433ea2666d944f4dca4c80f053594a5869ce67be2f88898395e1afad7",
+  "sha256_redacted": "158332c7811ffdca587aa1683a25cff7bdd440d706ecaacd97ad26bc4d6b7b42"
+ },
+ {
+  "file": "data/research/geo_audit_2026-11-20/html/svet.kz__products__podvesnoy_svetilnik_maytoni_mod272pl_l12bs3k.html",
+  "tokens_redacted": 7,
+  "visible_text_identical": true,
+  "sha256_raw": "eafbcb660ebb8eb373700d41ea0b9d493a2effdd929faec03f9f5f1280861ca2",
+  "sha256_redacted": "e1eaa6c08c2edc9a6ec9b642b3eb6189bb8fe46934a362ae7ad5839cfd99e2a0"
+ },
+ {
+  "file": "data/research/geo_recheck_2026-11-20/html/centr-krasok.kz.html",
+  "tokens_redacted": 2,
+  "visible_text_identical": true,
+  "sha256_raw": "adea96fdd5630c803872d850ecc50c0bc21248035ff1f3eb998227a56639c56d",
+  "sha256_redacted": "4bfcef7721db1648c7ba6a654bc1dc1da908bb081d4acf9cb238f1b19f69ecda"
+ },
+ {
+  "file": "data/research/geo_recheck_2026-11-20/html/centr-krasok.kz__about__contacts.html",
+  "tokens_redacted": 1,
+  "visible_text_identical": true,
+  "sha256_raw": "c317cef25169b399613a4fa1d05886bc4e8f48a9c84089da436858a206fb2d52",
+  "sha256_redacted": "e89a43443dab0e24ff44d09a108c42beba4101575d6c72854907a092bdfb2c88"
+ },
+ {
+  "file": "data/research/geo_recheck_2026-11-20/html/centr-krasok.kz__catalog__dlya_detskoy.html",
+  "tokens_redacted": 2,
+  "visible_text_identical": true,
+  "sha256_raw": "990469be5df47d83d16b73a9681e48a1e85640a9f63774a6c2dbbac6e8cab336",
+  "sha256_redacted": "a370d5459b209407d3f06b326f7a9a4c044e74f63251b8dd14733ac4a8f6f591"
+ },
+ {
+  "file": "data/research/geo_recheck_2026-11-20/html/centr-krasok.kz__catalog__dulux.html",
+  "tokens_redacted": 2,
+  "visible_text_identical": true,
+  "sha256_raw": "44a608662d13f1551777e04dd56b7bb05f6bd5a399e605daf42ed777f3d8914f",
+  "sha256_redacted": "3cdf2706442e26acf691a2b97bbbb09b24b3d47be2ae047296299b83699909f3"
+ },
+ {
+  "file": "data/research/geo_recheck_2026-11-20/html/svet.kz__brands__maytoni.html",
+  "tokens_redacted": 2,
+  "visible_text_identical": true,
+  "sha256_raw": "dc54d351f3fefa19101b2839ced1126e16a1fedaf24ad73c34bb67795aacb6d5",
+  "sha256_redacted": "624880d5608f6154ee5a3b8a6cf1621f251faaa18e378d503604466309a1fc1f"
+ },
+ {
+  "file": "data/research/geo_recheck_2026-11-20/html/svet.kz__contact.html",
+  "tokens_redacted": 1,
+  "visible_text_identical": true,
+  "sha256_raw": "5a00888c21615b384ec59db251732726e742c41f44bc4e78f88d011ef9d03e83",
+  "sha256_redacted": "ece09d14981ce933b065521b982e614efbd1a0a22a337d72e9261a5b4ba2842d"
+ },
+ {
+  "file": "data/research/geo_recheck_2026-11-20/html/svet.kz__dostavka__astana.html",
+  "tokens_redacted": 2,
+  "visible_text_identical": true,
+  "sha256_raw": "e2a6e8c796b7202be9f0c65146b93c61fefab947c186ab92f1ad7520a22c3564",
+  "sha256_redacted": "a1b11917a8881a95c24aad11760b6d0fa0816a6452c56bd78352be66ffe90922"
+ },
+ {
+  "file": "data/research/geo_recheck_2026-11-20/html/svet.kz__katalog__lyustry.html",
+  "tokens_redacted": 2,
+  "visible_text_identical": true,
+  "sha256_raw": "84bf4ef48e3adcfce0e5da0dba9276cae95323b99e581589a960a4d21547c17b",
+  "sha256_redacted": "39041082cf3104ccd5d31c653258f0b5aaaf5f273e8ae45fb4fc94780b213d2a"
+ }
+]

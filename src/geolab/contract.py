@@ -32,9 +32,13 @@ PRIORITY = ("P0", "P1", "P2")
 PROVIDER = ("chatgpt_search", "gemini", "perplexity", "google_ai_mode", "google_ai_overview",
             "copilot", "yandex_alice", "other")
 SEARCH_MODE = ("search_on", "unknown")  # search_off answers are NOT AI-search observations
-DATA_TYPE = ("REAL_SEARCH", "MANUAL_VERIFIED", "CONTROLLED_EXPERIMENT", "SYNTHETIC_DEMO")
-REAL_DATA_TYPES = ("REAL_SEARCH", "MANUAL_VERIFIED")
-VERIFICATION = ("pending", "verified", "rejected")
+DATA_TYPE = ("REAL_SEARCH", "MANUAL_VERIFIED", "MANUAL_REPORTED", "CONTROLLED_EXPERIMENT", "SYNTHETIC_DEMO")
+# MANUAL_REPORTED: real answer copied by a participant, no screenshot / share link (self_attested only).
+REAL_DATA_TYPES = ("REAL_SEARCH", "MANUAL_VERIFIED", "MANUAL_REPORTED")
+VERIFICATION = ("pending", "verified", "rejected", "self_attested")
+# self_attested: the collector supplied the answer text (e.g. a transcript document) and attests it is a
+# real AI answer, but there is no screenshot / share link. Usable for clearly-labelled PRELIMINARY
+# analysis; NEVER independently verified, never in verified KPIs.
 ENTITY_LEVEL = ("manufacturer", "retailer")
 SOURCE_TYPE = ("client_site", "retailer_site", "manufacturer_site", "map_directory", "marketplace",
                "social", "review_q&a", "media", "encyclopedia", "other_web")
@@ -191,8 +195,10 @@ def _norm_q(s: str) -> str:
 
 def validate_rows(kind: str, rows: list[tuple[int, dict]], *, prompts: dict[str, dict] | None = None,
                   known_entities: set[str] | None = None, allow_synthetic: bool = False,
-                  existing_keys: set[str] | None = None, now: datetime | None = None) -> tuple[list[dict], list[Issue]]:
-    """rows = [(row_number, dict)]. Returns (valid_rows, issues). A row with any error is not returned."""
+                  existing_keys: set[str] | None = None, now: datetime | None = None,
+                  channel: str = "manual") -> tuple[list[dict], list[Issue]]:
+    """rows = [(row_number, dict)]. Returns (valid_rows, issues). A row with any error is not returned.
+    channel: "manual" (UI upload, staging, data/raw/manual) or "api" (data/raw/api, trusted collector only)."""
     schema = SCHEMAS[kind]
     now = now or datetime.now(timezone.utc)
     issues: list[Issue] = []
@@ -222,7 +228,7 @@ def validate_rows(kind: str, rows: list[tuple[int, dict]], *, prompts: dict[str,
                 row_issues.append(Issue(rn, schema["key"], "error", "ID уже существует в загруженных данных"))
             seen.setdefault(key, rn)
         if kind == "observations":
-            row_issues += _observation_rules(rec, rn, prompts, allow_synthetic)
+            row_issues += _observation_rules(rec, rn, prompts, allow_synthetic, channel)
         if kind in ("brand_catalog", "sources", "proposals") and known_entities is not None:
             fld = {"brand_catalog": "retailer_id", "sources": "entity_id", "proposals": "affected_entity"}[kind]
             if rec[fld] and rec[fld] not in known_entities:
@@ -239,9 +245,13 @@ def validate_rows(kind: str, rows: list[tuple[int, dict]], *, prompts: dict[str,
     return valid, issues
 
 
-def _observation_rules(rec: dict, rn: int, prompts: dict | None, allow_synthetic: bool) -> list[Issue]:
+def _observation_rules(rec: dict, rn: int, prompts: dict | None, allow_synthetic: bool, channel: str = "manual") -> list[Issue]:
     out: list[Issue] = []
     dt = rec["data_type"]
+    if dt == "REAL_SEARCH" and channel != "api":
+        # the label alone proves nothing: REAL_SEARCH only from a trusted API collector (none exists in this MVP)
+        out.append(Issue(rn, "data_type", "error", "REAL_SEARCH принимается только из доверенного API-коллектора (data/raw/api). "
+                         "Ручной ответ: MANUAL_REPORTED/self_attested или MANUAL_VERIFIED/pending со скриншотом"))
     if dt == "CONTROLLED_EXPERIMENT":
         out.append(Issue(rn, "data_type", "error", "результаты эксперимента создаёт experiment engine, их нельзя импортировать как наблюдения"))
     if dt == "SYNTHETIC_DEMO" and not allow_synthetic:
@@ -249,7 +259,17 @@ def _observation_rules(rec: dict, rn: int, prompts: dict | None, allow_synthetic
     if dt in REAL_DATA_TYPES and 0 < len(rec["answer_text"]) < 40:
         out.append(Issue(rn, "answer_text", "warning", "очень короткий ответ — вставлен ли полный текст?"))
     ev = rec["evidence_link"]
-    if dt == "MANUAL_VERIFIED" and not ev:
+    if (dt == "MANUAL_REPORTED") != (rec["verification_status"] == "self_attested") and rec["verification_status"] != "rejected":
+        out.append(Issue(rn, "verification_status", "error", "MANUAL_REPORTED ↔ self_attested: ответ без доказательства "
+                         "имеет data_type MANUAL_REPORTED и статус self_attested (verified невозможен)"))
+    if rec["verification_status"] == "self_attested":
+        if ev:
+            out.append(Issue(rn, "evidence_link", "error", "self_attested, но evidence_link указан — используйте pending"))
+        if not rec["notes"]:
+            out.append(Issue(rn, "notes", "error", "self_attested: укажите в notes источник текста и кто его подтвердил"))
+        if rec["verified_by"]:
+            out.append(Issue(rn, "verified_by", "error", "self_attested не может быть verified: нет независимого доказательства"))
+    elif dt == "MANUAL_VERIFIED" and not ev:
         out.append(Issue(rn, "evidence_link", "error", "для MANUAL_VERIFIED нужен скриншот или ссылка на диалог"))
     elif ev and not ev.startswith(("http://", "https://")):
         if not EVIDENCE_PATH_RE.match(ev):
@@ -261,10 +281,21 @@ def _observation_rules(rec: dict, rn: int, prompts: dict | None, allow_synthetic
     if rec["provider"] == "other" and not rec["notes"]:
         out.append(Issue(rn, "notes", "warning", "provider=other: укажите в notes, какой именно сервис"))
     if rec["verification_status"] == "verified":
+        # verified = INDEPENDENT check against existing evidence (G06): every gap is an error, not a warning
         if not rec["verified_by"]:
             out.append(Issue(rn, "verified_by", "error", "статус verified требует verified_by"))
         elif rec["verified_by"] == rec["collector"]:
-            out.append(Issue(rn, "verified_by", "warning", "проверял тот же человек, что собирал"))
+            out.append(Issue(rn, "verified_by", "error", "verified требует независимой проверки: verified_by не может совпадать с collector"))
+        # evidence required for verified rows of EVERY data_type (no REAL_SEARCH exemption)
+        if not ev:
+            out.append(Issue(rn, "evidence_link", "error", "verified требует доказательства (скриншот или share-ссылка)"))
+        elif ev.startswith(("http://", "https://")):
+            if not urlsplit(ev).netloc or not ev.startswith("https://"):
+                out.append(Issue(rn, "evidence_link", "error", "verified: ссылка на доказательство должна быть полным https-адресом"))
+        elif not (ROOT / ev).exists():
+            out.append(Issue(rn, "evidence_link", "error", f"verified: файл доказательства {ev} отсутствует в репозитории"))
+        if not rec["notes"].strip():
+            out.append(Issue(rn, "notes", "error", "verified: укажите в notes, что именно сверено (текст, URL, запрос)"))
     if prompts is not None and rec["prompt_id"]:
         p = prompts.get(rec["prompt_id"])
         if p is None:
@@ -293,8 +324,16 @@ def read_rows(name: str, content: bytes) -> tuple[list[tuple[int, dict]], list[I
             if not isinstance(obj, dict):
                 issues.append(Issue(i, "*", "error", f"строка JSONL должна быть объектом {{...}}, получено {type(obj).__name__}"))
                 continue
-            if isinstance(obj.get("cited_urls"), list):
-                obj["cited_urls"] = " | ".join(obj["cited_urls"])
+            cu = obj.get("cited_urls")
+            if isinstance(cu, list):
+                if not all(isinstance(u, str) for u in cu):
+                    issues.append(Issue(i, "cited_urls", "error", "cited_urls: каждый элемент списка должен быть строкой-URL, "
+                                        f"получено {[type(u).__name__ for u in cu if not isinstance(u, str)]}"))
+                    continue
+                obj["cited_urls"] = " | ".join(cu)
+            elif cu is not None and not isinstance(cu, str):
+                issues.append(Issue(i, "cited_urls", "error", f"cited_urls должен быть строкой или списком строк, получено {type(cu).__name__}"))
+                continue
             rows.append((i, {k: "" if v is None else str(v) for k, v in obj.items()}))
         return rows, issues
     if name.endswith(".csv"):

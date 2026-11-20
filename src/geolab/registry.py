@@ -20,6 +20,8 @@ class Entity:
     is_client: bool = False
     status: str = "observed"
     case_sensitive: bool = False  # alias is also a common word: match only as written (e.g. "Favourite")
+    exclude_preceding: tuple[str, ...] = ()  # skip a match right after these words ("гарантия 12 месяцев")
+    case_sensitive_aliases: tuple[str, ...] = ()  # proper-name forms that are also common phrases ("центры красок")
     sold_by: dict = field(default_factory=dict, hash=False, compare=False)
     cities: dict = field(default_factory=dict, hash=False, compare=False)
 
@@ -56,6 +58,8 @@ def load_registry(path: Path = REGISTRY_PATH) -> Registry:
             aliases=tuple(r.get("aliases", [])), domains=tuple(r.get("domains", [])),
             is_client=bool(r.get("is_client")), status=r.get("status", "observed"),
             case_sensitive=bool(r.get("case_sensitive", False)),
+            exclude_preceding=tuple(r.get("exclude_preceding", [])),
+            case_sensitive_aliases=tuple(r.get("case_sensitive_aliases", [])),
             cities=r.get("cities", {}),
         )
     for m in raw.get("manufacturers", []):

@@ -1,3 +1,5 @@
+import json
+import pytest
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -34,7 +36,8 @@ def errors(issues):
 def test_existing_prompts_pass_contract():
     rows, _ = C.read_rows("prompts.csv", (ROOT / "data/prompts/prompts.csv").read_bytes())
     valid, issues = C.validate_rows("prompts", rows)
-    assert len(valid) == 43 and not [i for i in issues if i.severity == "error"]
+    assert len(valid) == len(rows) == 51 and not [i for i in issues if i.severity == "error"]
+    assert sum(r["prompt_id"].startswith("P-") for r in valid) == 8   # real participant questions (forme 2026-11-20)
 
 
 def test_template_header_matches_schema():
@@ -102,7 +105,12 @@ def test_non_utf8_rejected():
 
 
 def test_kpi_filter_only_verified_real():
-    assert is_real_kpi_row({"data_type": "MANUAL_VERIFIED", "verification_status": "verified"})
+    ok = {"data_type": "MANUAL_VERIFIED", "verification_status": "verified", "collector": "P3", "verified_by": "P2",
+          "evidence_link": "https://chatgpt.com/share/x"}
+    assert is_real_kpi_row(ok)
+    assert not is_real_kpi_row({**ok, "verified_by": "P3"})            # self-verification (G06)
+    assert not is_real_kpi_row({**ok, "evidence_link": ""})            # no evidence (G06)
+    assert not is_real_kpi_row({**ok, "data_type": "MANUAL_REPORTED"})
     assert not is_real_kpi_row({"data_type": "MANUAL_VERIFIED", "verification_status": "pending"})
     assert not is_real_kpi_row({"data_type": "SYNTHETIC_DEMO", "verification_status": "verified"})
 
@@ -112,3 +120,58 @@ def test_sample_files_behave():
     assert len(v) == 2 and not errors(iss)
     v, iss = C.validate_file("observations", ROOT / "data/samples/INVALID_example.csv", prompts=PROMPTS, now=NOW)
     assert not v and len(errors(iss)) >= 8
+
+
+# ---- Sprint FINAL: Codex audit G06 / G07 ----
+VERIFIED_OK = {"response_id": "V-1", "prompt_id": "R-C-ALA-01", "query": "Где купить люстру в Алматы?", "provider": "gemini",
+               "model": "", "search_mode": "search_on", "timestamp": "2026-11-20T14:05+05:00", "run_no": "1", "language": "ru",
+               "region_setting": "", "answer_text": "Ответ достаточно длинный для валидатора: SVET.KZ на Кабдолова 1/8.",
+               "cited_urls": "", "data_type": "MANUAL_VERIFIED", "verification_status": "verified", "collector": "P3",
+               "verified_by": "P2", "evidence_link": "https://chatgpt.com/share/abc", "notes": "текст и 2 URL сверены со ссылкой"}
+
+
+@pytest.mark.parametrize("change,field", [
+    ({"verified_by": "P3"}, "verified_by"),                                   # self-verification
+    ({"verified_by": ""}, "verified_by"),
+    ({"evidence_link": ""}, "evidence_link"),                                 # no evidence
+    ({"evidence_link": "assets/evidence/V-1.png"}, "evidence_link"),          # file does not exist
+    ({"evidence_link": "http://chatgpt.com/share/abc"}, "evidence_link"),     # not https
+    ({"notes": ""}, "notes"),                                                 # what was checked is unknown
+])
+def test_g06_verified_requires_independent_check_with_evidence(change, field):
+    v, iss = C.validate_rows("observations", [(2, {**VERIFIED_OK, **change})], prompts=PROMPTS, now=NOW)
+    assert not v and any(i.field == field and i.severity == "error" for i in iss), (change, [i.as_dict() for i in iss])
+
+
+def test_g06_valid_independent_verification_passes():
+    v, iss = C.validate_rows("observations", [(2, VERIFIED_OK)], prompts=PROMPTS, now=NOW)
+    assert len(v) == 1 and not errors(iss)
+
+
+@pytest.mark.parametrize("value", [[1], ["https://svet.kz/", None], 5, {"u": "x"}])
+def test_g07_cited_urls_wrong_types_are_row_errors_not_exceptions(value):
+    rows, iss = C.read_rows("x.jsonl", json.dumps({"response_id": "R1", "cited_urls": value}).encode())
+    assert not rows and len(iss) == 1 and iss[0].field == "cited_urls" and iss[0].severity == "error" and iss[0].row == 1
+
+
+# ---- REAL_SEARCH bypass (Codex QA, final) ----
+RS = {**VERIFIED_OK, "response_id": "RS-1", "data_type": "REAL_SEARCH"}
+
+
+def test_real_search_rejected_on_manual_channel():
+    for status in ("verified", "pending"):
+        row = {**RS, "verification_status": status, "verified_by": "P2" if status == "verified" else ""}
+        v, iss = C.validate_rows("observations", [(2, row)], prompts=PROMPTS, now=NOW)            # default channel = manual
+        assert not v and any(i.field == "data_type" and i.severity == "error" for i in iss), status
+
+
+def test_real_search_verified_on_api_channel_still_needs_evidence():
+    v, iss = C.validate_rows("observations", [(2, {**RS, "evidence_link": ""})], prompts=PROMPTS, now=NOW, channel="api")
+    assert not v and any(i.field == "evidence_link" and i.severity == "error" for i in iss)
+    v, iss = C.validate_rows("observations", [(2, RS)], prompts=PROMPTS, now=NOW, channel="api")  # evidence + other verifier
+    assert len(v) == 1
+
+
+def test_real_search_kpi_filter_requires_evidence():
+    row = {"data_type": "REAL_SEARCH", "verification_status": "verified", "collector": "P3", "verified_by": "P2", "evidence_link": ""}
+    assert not is_real_kpi_row(row) and is_real_kpi_row({**row, "evidence_link": "https://chatgpt.com/share/x"})

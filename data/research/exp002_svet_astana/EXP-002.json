@@ -1,0 +1,20 @@
+{
+  "experiment_id": "EXP-002-SVET-ASTANA",
+  "target_entity": "svet_kz",
+  "changed_doc_ids": ["svet_dostavka_astana"],
+  "top_k": 5,
+  "linked_issue": "GEO-01",
+  "hypothesis": "Pre-registered 2026-11-20 before the first run. Adding the Astana showroom block (facts already in svet.kz JSON-LD) to svet.kz/dostavka/astana/ raises the rank of SVET.KZ pages for Astana chandelier-store queries in a local BM25 retrieval simulation. Controls (Almaty, Karaganda, paint) should not move. Engine: Codex geolab.experiment, unchanged. Not a measurement of ChatGPT or Gemini.",
+  "corpus_note": "12 public pages: 8 client pages (GEO-audit snapshots 2026-11-20) + 4 competitor homepages cited by AI (mitris.kz, svetolux.kz, tekled.kz — OBS-004/005; artlamp.kz — OBS-004).",
+  "queries": [
+    {"query_id": "T1", "query": "Какие магазины люстр и светильников лучше в Астане?", "role": "target", "prompt_id": "P-CH-AST-001"},
+    {"query_id": "T2", "query": "Где купить люстру в Астане?", "role": "target", "prompt_id": "R-C-AST-01"},
+    {"query_id": "T3", "query": "Где в Астане купить люстру для спальни?", "role": "target", "prompt_id": "R-C-AST-03"},
+    {"query_id": "T4", "query": "салон люстр в Астане адрес", "role": "target", "prompt_id": ""},
+    {"query_id": "N1", "query": "Где купить люстру в Алматы?", "role": "negative_control", "prompt_id": "R-C-ALA-01"},
+    {"query_id": "N2", "query": "Где в Караганде большой выбор люстр для квартиры?", "role": "negative_control", "prompt_id": "P-CH-KAR-001"},
+    {"query_id": "N3", "query": "Какие магазины красок для ремонта есть в Астане?", "role": "negative_control", "prompt_id": "P-PA-AST-001"},
+    {"query_id": "N4", "query": "В каких магазинах Алматы продаются люстры Maytoni?", "role": "negative_control", "prompt_id": "P-BRIDGE-CH-001"},
+    {"query_id": "N5", "query": "Можно ли заказать люстру с доставкой в Караганду?", "role": "negative_control", "prompt_id": "R-C-KAR-03"}
+  ]
+}

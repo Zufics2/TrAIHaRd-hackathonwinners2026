@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Реестр сущностей. LEVEL 1 = manufacturer/product brand, LEVEL 2 = retailer. Поле evidence — откуда известна связь. status: verified | observed | candidate_unverified.",
-    "updated": "2026-11-20T13:30+05:00",
+    "updated": "2026-11-20T17:40+05:00",
     "owner": "Workstream A (структура) / Workstream B (наполнение)"
   },
   "retailers": [
@@ -16,7 +16,6 @@
       "aliases": [
         "Центр Красок №1",
         "Центр Красок #1",
-        "Центр Красок",
         "centr-krasok.kz",
         "centr-krasok",
         "Centr Krasok"
@@ -36,7 +35,10 @@
           "evidence": "Нет адреса; /about/delivery/ не упоминает Караганду (2026-11-20)"
         }
       },
-      "status": "observed"
+      "status": "observed",
+      "case_sensitive_aliases": [
+        "Центр Красок"
+      ]
     },
     {
       "id": "svet_kz",
@@ -132,6 +134,611 @@
       ],
       "cities": {},
       "status": "candidate_unverified"
+    },
+    {
+      "id": "mir_krasok",
+      "name": "МИР КРАСОК",
+      "is_client": false,
+      "category": "paint",
+      "domains": [],
+      "aliases": [
+        "МИР КРАСОК",
+        "Мир красок",
+        "Бояулар әлемі"
+      ],
+      "cities": {},
+      "status": "candidate_unverified",
+      "evidence": "названо AI в наблюдении OBS-001 (data/staging/forme_2026-11-20, pending); присутствие не проверено",
+      "ai_named_cities": [
+        "almaty"
+      ]
+    },
+    {
+      "id": "premium_color",
+      "name": "Premium Color",
+      "is_client": false,
+      "category": "paint",
+      "domains": [],
+      "aliases": [
+        "Premium Color"
+      ],
+      "cities": {},
+      "status": "candidate_unverified",
+      "evidence": "названо AI в наблюдении OBS-001 (data/staging/forme_2026-11-20, pending); присутствие не проверено",
+      "ai_named_cities": [
+        "almaty"
+      ]
+    },
+    {
+      "id": "belyi_dom",
+      "name": "Белый Дом (ЛКЗ)",
+      "is_client": false,
+      "category": "paint",
+      "domains": [],
+      "aliases": [
+        "Белый Дом"
+      ],
+      "cities": {},
+      "status": "candidate_unverified",
+      "evidence": "названо AI в наблюдении OBS-001 (data/staging/forme_2026-11-20, pending); присутствие не проверено",
+      "case_sensitive": true,
+      "ai_named_cities": [
+        "almaty"
+      ]
+    },
+    {
+      "id": "dvenadtsat_mesyatsev",
+      "name": "12 месяцев",
+      "is_client": false,
+      "category": "paint",
+      "domains": [
+        "12.kz"
+      ],
+      "aliases": [
+        "12 месяцев",
+        "12 Месяцев",
+        "12.kz"
+      ],
+      "cities": {},
+      "status": "candidate_unverified",
+      "evidence": "названо AI в наблюдении OBS-001, OBS-003 (data/staging/forme_2026-11-20, pending); присутствие не проверено; строительный гипермаркет, назван в ответе на запрос о краске",
+      "ai_named_cities": [
+        "almaty",
+        "karaganda"
+      ],
+      "exclude_preceding": [
+        "гарантия",
+        "гарантией",
+        "гарантии",
+        "срок",
+        "хранения",
+        "годности",
+        "течение",
+        "через",
+        "на",
+        "до",
+        "от",
+        "за",
+        "каждые",
+        "около",
+        "более",
+        "менее",
+        "примерно",
+        "лет",
+        "год"
+      ]
+    },
+    {
+      "id": "stroymart",
+      "name": "Строймарт",
+      "is_client": false,
+      "category": "paint",
+      "domains": [],
+      "aliases": [
+        "Строймарт Гипер",
+        "Строймарт",
+        "Stroymart"
+      ],
+      "cities": {},
+      "status": "candidate_unverified",
+      "evidence": "названо AI в наблюдении OBS-001, OBS-003 (data/staging/forme_2026-11-20, pending); присутствие не проверено; строительный гипермаркет, назван в ответе на запрос о краске",
+      "ai_named_cities": [
+        "almaty",
+        "karaganda"
+      ]
+    },
+    {
+      "id": "baumarkt",
+      "name": "Baumarkt",
+      "is_client": false,
+      "category": "paint",
+      "domains": [],
+      "aliases": [
+        "Baumarkt"
+      ],
+      "cities": {},
+      "status": "candidate_unverified",
+      "evidence": "названо AI в наблюдении OBS-001 (data/staging/forme_2026-11-20, pending); присутствие не проверено; строительный гипермаркет, назван в ответе на запрос о краске",
+      "ai_named_cities": [
+        "almaty"
+      ]
+    },
+    {
+      "id": "studiya_tsveta_tikkurila",
+      "name": "Студия Цвета Tikkurila",
+      "is_client": false,
+      "category": "paint",
+      "domains": [],
+      "aliases": [
+        "Студия Цвета Tikkurila"
+      ],
+      "cities": {},
+      "status": "candidate_unverified",
+      "evidence": "названо AI в наблюдении OBS-002 (data/staging/forme_2026-11-20, pending); присутствие не проверено",
+      "ai_named_cities": [
+        "astana"
+      ]
+    },
+    {
+      "id": "inside_art",
+      "name": "Inside Art",
+      "is_client": false,
+      "category": "paint",
+      "domains": [],
+      "aliases": [
+        "Inside Art"
+      ],
+      "cities": {},
+      "status": "candidate_unverified",
+      "evidence": "названо AI в наблюдении OBS-002 (data/staging/forme_2026-11-20, pending); присутствие не проверено",
+      "ai_named_cities": [
+        "astana"
+      ]
+    },
+    {
+      "id": "tambour",
+      "name": "Tambour",
+      "is_client": false,
+      "category": "paint",
+      "domains": [],
+      "aliases": [
+        "Tambour"
+      ],
+      "cities": {},
+      "status": "candidate_unverified",
+      "evidence": "названо AI в наблюдении OBS-002 (data/staging/forme_2026-11-20, pending); присутствие не проверено",
+      "ai_named_cities": [
+        "astana"
+      ]
+    },
+    {
+      "id": "kokos",
+      "name": "Кокос",
+      "is_client": false,
+      "category": "paint",
+      "domains": [],
+      "aliases": [
+        "Кокос"
+      ],
+      "cities": {},
+      "status": "candidate_unverified",
+      "evidence": "названо AI в наблюдении OBS-002 (data/staging/forme_2026-11-20, pending); присутствие не проверено",
+      "case_sensitive": true,
+      "ai_named_cities": [
+        "astana"
+      ]
+    },
+    {
+      "id": "megastroy",
+      "name": "Мегастрой",
+      "is_client": false,
+      "category": "paint",
+      "domains": [],
+      "aliases": [
+        "Мегастрой"
+      ],
+      "cities": {},
+      "status": "candidate_unverified",
+      "evidence": "названо AI в наблюдении OBS-002 (data/staging/forme_2026-11-20, pending); присутствие не проверено; строительный гипермаркет, назван в ответе на запрос о краске",
+      "ai_named_cities": [
+        "astana"
+      ]
+    },
+    {
+      "id": "laki_kraski",
+      "name": "Лаки-Краски",
+      "is_client": false,
+      "category": "paint",
+      "domains": [],
+      "aliases": [
+        "Лаки-Краски",
+        "Лаки Краски"
+      ],
+      "cities": {},
+      "status": "candidate_unverified",
+      "evidence": "названо AI в наблюдении OBS-003 (data/staging/forme_2026-11-20, pending); присутствие не проверено",
+      "ai_named_cities": [
+        "karaganda"
+      ]
+    },
+    {
+      "id": "caparol_center",
+      "name": "Caparol Center",
+      "is_client": false,
+      "category": "paint",
+      "domains": [],
+      "aliases": [
+        "Caparol Center"
+      ],
+      "cities": {},
+      "status": "candidate_unverified",
+      "evidence": "названо AI в наблюдении OBS-003 (data/staging/forme_2026-11-20, pending); присутствие не проверено",
+      "ai_named_cities": [
+        "karaganda"
+      ]
+    },
+    {
+      "id": "domsad",
+      "name": "DOMSAD",
+      "is_client": false,
+      "category": "paint",
+      "domains": [
+        "domsad.kz"
+      ],
+      "aliases": [
+        "DOMSAD",
+        "domsad.kz"
+      ],
+      "cities": {},
+      "status": "candidate_unverified",
+      "evidence": "названо AI в наблюдении OBS-003 (data/staging/forme_2026-11-20, pending); присутствие не проверено; строительный гипермаркет, назван в ответе на запрос о краске",
+      "ai_named_cities": [
+        "karaganda"
+      ]
+    },
+    {
+      "id": "raduga",
+      "name": "Радуга",
+      "is_client": false,
+      "category": "paint",
+      "domains": [
+        "raduga.kz"
+      ],
+      "aliases": [
+        "Радуга"
+      ],
+      "cities": {},
+      "status": "candidate_unverified",
+      "evidence": "названо AI в наблюдении OBS-003 (data/staging/forme_2026-11-20, pending); присутствие не проверено",
+      "case_sensitive": true,
+      "ai_named_cities": [
+        "karaganda"
+      ]
+    },
+    {
+      "id": "artlamp",
+      "name": "Artlamp / Zharyk Alemi",
+      "is_client": false,
+      "category": "chandelier",
+      "domains": [
+        "artlamp.kz",
+        "zharykalemy.kz"
+      ],
+      "aliases": [
+        "Artlamp",
+        "Zharyk Alemi",
+        "Zharyk Alemy",
+        "artlamp.kz",
+        "zharykalemy.kz"
+      ],
+      "cities": {},
+      "status": "candidate_unverified",
+      "evidence": "названо AI в наблюдении OBS-004 (data/staging/forme_2026-11-20, pending); присутствие не проверено",
+      "ai_named_cities": [
+        "almaty"
+      ]
+    },
+    {
+      "id": "tekled",
+      "name": "TEKLED",
+      "is_client": false,
+      "category": "chandelier",
+      "domains": [
+        "tekled.kz",
+        "tekledgroup.com"
+      ],
+      "aliases": [
+        "TEKLED Astana",
+        "TEKLED",
+        "TEK LED",
+        "tekled.kz"
+      ],
+      "cities": {},
+      "status": "candidate_unverified",
+      "evidence": "названо AI в наблюдении OBS-004, OBS-005, OBS-006 (data/staging/forme_2026-11-20, pending); присутствие не проверено",
+      "ai_named_cities": [
+        "almaty",
+        "astana",
+        "karaganda"
+      ]
+    },
+    {
+      "id": "elektrokompleks",
+      "name": "Электрокомплекс Asia",
+      "is_client": false,
+      "category": "chandelier",
+      "domains": [
+        "elkom.kz"
+      ],
+      "aliases": [
+        "Электрокомплекс Asia",
+        "Электрокомплекс",
+        "Elektrokompleks",
+        "elkom.kz"
+      ],
+      "cities": {},
+      "status": "candidate_unverified",
+      "evidence": "названо AI в наблюдении OBS-004 (data/staging/forme_2026-11-20, pending); присутствие не проверено",
+      "ai_named_cities": [
+        "almaty"
+      ]
+    },
+    {
+      "id": "luis_lighting",
+      "name": "Luis Lighting",
+      "is_client": false,
+      "category": "chandelier",
+      "domains": [
+        "luis.kz"
+      ],
+      "aliases": [
+        "Luis Lighting",
+        "Luis.kz"
+      ],
+      "cities": {},
+      "status": "candidate_unverified",
+      "evidence": "названо AI в наблюдении OBS-004 (data/staging/forme_2026-11-20, pending); присутствие не проверено",
+      "ai_named_cities": [
+        "almaty"
+      ]
+    },
+    {
+      "id": "m_light",
+      "name": "M light",
+      "is_client": false,
+      "category": "chandelier",
+      "domains": [],
+      "aliases": [
+        "M light"
+      ],
+      "cities": {},
+      "status": "candidate_unverified",
+      "evidence": "названо AI в наблюдении OBS-005 (data/staging/forme_2026-11-20, pending); присутствие не проверено",
+      "case_sensitive": true,
+      "ai_named_cities": [
+        "astana"
+      ]
+    },
+    {
+      "id": "mitris",
+      "name": "Митрис",
+      "is_client": false,
+      "category": "chandelier",
+      "domains": [
+        "mitris.kz"
+      ],
+      "aliases": [
+        "Митрис",
+        "mitris.kz"
+      ],
+      "cities": {},
+      "status": "candidate_unverified",
+      "evidence": "названо AI в наблюдении OBS-005 (data/staging/forme_2026-11-20, pending); присутствие не проверено",
+      "ai_named_cities": [
+        "astana"
+      ]
+    },
+    {
+      "id": "svetolux",
+      "name": "Светолюкс",
+      "is_client": false,
+      "category": "chandelier",
+      "domains": [
+        "svetolux.kz"
+      ],
+      "aliases": [
+        "Светолюкс",
+        "svetolux.kz"
+      ],
+      "cities": {},
+      "status": "candidate_unverified",
+      "evidence": "названо AI в наблюдении OBS-005 (data/staging/forme_2026-11-20, pending); присутствие не проверено",
+      "ai_named_cities": [
+        "astana"
+      ]
+    },
+    {
+      "id": "haydi",
+      "name": "HAYDI",
+      "is_client": false,
+      "category": "chandelier",
+      "domains": [
+        "haydi.kz"
+      ],
+      "aliases": [
+        "HAYDI",
+        "haydi.kz"
+      ],
+      "cities": {},
+      "status": "candidate_unverified",
+      "evidence": "названо AI в наблюдении OBS-006 (data/staging/forme_2026-11-20, pending); присутствие не проверено",
+      "ai_named_cities": [
+        "karaganda"
+      ]
+    },
+    {
+      "id": "svetotekhnika_plus",
+      "name": "Светотехника Плюс",
+      "is_client": false,
+      "category": "chandelier",
+      "domains": [],
+      "aliases": [
+        "Светотехника Плюс"
+      ],
+      "cities": {},
+      "status": "candidate_unverified",
+      "evidence": "названо AI в наблюдении OBS-006 (data/staging/forme_2026-11-20, pending); присутствие не проверено",
+      "ai_named_cities": [
+        "karaganda"
+      ]
+    },
+    {
+      "id": "global_light",
+      "name": "Global Light",
+      "is_client": false,
+      "category": "chandelier",
+      "domains": [],
+      "aliases": [
+        "Global Light"
+      ],
+      "cities": {},
+      "status": "candidate_unverified",
+      "evidence": "названо AI в наблюдении OBS-006 (data/staging/forme_2026-11-20, pending); присутствие не проверено",
+      "ai_named_cities": [
+        "karaganda"
+      ]
+    },
+    {
+      "id": "paintcenter",
+      "name": "Мастерская Цвета Dulux (Paintcenter.kz)",
+      "is_client": false,
+      "category": "paint",
+      "domains": [
+        "paintcenter.kz"
+      ],
+      "aliases": [
+        "Мастерская Цвета Dulux",
+        "Paintcenter.kz",
+        "Paintcenter"
+      ],
+      "cities": {},
+      "status": "candidate_unverified",
+      "evidence": "названо AI в наблюдении BR-G-PA-001, BR-C-PA-001 (forme 2026-11-20, P3, self_attested); присутствие не проверено",
+      "ai_named_cities": [
+        "almaty"
+      ]
+    },
+    {
+      "id": "svetilniki_kz",
+      "name": "Svetilniki.kz",
+      "is_client": false,
+      "category": "chandelier",
+      "domains": [
+        "svetilniki.kz"
+      ],
+      "aliases": [
+        "Svetilniki.kz"
+      ],
+      "cities": {},
+      "status": "candidate_unverified",
+      "evidence": "названо AI в наблюдении BR-G-CH-001 (forme 2026-11-20, P3, self_attested); присутствие не проверено",
+      "ai_named_cities": [
+        "almaty"
+      ]
+    },
+    {
+      "id": "nova_svet",
+      "name": "Электромаркет NOVA",
+      "is_client": false,
+      "category": "chandelier",
+      "domains": [
+        "novasvet.kz"
+      ],
+      "aliases": [
+        "Электромаркет NOVA",
+        "novasvet.kz"
+      ],
+      "cities": {},
+      "status": "candidate_unverified",
+      "evidence": "названо AI в наблюдении BR-G-CH-001 (forme 2026-11-20, P3, self_attested); присутствие не проверено",
+      "ai_named_cities": [
+        "almaty"
+      ]
+    },
+    {
+      "id": "masterskaya_uyuta",
+      "name": "Мастерская Уюта",
+      "is_client": false,
+      "category": "chandelier",
+      "domains": [
+        "vmasterskoy.kz"
+      ],
+      "aliases": [
+        "Мастерская Уюта",
+        "vmasterskoy.kz"
+      ],
+      "cities": {},
+      "status": "candidate_unverified",
+      "evidence": "названо AI в наблюдении BR-G-CH-001 (forme 2026-11-20, P3, self_attested); присутствие не проверено",
+      "ai_named_cities": [
+        "almaty"
+      ]
+    },
+    {
+      "id": "artvance",
+      "name": "ArtVance",
+      "is_client": false,
+      "category": "chandelier",
+      "domains": [
+        "artvance.kz"
+      ],
+      "aliases": [
+        "ArtVance",
+        "artvance.kz"
+      ],
+      "cities": {},
+      "status": "candidate_unverified",
+      "evidence": "названо AI в наблюдении BR-G-CH-001 (forme 2026-11-20, P3, self_attested); присутствие не проверено",
+      "ai_named_cities": [
+        "almaty"
+      ]
+    },
+    {
+      "id": "zions",
+      "name": "Zions.kz",
+      "is_client": false,
+      "category": "chandelier",
+      "domains": [
+        "zions.kz"
+      ],
+      "aliases": [
+        "Zions.kz",
+        "zions.kz"
+      ],
+      "cities": {},
+      "status": "candidate_unverified",
+      "evidence": "названо AI в наблюдении BR-G-CH-001 (forme 2026-11-20, P3, self_attested); присутствие не проверено",
+      "ai_named_cities": [
+        "almaty"
+      ]
+    },
+    {
+      "id": "maytoni_shop_kz",
+      "name": "Maytoni Shop KZ (портал дилеров)",
+      "is_client": false,
+      "category": "chandelier",
+      "domains": [
+        "maytoni-shop.kz"
+      ],
+      "aliases": [
+        "maytoni-shop.kz"
+      ],
+      "cities": {},
+      "status": "candidate_unverified",
+      "evidence": "названо AI в наблюдении BR-G-CH-001 (forme 2026-11-20, P3, self_attested); присутствие не проверено",
+      "ai_named_cities": [
+        "almaty"
+      ]
     }
   ],
   "manufacturers": [
@@ -289,7 +896,11 @@
       "sold_by": {
         "svet_kz": "observed: svet.kz/brands/maytoni/; meta description claims 'официальный дилер Maytoni' (self-claim)"
       },
-      "status": "observed"
+      "status": "observed",
+      "domains": [
+        "maytoni.am"
+      ],
+      "domains_evidence": "maytoni.am/shops/brand-zones/ процитирован ChatGPT в BR-C-CH-001 как «Maytoni — список бренд-зон и партнёров»; принадлежность домена не проверена"
     },
     {
       "id": "arte_lamp",

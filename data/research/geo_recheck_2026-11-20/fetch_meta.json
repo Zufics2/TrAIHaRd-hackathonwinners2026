@@ -1,0 +1,55 @@
+{
+ "https://svet.kz/dostavka/astana/": {
+  "status": 200,
+  "fetched_at": "2026-11-20T15:28:45+00:00",
+  "sha256": "e2a6e8c796b7202be9f0c65146b93c61fefab947c186ab92f1ad7520a22c3564",
+  "sha256_redacted": "a1b11917a8881a95c24aad11760b6d0fa0816a6452c56bd78352be66ffe90922"
+ },
+ "https://svet.kz/katalog/lyustry/": {
+  "status": 200,
+  "fetched_at": "2026-11-20T15:28:46+00:00",
+  "sha256": "84bf4ef48e3adcfce0e5da0dba9276cae95323b99e581589a960a4d21547c17b",
+  "sha256_redacted": "39041082cf3104ccd5d31c653258f0b5aaaf5f273e8ae45fb4fc94780b213d2a"
+ },
+ "https://svet.kz/contact/": {
+  "status": 200,
+  "fetched_at": "2026-11-20T15:28:48+00:00",
+  "sha256": "5a00888c21615b384ec59db251732726e742c41f44bc4e78f88d011ef9d03e83",
+  "sha256_redacted": "ece09d14981ce933b065521b982e614efbd1a0a22a337d72e9261a5b4ba2842d"
+ },
+ "https://svet.kz/brands/maytoni/": {
+  "status": 200,
+  "fetched_at": "2026-11-20T15:28:49+00:00",
+  "sha256": "dc54d351f3fefa19101b2839ced1126e16a1fedaf24ad73c34bb67795aacb6d5",
+  "sha256_redacted": "624880d5608f6154ee5a3b8a6cf1621f251faaa18e378d503604466309a1fc1f"
+ },
+ "https://centr-krasok.kz/about/contacts/": {
+  "status": 200,
+  "fetched_at": "2026-11-20T15:28:51+00:00",
+  "sha256": "c317cef25169b399613a4fa1d05886bc4e8f48a9c84089da436858a206fb2d52",
+  "sha256_redacted": "e89a43443dab0e24ff44d09a108c42beba4101575d6c72854907a092bdfb2c88"
+ },
+ "https://centr-krasok.kz/": {
+  "status": 200,
+  "fetched_at": "2026-11-20T15:28:53+00:00",
+  "sha256": "adea96fdd5630c803872d850ecc50c0bc21248035ff1f3eb998227a56639c56d",
+  "sha256_redacted": "4bfcef7721db1648c7ba6a654bc1dc1da908bb081d4acf9cb238f1b19f69ecda"
+ },
+ "https://centr-krasok.kz/catalog/dulux/": {
+  "status": 200,
+  "fetched_at": "2026-11-20T15:28:55+00:00",
+  "sha256": "44a608662d13f1551777e04dd56b7bb05f6bd5a399e605daf42ed777f3d8914f",
+  "sha256_redacted": "3cdf2706442e26acf691a2b97bbbb09b24b3d47be2ae047296299b83699909f3"
+ },
+ "https://centr-krasok.kz/catalog/dlya_detskoy/": {
+  "status": 200,
+  "fetched_at": "2026-11-20T15:28:57+00:00",
+  "sha256": "990469be5df47d83d16b73a9681e48a1e85640a9f63774a6c2dbbac6e8cab336",
+  "sha256_redacted": "a370d5459b209407d3f06b326f7a9a4c044e74f63251b8dd14733ac4a8f6f591"
+ },
+ "https://centr-krasok.kz/robots.txt": {
+  "status": 200,
+  "fetched_at": "2026-11-20T15:28:58+00:00",
+  "sha256": "aa4e5f4273b7e9a64cc302e0a3df9e0be0f8f44d239490360fb051cdd480f95f"
+ }
+}

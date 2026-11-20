@@ -67,6 +67,7 @@ def share_of_voice(items: list[AnalyzedResponse], registry: Registry, level: str
     total = sum(cnt.values())
     rows = [{"entity_id": eid, "name": registry.entities[eid].name, "is_client": registry.entities[eid].is_client,
              "in_client_assortment": bool(registry.entities[eid].sold_by),
+             "registry_status": registry.entities[eid].status,  # candidate_unverified = named by AI, not checked
              "answers_mentioning": c, "share_of_voice": rate(c, total)} for eid, c in cnt.most_common()]
     return pd.DataFrame(rows)
 

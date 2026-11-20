@@ -13,7 +13,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent / "src"))
 
 from geolab import contract as C  # noqa: E402
 from geolab import experiment as X  # noqa: E402
-from geolab.metrics import analyze_records, entity_metrics, fmt, general_metrics, share_of_voice, source_table  # noqa: E402
+from geolab.analysis import url_key  # noqa: E402
+from geolab.metrics import analyze_records, consistency, entity_metrics, fmt, general_metrics, share_of_voice, source_table  # noqa: E402
 from geolab.registry import ROOT, load_registry  # noqa: E402
 from geolab.store import UPLOAD_DIR, is_real_kpi_row, load_observations, load_prompts, prompts_index, safe_name, save_upload  # noqa: E402
 
@@ -27,6 +28,7 @@ STAGE_LABEL = {"brand_discovery": "A · Выбор бренда товара", "
 TYPE_HELP = {
     "REAL_SEARCH": "ответ AI-поиска, полученный через API",
     "MANUAL_VERIFIED": "ответ AI-поиска, собранный вручную из интерфейса, со скриншотом/ссылкой",
+    "MANUAL_REPORTED": "ответ AI-поиска, скопированный участником без скриншота/ссылки (self_attested) — только предварительно",
     "CONTROLLED_EXPERIMENT": "результат локальной симуляции извлечения — не внешний AI",
     "SYNTHETIC_DEMO": "придуманные данные для проверки интерфейса — не измерение",
 }
@@ -35,14 +37,37 @@ PAGES = ["Обзор", "Импорт наблюдений", "Наблюдени�
 
 # ---------- sidebar ----------
 st.sidebar.title("GEO Intelligence Lab")
-page = st.sidebar.radio("Раздел", PAGES)
-client = st.sidebar.selectbox("Клиент", [e.id for e in REG.clients()], format_func=lambda i: REG.entities[i].name)
-stage = st.sidebar.selectbox("Этап пути", list(STAGE_LABEL), format_func=STAGE_LABEL.get)
-city = st.sidebar.selectbox("Город", ["all", "almaty", "astana", "karaganda", "national"],
+QP = st.query_params  # optional deep links for demo bookmarks / offline screenshots: ?page=4&client=svet_kz&city=astana
+
+
+def _qp_index(key: str, options: list, default: int) -> int:
+    v = QP.get(key)
+    if v is None:
+        return default
+    if key == "page" and v.isdigit() and 1 <= int(v) <= len(options):
+        return int(v) - 1
+    return options.index(v) if v in options else default
+
+
+page = st.sidebar.radio("Раздел", PAGES, index=_qp_index("page", PAGES, 0))
+_clients = [e.id for e in REG.clients()]
+client = st.sidebar.selectbox("Клиент", _clients, index=_qp_index("client", _clients, 0), format_func=lambda i: REG.entities[i].name)
+stage = st.sidebar.selectbox("Этап пути", list(STAGE_LABEL), index=1, format_func=STAGE_LABEL.get)  # B: where real answers are
+_cities = ["all", "almaty", "astana", "karaganda", "national"]
+city = st.sidebar.selectbox("Город", _cities, index=_qp_index("city", _cities, 0),
                             format_func=lambda c: "Все" if c == "all" else REG.cities[c]["name"])
+PROVIDER_LABEL = {"all": "Все", "chatgpt_search": "ChatGPT Search", "gemini": "Gemini", "perplexity": "Perplexity",
+                  "google_ai_mode": "Google AI Mode", "google_ai_overview": "Google AI Overview"}
+provider = st.sidebar.selectbox("AI-провайдер", ["all", *C.PROVIDER], format_func=lambda p: PROVIDER_LABEL.get(p, p))
 demo = st.sidebar.toggle("Режим SYNTHETIC_DEMO", value=False,
                          help="Показывает только синтетические образцы из data/samples. Реальные данные в этом режиме скрыты.")
 category = REG.entities[client].category
+with st.sidebar.expander("Demo path · 3 минуты"):
+    st.markdown("1. **Обзор** — где клиент назван / не назван (город Астана)\n"
+                "2. **Наблюдения AI** — полный ответ ❌ и его ссылки\n"
+                "3. **Рекомендации** — ФАКТ → ИСТОЧНИК → BEFORE/AFTER\n"
+                "4. **Контролируемый эксперимент** — отдельная проверка механизма (BM25), не ответ AI\n"
+                "5. **Реальные KPI** — A предварительно (N) и B verified (N/A)")
 
 ALL_RECORDS, LOAD_ISSUES = load_observations(include_samples=demo)
 if demo:
@@ -56,7 +81,8 @@ if n_err:
 
 
 def in_scope(r: dict) -> bool:
-    return r["category"] == category and r["funnel_stage"] == stage and (city == "all" or r["city"] == city)
+    return (r["category"] == category and r["funnel_stage"] == stage and (city == "all" or r["city"] == city)
+            and (provider == "all" or r["provider"] == provider))
 
 
 def evidence_rows() -> list[dict]:
@@ -86,6 +112,53 @@ def metric_n(col, label, value, n, help_=None):
 
 
 # ---------- pages ----------
+def render_kpis(items: list, sfx: str = "") -> None:
+    """KPI block. sfx marks the PRELIMINARY block (labels differ so the two are never confused)."""
+    if len(items) < 10:
+        st.warning(f"Малая выборка: N = {len(items)}. Это описание наблюдений, а не статистический вывод.")
+    g = general_metrics(items)
+    if stage == "brand_discovery":
+        assort = REG.assortment(client)
+        hit = sum(1 for it in items if any(a.id in it.analysis.mentions for a in assort))
+        c1, c2, c3 = st.columns(3)
+        metric_n(c1, "Assortment Brand Coverage" + sfx, fmt(hit / len(items)), len(items),
+                 "доля ответов, где названа ≥1 марка из подтверждённого ассортимента клиента")
+        metric_n(c2, "Citation coverage" + sfx, fmt(g["citation_coverage"]), len(items))
+        metric_n(c3, "Уникальных доменов" + sfx, g["unique_cited_domains"], g["answers_with_citations"])
+        sov = share_of_voice(items, REG, "manufacturer", category)
+        color = "in_client_assortment"
+    else:
+        m = entity_metrics(items, client)
+        c1, c2, c3, c4 = st.columns(4)
+        metric_n(c1, "Mention rate" + sfx, fmt(m["mention_rate"]), m["answers"])
+        metric_n(c2, "Recommendation rate" + sfx, fmt(m["recommendation_rate"]), m["answers"], "эвристика")
+        metric_n(c3, "Top-3 rate" + sfx, fmt(m["top3_rate"]), m["ranked_answers"], "только ответы с явным нумерованным списком")
+        metric_n(c4, "Citation rate" + sfx, fmt(m["citation_rate"]), m["answers_with_citations"], "среди ответов с цитатами")
+        sov = share_of_voice(items, REG, "retailer", category)
+        color = "is_client"
+    if not sov.empty:
+        sov["name"] = [n + (" · кандидат" if stt == "candidate_unverified" else "") for n, stt in zip(sov.name, sov.registry_status)]
+        st.subheader("AI Share of Voice (по числу ответов с упоминанием)")
+        st.caption("«кандидат» — магазин назван AI, но в реестре не проверен независимо.")
+        fig = px.bar(sov, x="answers_mentioning", y="name", orientation="h", color=color,
+                     color_discrete_map={True: "#2f6f4f", False: "#b8bcc2"}, labels={"answers_mentioning": "ответов с упоминанием", "name": ""})
+        fig.update_layout(height=80 + 28 * len(sov), showlegend=False, margin=dict(l=0, r=0, t=10, b=0))
+        st.plotly_chart(fig, width="stretch", key=f"sov{sfx}")
+    if stage != "brand_discovery":
+        cons = consistency(items, client)
+        if not cons.empty and (cons.runs >= 2).any():
+            st.subheader("Result Consistency (повторные прогоны одного вопроса)")
+            st.caption("Доля прогонов, где клиент назван, по вопросу и AI. Строки с 1 прогоном не показаны.")
+            st.dataframe(cons[cons.runs >= 2], hide_index=True, width="stretch", key=f"cons{sfx}")
+    export = pd.DataFrame([{**{k: v for k, v in it.record.items() if not k.startswith("_")},
+                            "cited_urls": " | ".join(it.record["cited_urls"]),
+                            "manufacturers": ", ".join(named(it.analysis, "manufacturer")),
+                            "retailers": ", ".join(named(it.analysis, "retailer")),
+                            "ranked": " > ".join(it.analysis.ranked_entities)} for it in items])
+    st.download_button("Экспорт наблюдений + распознавания (CSV)", export.to_csv(index=False).encode("utf-8-sig"),
+                       file_name=f"observations_{client}_{stage}_{city}{'_preliminary' if sfx else ''}.csv", mime="text/csv", key=f"exp{sfx}")
+
+
 if page == "Обзор":
     st.header("Как AI-поиск рекомендует бренды товаров и магазины")
     real = [r for r in ALL_RECORDS if r["data_type"] in C.REAL_DATA_TYPES]
@@ -94,6 +167,24 @@ if page == "Обзор":
     c2.metric("Реальных наблюдений", len(real))
     c3.metric("из них verified", sum(1 for r in real if r["verification_status"] == "verified"))
     c4.metric("AI-провайдеров", len({r["provider"] for r in real}) or "N/A")
+    if real and not demo:
+        st.subheader(f"Реальные ответы AI: где {REG.entities[client].name}?")
+        items_all = analyze_records([r for r in real if r["category"] == category and r["verification_status"] != "rejected"], REG)
+        mx = []
+        for it in items_all:
+            r, a = it.record, it.analysis
+            m = a.mentions.get(client)
+            mx.append({"этап": STAGE_LABEL[r["funnel_stage"]][:1], "город": REG.cities[r["city"]]["name"], "AI": r["provider"],
+                       "вопрос": r["query"], "клиент назван": "✅ да" if m else "❌ нет",
+                       "место в рейтинге": str(m.rank) if m and m.rank else "—",
+                       "сайт клиента процитирован": "✅" if any(c.owner_entity == client for c in a.citations) else "—",
+                       "первые в ответе": ", ".join(REG.entities[e].name for e in (a.ranked_entities or [e for _, e in sorted(
+                           (mm.first_pos, e) for e, mm in a.mentions.items() if mm.level == "retailer")])[:3]),
+                       "доказательство": r["verification_status"]})
+        if mx:
+            st.dataframe(pd.DataFrame(mx), hide_index=True, width="stretch")
+            st.caption(f"N = {len(mx)} · self_attested = ответ предоставил участник P3 без скриншота (предварительно, не независимо проверено). "
+                       "Каждый вопрос задан 1 раз — это описание конкретных ответов, а не доля рынка.")
     st.markdown(
         "- **Слой A — выбор бренда товара** («какая краска лучше для детской?»): AI рекомендует производителей.\n"
         "- **Слой B — выбор магазина** («где купить люстру в Астане?»): AI рекомендует продавцов.\n"
@@ -159,14 +250,16 @@ elif page == "Импорт наблюдений":
 elif page == "Наблюдения AI (evidence)":
     st.header("Наблюдения AI-поиска")
     st.caption(f"{STAGE_LABEL[stage]} · {REG.entities[client].name} · "
-               + ("SYNTHETIC_DEMO" if demo else "реальные данные (pending и verified; rejected скрыты)"))
+               + ("SYNTHETIC_DEMO" if demo else "реальные данные (pending, self_attested, verified; rejected скрыты)"))
     recs = evidence_rows()
     if not recs:
         no_data_box()
     for it in analyze_records(recs, REG):
         r = it.record
         badge = f"`{r['data_type']}` · `{r['verification_status']}`"
-        with st.expander(f"{r['provider']} · {r['query']} · {r['timestamp']} · run {r['run_no']}"):
+        cm = it.analysis.mentions.get(client)
+        mark = (f"✅ {REG.entities[client].name}" + (f" #{cm.rank}" if cm and cm.rank else "")) if cm else f"❌ {REG.entities[client].name} нет"
+        with st.expander(f"{mark} · {r['provider']} · {REG.cities[r['city']]['name']} · {r['query']} · {r['timestamp'][:16]}"):
             st.markdown(f"{badge} · prompt `{r['prompt_id']}` · собрал `{r['collector']}`"
                         + (f" · проверил `{r['verified_by']}`" if r["verified_by"] else "")
                         + (f" · модель `{r['model']}`" if r["model"] else ""))
@@ -189,50 +282,31 @@ elif page == "Наблюдения AI (evidence)":
 
 elif page == "Реальные KPI":
     st.header(("SYNTHETIC DEMO KPI — не измерение" if demo else "REAL-WORLD METRICS") + f" · {STAGE_LABEL[stage]}")
-    st.caption("Только verified-наблюдения REAL_SEARCH / MANUAL_VERIFIED. Результаты эксперимента сюда не входят.")
+    st.caption("Результаты эксперимента сюда не входят. A — предварительно (все реальные ответы, кроме rejected); "
+               "B — только независимо проверенные (verified).")
     recs = kpi_rows()
+    if not demo:
+        prelim = evidence_rows()
+        by = {s: sum(1 for r in prelim if r["verification_status"] == s) for s in ("self_attested", "pending", "verified")}
+        st.subheader("A. Предварительные показатели — ручные ответы, НЕ проверены независимо")
+        if prelim:
+            st.warning(f"N = {len(prelim)}: self_attested {by['self_attested']}, pending {by['pending']}, verified {by['verified']}. "
+                       "self_attested — ответ предоставил и подтвердил участник, скриншота / ссылки на диалог нет. "
+                       "Это описание конкретных ответов, не статистический вывод.")
+            render_kpis(analyze_records(prelim, REG), sfx=" · A предварительно")
+        else:
+            st.info("Нет реальных ответов в этом срезе (клиент · этап · город · провайдер).")
+        st.subheader("B. Independently verified KPI")
     pending = len([r for r in evidence_rows() if r["verification_status"] == "pending"]) if not demo else 0
     if pending:
         st.warning(f"{pending} наблюдений в статусе pending не учтены. Их должен проверить второй участник.")
+    att = len([r for r in evidence_rows() if r["verification_status"] == "self_attested"]) if not demo else 0
+    if att:
+        st.info(f"{att} наблюдений self_attested (ручной ответ участника без скриншота) — в verified KPI не входят.")
     if not recs:
         no_data_box()
     else:
-        items = analyze_records(recs, REG)
-        if len(items) < 10:
-            st.warning(f"Малая выборка: N = {len(items)}. Это описание наблюдений, а не статистический вывод.")
-        g = general_metrics(items)
-        if stage == "brand_discovery":
-            assort = REG.assortment(client)
-            hit = sum(1 for it in items if any(a.id in it.analysis.mentions for a in assort))
-            c1, c2, c3 = st.columns(3)
-            metric_n(c1, "Assortment Brand Coverage", fmt(hit / len(items)), len(items),
-                     "доля ответов, где названа ≥1 марка из подтверждённого ассортимента клиента")
-            metric_n(c2, "Citation coverage", fmt(g["citation_coverage"]), len(items))
-            metric_n(c3, "Уникальных доменов", g["unique_cited_domains"], g["answers_with_citations"])
-            sov = share_of_voice(items, REG, "manufacturer", category)
-            color = "in_client_assortment"
-        else:
-            m = entity_metrics(items, client)
-            c1, c2, c3, c4 = st.columns(4)
-            metric_n(c1, "Mention rate", fmt(m["mention_rate"]), m["answers"])
-            metric_n(c2, "Recommendation rate", fmt(m["recommendation_rate"]), m["answers"], "эвристика")
-            metric_n(c3, "Top-3 rate", fmt(m["top3_rate"]), m["ranked_answers"], "только ответы с явным нумерованным списком")
-            metric_n(c4, "Citation rate", fmt(m["citation_rate"]), m["answers_with_citations"], "среди ответов с цитатами")
-            sov = share_of_voice(items, REG, "retailer", category)
-            color = "is_client"
-        if not sov.empty:
-            st.subheader("AI Share of Voice (по числу ответов с упоминанием)")
-            fig = px.bar(sov, x="answers_mentioning", y="name", orientation="h", color=color,
-                         color_discrete_map={True: "#2f6f4f", False: "#b8bcc2"}, labels={"answers_mentioning": "ответов с упоминанием", "name": ""})
-            fig.update_layout(height=80 + 28 * len(sov), showlegend=False, margin=dict(l=0, r=0, t=10, b=0))
-            st.plotly_chart(fig, width="stretch")
-        export = pd.DataFrame([{**{k: v for k, v in it.record.items() if not k.startswith("_")},
-                                "cited_urls": " | ".join(it.record["cited_urls"]),
-                                "manufacturers": ", ".join(named(it.analysis, "manufacturer")),
-                                "retailers": ", ".join(named(it.analysis, "retailer")),
-                                "ranked": " > ".join(it.analysis.ranked_entities)} for it in items])
-        st.download_button("Экспорт наблюдений + распознавания (CSV)", export.to_csv(index=False).encode("utf-8-sig"),
-                           file_name=f"observations_{client}_{stage}_{city}.csv", mime="text/csv")
+        render_kpis(analyze_records(recs, REG))
 
 elif page == "Источники":
     st.header("Откуда AI берёт ответы")
@@ -243,7 +317,9 @@ elif page == "Источники":
     else:
         tbl = source_table(analyze_records(recs, REG), REG)
         cited = tbl[tbl.source_type != "no_citation"]
-        st.caption(f"N ответов = {len(recs)} · цитат = {len(cited)} · ответов без цитат = {int((tbl.source_type == 'no_citation').sum())}")
+        n_unique = len({url_key(u) for u in cited.cited_url})
+        st.caption(f"N ответов = {len(recs)} · появлений ссылок (без повторов внутри ответа) = {len(cited)} · "
+                   f"уникальных URL = {n_unique} · ответов без ссылок = {int((tbl.source_type == 'no_citation').sum())}")
         if not cited.empty:
             by_type = cited.groupby("source_type").size().reset_index(name="citations").sort_values("citations")
             st.plotly_chart(px.bar(by_type, x="citations", y="source_type", orientation="h", labels={"source_type": ""}), width="stretch")
@@ -255,33 +331,61 @@ elif page == "Источники":
                            file_name=f"sources_{client}_{stage}_{city}.csv", mime="text/csv")
 
 elif page == "Рекомендации":
-    st.header("GEO-правки (предложения; production не изменён)")
+    st.header("GEO-правки — предложения (production сайтов не изменён)")
+    st.caption("ФАКТ — проверено на живой странице клиента (data/research/geo_recheck_2026-11-20/checks.json). "
+               "Наблюдение AI — отдельный уровень доказательности (self_attested). ГИПОТЕЗА — не обещание результата.")
     recs = json.loads((ROOT / "data" / "processed" / "recommendations.json").read_text(encoding="utf-8"))
-    for r in recs:
-        if client not in r["affected_entity"]:
-            continue
-        with st.expander(f"{r['priority']} · {r['issue_id']} · {r['finding'][:90]}"):
-            st.markdown(f"**Тип:** {r['implementation_type']} · **уверенность:** {r['confidence']} · **статус:** {r['status']}")
-            st.markdown(f"**Находка:** {r['finding']}\n\n**Доказательство:** {r['evidence']}\n\n**Механизм:** {r['expected_mechanism']}")
+    recs = [r for r in recs if client in r["affected_entity"]]
+    core = sorted((r for r in recs if r.get("tier") == "core"), key=lambda r: (r["priority"], r["issue_id"]))
+    secondary = sorted((r for r in recs if r.get("tier") != "core"), key=lambda r: (r["priority"], r["issue_id"]))
+    if not recs:
+        st.info("Для этого клиента предложений нет.")
+    for i, r in enumerate(core + secondary):
+        tag = "основная" if r.get("tier") == "core" else "дополнительная"
+        with st.expander(f"{r['priority']} · {r['issue_id']} · {tag} · {r.get('status', '')} — {r.get('geo_issue', r['finding'])[:80]}…",
+                         expanded=(i == 0)):
+            st.markdown(f"**Страница:** {r.get('source_url', '—')}  \n**Тип:** {r['implementation_type']} · **стоимость:** {r.get('cost', '—')} · "
+                        f"**уверенность:** {r['confidence']}")
+            if r.get("facts"):
+                st.markdown("**ФАКТЫ и ИСТОЧНИКИ**")
+                st.dataframe(pd.DataFrame(r["facts"]).rename(columns={"fact": "факт", "source_url": "источник", "evidence": "доказательство"}),
+                             hide_index=True, width="stretch")
+            st.markdown(f"**GEO-ПРОБЛЕМА:** {r.get('geo_issue', r['finding'])}")
             a, b = st.columns(2)
-            a.markdown("**BEFORE**")
+            a.markdown("**BEFORE** (как сейчас)")
             a.code(r["before"], language="html")
-            b.markdown("**AFTER**")
+            b.markdown("**AFTER** (предложение)")
             b.code(r["after"], language="html")
-            st.markdown(f"**Почему:** {r['why']}\n\n**Тест:** {r['experiment_plan']}")
+            st.markdown(f"**ПРЕДЛОЖЕНИЕ:** {r.get('proposal', r.get('proposed_change', ''))}\n\n"
+                        f"**ГИПОТЕЗА:** {r.get('hypothesis', r.get('expected_mechanism', ''))}\n\n"
+                        f"**ТЕСТ после публикации:** {r.get('test', r.get('experiment_plan', ''))}\n\n"
+                        f"**ОГРАНИЧЕНИЯ:** {r.get('limitations', '—')}")
+            st.markdown(f"**НАБЛЮДЕНИЕ в ответах AI** (не доказательство причины): {r.get('observation') or r.get('ai_observation', '—')}")
 
 elif page == "Контролируемый эксперимент":
     st.header("CONTROLLED EXPERIMENT RESULTS")
+
+    def m3(v):  # MRR shown with 3 decimals (0.875 must not read as 0.88)
+        return "N/A" if v is None else f"{v:.3f}"
     st.warning("Локальная BM25-симуляция стадии извлечения на фиксированном корпусе. Это не ответ ChatGPT/Gemini/Perplexity "
                "и не доказательство изменения их ранжирования. С реальными KPI не смешивается.")
-    exps = sorted(p.stem for p in X.EXP_DIR.glob("EXP-*.json"))
+    # Codex experiments (data/experiments) + Claude-built experiments run with the same unchanged engine
+    # (data/research/exp*/EXP-*.json, corpus next to the config, result saved as <id>_result.json).
+    EXPS = {p.stem: (None, X.EXP_DIR / "results" / f"{p.stem}_result.json") for p in sorted(X.EXP_DIR.glob("EXP-*.json"))
+            if not p.stem.endswith("_result")}
+    for cfgp in sorted(p for p in (ROOT / "data" / "research").glob("exp*/EXP-*.json") if not p.stem.endswith("_result")):
+        cfg = json.loads(cfgp.read_text(encoding="utf-8"))
+        EXPS[cfg["experiment_id"]] = (cfgp, cfgp.parent / f"{cfgp.stem}_result.json")
+    exps = list(EXPS)
     if not exps:
         st.info("Эксперименты не описаны (data/experiments/EXP-*.json).")
     else:
-        exp_id = st.selectbox("Эксперимент", exps, index=len(exps) - 1)
-        exp = X.load_experiment(exp_id)
+        exp_id = st.selectbox("Эксперимент", exps, index=_qp_index("exp", exps, len(exps) - 1))
+        cfg_path, saved = EXPS[exp_id]
+        exp = X.load_experiment(exp_id) if cfg_path is None else json.loads(cfg_path.read_text(encoding="utf-8"))
+        own_dir = None if cfg_path is None else cfg_path.parent
         try:
-            corpus_dir = X.resolve_corpus(exp, None)
+            corpus_dir = X.resolve_corpus(exp, own_dir)
             corpus = [json.loads(p.read_text(encoding="utf-8")) for p in sorted((corpus_dir / "baseline").glob("*.json"))]
         except (ValueError, OSError, json.JSONDecodeError) as exc:
             st.error(f"Корпус эксперимента недоступен: {exc}")
@@ -297,11 +401,13 @@ elif page == "Контролируемый эксперимент":
         c2.metric("Владельцев документов", len(owners), help=", ".join(owners))
         c3.metric("Целевых запросов", n_target)
         c4.metric("Negative controls", n_neg)
-        saved = X.EXP_DIR / "results" / f"{exp_id}_result.json"
+        n_client = sum(1 for d in corpus if d["entity_id"] in {e.id for e in REG.clients()})
+        st.caption(f"Документов клиентов: {n_client} из {len(corpus)} — корпус смещён к клиентам, это не модель рынка. "
+                   "Эксперимент проверяет механизм извлечения на сохранённых страницах; он не является результатом конкретного ответа Gemini/ChatGPT.")
         if st.button("Перезапустить baseline и treatment", type="primary"):
             try:
                 with st.spinner("Индексация корпуса и прогон запросов…"):
-                    st.session_state["res"] = X.run_experiment(exp)
+                    st.session_state["res"] = X.run_experiment(exp, corpus_dir=own_dir)
             except (FileNotFoundError, ValueError) as exc:
                 st.error(f"Эксперимент не готов: {exc}")
         res = st.session_state.get("res")
@@ -310,10 +416,10 @@ elif page == "Контролируемый эксперимент":
             st.caption(f"Показан сохранённый результат: {saved.relative_to(ROOT)}")
         if res and res["experiment_id"] == exp_id:
             s = res["summary"]
-            st.subheader("Целевые запросы: baseline → treatment")
+            st.subheader("Целевые запросы: baseline → treatment · уровень МАГАЗИНА (entity-level)")
             c1, c2, c3 = st.columns(3)
             bm, tm = s["target"]["baseline"].get("mrr"), s["target"]["treatment"].get("mrr")
-            metric_n(c1, "MRR владельца", f"{fmt(bm, False)} → {fmt(tm, False)}", s["target"]["baseline"]["queries"],
+            metric_n(c1, "MRR владельца", f"{m3(bm)} → {m3(tm)}", s["target"]["baseline"]["queries"],
                      "Mean Reciprocal Rank: среднее 1/позиция первого документа клиента в top-k (0, если нет). Это НЕ средняя позиция.")
             bt, tt = s["target"]["baseline"]["top3_rate"], s["target"]["treatment"]["top3_rate"]
             metric_n(c2, "Hit@3", f"{fmt(bt)} → {fmt(tt)}", s["target"]["baseline"]["queries"],
@@ -322,12 +428,12 @@ elif page == "Контролируемый эксперимент":
             metric_n(c3, "Citation Rate", f"{fmt(bc)} → {fmt(tc)}", s["target"]["baseline"]["queries"],
                      "доля целевых запросов, где документ клиента попал в top-k цитат. Не путать с Hit@3.")
             if "changed_page_mrr" in s["target"]["baseline"]:
-                st.caption(f"MRR изменённой страницы: {fmt(s['target']['baseline']['changed_page_mrr'], False)} → "
-                           f"{fmt(s['target']['treatment']['changed_page_mrr'], False)}")
+                st.markdown(f"**Уровень ДОКУМЕНТА (document-level):** MRR изменённой страницы "
+                            f"{m3(s['target']['baseline']['changed_page_mrr'])} → {m3(s['target']['treatment']['changed_page_mrr'])}")
             st.subheader("Negative controls (рост = ухудшение релевантности)")
             n = s["negative_control"]
             c1, c2, c3 = st.columns(3)
-            metric_n(c1, "MRR · controls", f"{fmt(n['baseline'].get('mrr'), False)} → {fmt(n['treatment'].get('mrr'), False)}", n["baseline"]["queries"])
+            metric_n(c1, "MRR · controls", f"{m3(n['baseline'].get('mrr'))} → {m3(n['treatment'].get('mrr'))}", n["baseline"]["queries"])
             metric_n(c2, "Hit@3 · controls", f"{fmt(n['baseline']['top3_rate'])} → {fmt(n['treatment']['top3_rate'])}", n["baseline"]["queries"])
             metric_n(c3, "Citation Rate · controls", f"{fmt(n['baseline']['citation_rate'])} → {fmt(n['treatment']['citation_rate'])}", n["baseline"]["queries"])
             df = pd.DataFrame(res["per_query"])
@@ -344,6 +450,9 @@ elif page == "Контролируемый эксперимент":
             else:
                 lim.append("Сохранённый результат создан до добавления evidence-блока (hash/provenance) — перезапустите для полной трассировки.")
             st.markdown("**Ограничения доказательств**\n\n" + "\n".join(f"- {x}" for x in lim))
+            note = (own_dir / "INTERPRETATION.md") if own_dir else None
+            if note and note.exists():
+                st.info(note.read_text(encoding="utf-8"))
 
 elif page == "Данные и ошибки":
     st.header("Происхождение данных и ошибки импорта")
