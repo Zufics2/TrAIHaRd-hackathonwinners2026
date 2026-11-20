@@ -1,0 +1,10 @@
+{
+  "diff_check": "PASS",
+  "module_imports": "PASS",
+  "app_syntax": "PASS",
+  "secret_signature_matches": [],
+  "competitive_saved_and_two_reruns_equal": true,
+  "pytest_passed": 43,
+  "pytest_strict_xfailed": 9,
+  "interactive_ui": "NOT_RUN"
+}

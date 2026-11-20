@@ -1,0 +1,65 @@
+{
+  "experiment_id": "EXP-001-COMPETITIVE-v1",
+  "target_entity": "centr_krasok",
+  "changed_doc_ids": [
+    "ck_kids"
+  ],
+  "top_k": 5,
+  "hypothesis": "Audit replication on original fixed queries with three independently collected retailer pages; no query or treatment tuning after results.",
+  "linked_issue": "CK-005",
+  "queries": [
+    {
+      "query_id": "T1",
+      "query": "Где в Астане купить краску для детской комнаты?",
+      "role": "target",
+      "prompt_id": "R-P-AST-03"
+    },
+    {
+      "query_id": "T2",
+      "query": "краска для детской купить Алматы",
+      "role": "target",
+      "prompt_id": ""
+    },
+    {
+      "query_id": "T3",
+      "query": "Какая краска лучше для детской комнаты?",
+      "role": "target",
+      "prompt_id": "B-P-01"
+    },
+    {
+      "query_id": "T4",
+      "query": "Где купить краску для квартиры в Алматы?",
+      "role": "target",
+      "prompt_id": "R-P-ALA-01"
+    },
+    {
+      "query_id": "N1",
+      "query": "Где купить люстру в Алматы?",
+      "role": "negative_control",
+      "prompt_id": "R-C-ALA-01"
+    },
+    {
+      "query_id": "N2",
+      "query": "Где в Астане купить люстру для спальни?",
+      "role": "negative_control",
+      "prompt_id": "R-C-AST-03"
+    },
+    {
+      "query_id": "N3",
+      "query": "Можно ли заказать люстру с доставкой в Караганду?",
+      "role": "negative_control",
+      "prompt_id": "R-C-KAR-03"
+    },
+    {
+      "query_id": "N4",
+      "query": "ХВ-161 эмаль по металлу купить",
+      "role": "negative_control"
+    },
+    {
+      "query_id": "N5",
+      "query": "Краска Finncolor OASIS KITCHEN GALLERY",
+      "role": "negative_control"
+    }
+  ],
+  "corpus_subdir": "competitive_v1"
+}
