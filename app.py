@@ -15,7 +15,7 @@ from geolab import contract as C  # noqa: E402
 from geolab import experiment as X  # noqa: E402
 from geolab.metrics import analyze_records, entity_metrics, fmt, general_metrics, share_of_voice, source_table  # noqa: E402
 from geolab.registry import ROOT, load_registry  # noqa: E402
-from geolab.store import is_real_kpi_row, load_observations, load_prompts, prompts_index, save_upload  # noqa: E402
+from geolab.store import UPLOAD_DIR, is_real_kpi_row, load_observations, load_prompts, prompts_index, safe_name, save_upload  # noqa: E402
 
 st.set_page_config(page_title="GEO Intelligence Lab", layout="wide")
 st.markdown("<style>.block-container{padding-top:1.5rem;max-width:1300px}</style>", unsafe_allow_html=True)
@@ -117,8 +117,15 @@ elif page == "Импорт наблюдений":
     up = st.file_uploader("Файл наблюдений", type=["csv", "jsonl"])
     if up is not None:
         content = up.getvalue()
+        try:
+            target_name = safe_name(up.name)
+        except ValueError as exc:
+            st.error(str(exc))
+            st.stop()
+        replacing = (UPLOAD_DIR / target_name).exists()
         rows, issues = C.read_rows(up.name, content)
-        existing = {r["response_id"] for r in ALL_RECORDS}
+        # IDs from the file being replaced do not count as duplicates
+        existing = {r["response_id"] for r in ALL_RECORDS if r["_file"] != target_name}
         valid, more = C.validate_rows("observations", rows, prompts=prompts_index(), existing_keys=existing)
         issues += more
         errs = [i for i in issues if i.severity == "error"]
@@ -140,6 +147,11 @@ elif page == "Импорт наблюдений":
             st.caption("★ — эвристически распознано как рекомендация (пункт списка или слова-рекомендации, без отрицания).")
         if errs:
             st.error("Файл не сохранён: исправьте ошибки в исходной таблице и загрузите снова.")
+        elif valid and replacing:
+            st.warning(f"Файл {target_name} уже есть. Новая версия заменит его целиком (старая останется в истории Git).")
+            if st.button("Заменить предыдущую версию", type="primary"):
+                path = save_upload(up.name, content, replace=True)
+                st.success(f"Заменено: {path.relative_to(ROOT)}. Обновите страницу.")
         elif valid and st.button("Сохранить в data/raw/manual/", type="primary"):
             path = save_upload(up.name, content)
             st.success(f"Сохранено: {path.relative_to(ROOT)}. Обновите страницу.")

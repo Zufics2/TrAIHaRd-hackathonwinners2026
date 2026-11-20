@@ -46,6 +46,8 @@ CONFIDENCE = ("low", "medium", "high")
 ID_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_\-]{1,63}$")
 SLUG_RE = re.compile(r"^[a-z0-9][a-z0-9_]{1,63}$")
 EARLIEST = datetime(2026, 1, 1, tzinfo=timezone.utc)
+EVIDENCE_PATH_RE = re.compile(r"^assets/evidence/[A-Za-z0-9_\-]+\.(png|jpg|jpeg|webp)$", re.IGNORECASE)
+ROOT = Path(__file__).resolve().parents[2]
 
 
 @dataclass(frozen=True)
@@ -135,7 +137,9 @@ def _is_url(v: str) -> bool:
 
 
 def split_urls(v: str) -> list[str]:
-    return [u for u in re.split(r"[\s|]+", v or "") if u]
+    """Separators: ' | ', whitespace, newline, ';', and a comma directly before another http(s)://."""
+    v = re.sub(r",\s*(?=https?://)", " ", v or "")
+    return [u for u in re.split(r"[\s|;]+", v) if u]
 
 
 def parse_dt(v: str) -> datetime | None:
@@ -159,7 +163,15 @@ def _check_cell(col: Col, v: str, row: int, now: datetime) -> list[Issue]:
     if k == "url" and not _is_url(v):
         return [Issue(row, col.name, "error", f"не URL: {v!r}")]
     if k == "urls":
-        return [Issue(row, col.name, "error", f"не URL: {u!r} (разделяйте ссылки ' | ')") for u in split_urls(v) if not _is_url(u)]
+        out = []
+        for u in split_urls(v):
+            if u.startswith("[") or "](" in u:
+                out.append(Issue(row, col.name, "error", f"markdown-ссылка {u[:60]!r}: вставьте только сам адрес https://..."))
+            elif not _is_url(u):
+                out.append(Issue(row, col.name, "error", f"не URL: {u[:80]!r} (нужен полный адрес https://..., ссылки разделяйте ' | ')"))
+            elif "…" in u or u.endswith("..."):
+                out.append(Issue(row, col.name, "error", f"обрезанный URL {u[:80]!r}: скопируйте ссылку целиком (правый клик → Копировать адрес)"))
+        return out
     if k == "int" and (not v.isdigit() or int(v) < 1):
         return [Issue(row, col.name, "error", f"нужно целое ≥ 1, получено {v!r}")]
     if k == "datetime":
@@ -236,8 +248,18 @@ def _observation_rules(rec: dict, rn: int, prompts: dict | None, allow_synthetic
         out.append(Issue(rn, "data_type", "error", "SYNTHETIC_DEMO нельзя импортировать в реальные данные (только data/samples/)"))
     if dt in REAL_DATA_TYPES and 0 < len(rec["answer_text"]) < 40:
         out.append(Issue(rn, "answer_text", "warning", "очень короткий ответ — вставлен ли полный текст?"))
-    if dt == "MANUAL_VERIFIED" and not rec["evidence_link"]:
+    ev = rec["evidence_link"]
+    if dt == "MANUAL_VERIFIED" and not ev:
         out.append(Issue(rn, "evidence_link", "error", "для MANUAL_VERIFIED нужен скриншот или ссылка на диалог"))
+    elif ev and not ev.startswith(("http://", "https://")):
+        if not EVIDENCE_PATH_RE.match(ev):
+            out.append(Issue(rn, "evidence_link", "error", f"путь {ev!r}: нужно assets/evidence/<response_id>.png|jpg или https-ссылка на диалог"))
+        elif not (Path(ev).stem == rec["response_id"] or Path(ev).stem.startswith(rec["response_id"] + "_")):
+            out.append(Issue(rn, "evidence_link", "error", f"имя файла {Path(ev).name!r} должно начинаться с response_id {rec['response_id']!r}"))
+        elif not (ROOT / ev).exists():
+            out.append(Issue(rn, "evidence_link", "warning", f"файл {ev} пока не найден в репозитории — передайте скриншот капитану"))
+    if rec["provider"] == "other" and not rec["notes"]:
+        out.append(Issue(rn, "notes", "warning", "provider=other: укажите в notes, какой именно сервис"))
     if rec["verification_status"] == "verified":
         if not rec["verified_by"]:
             out.append(Issue(rn, "verified_by", "error", "статус verified требует verified_by"))
@@ -273,7 +295,9 @@ def read_rows(name: str, content: bytes) -> tuple[list[tuple[int, dict]], list[I
             rows.append((i, {k: "" if v is None else str(v) for k, v in obj.items()}))
         return rows, issues
     if name.endswith(".csv"):
-        reader = csv.DictReader(io.StringIO(text, newline=""))
+        first = text.split("\n", 1)[0]
+        delim = ";" if first.count(";") > first.count(",") else ","  # Excel (ru locale) saves with ';'
+        reader = csv.DictReader(io.StringIO(text, newline=""), delimiter=delim)
         rows, prev = [], 1
         for rec in reader:
             rows.append((prev + 1, rec))  # physical line where the record starts (multi-line answers OK)

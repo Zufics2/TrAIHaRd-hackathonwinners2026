@@ -26,7 +26,7 @@ GEO Intelligence Lab измеряет, как AI-поисковики (ChatGPT S
 
 `Cmd + Пробел` → набрать `Terminal` → `Enter`.
 
-Видите строку вида `alisherseitimbetov@MacBook ~ %` — это приглашение `zsh`. Знак `%`
+Видите строку вида `<имя>@MacBook ~ %` — это приглашение `zsh`. Знак `%`
 вводить не нужно.
 
 ---
@@ -44,7 +44,7 @@ cd ~/Desktop/TrAIHaRd-hackathonwinners2026
 pwd
 ```
 - **`pwd`** (print working directory) — показывает текущую папку.
-- Ожидается: `/Users/alisherseitimbetov/Desktop/TrAIHaRd-hackathonwinners2026`.
+- Ожидается: `/Users/<ваше_имя>/Desktop/TrAIHaRd-hackathonwinners2026`.
 
 ```zsh
 ls -la

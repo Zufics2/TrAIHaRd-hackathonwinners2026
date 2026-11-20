@@ -37,13 +37,14 @@ def _files(dirs) -> list[Path]:
     return out
 
 
-def load_observations(include_samples: bool = False) -> tuple[list[dict], list[dict]]:
+def load_observations(include_samples: bool = False, real_dirs=None) -> tuple[list[dict], list[dict]]:
     """Returns (records, issues). Issues carry file, row, field, severity, reason."""
     prompts = prompts_index()
     recs: list[dict] = []
     issues: list[dict] = []
     seen: set[str] = set()
-    sources = [(p, False) for p in _files(REAL_DIRS)]
+    seen_text: dict[tuple, str] = {}
+    sources = [(p, False) for p in _files(real_dirs or REAL_DIRS)]
     if include_samples:
         sources += [(p, True) for p in _files([SAMPLES_DIR]) if "observations" in p.name]
     for path, synthetic_ok in sources:
@@ -55,6 +56,11 @@ def load_observations(include_samples: bool = False) -> tuple[list[dict], list[d
                                "reason": "в data/samples допускается только SYNTHETIC_DEMO"})
                 continue
             seen.add(r["response_id"])
+            fp = (r["prompt_id"], r["provider"], " ".join(r["answer_text"].split()))
+            if fp in seen_text:
+                issues.append({"file": path.name, "row": "-", "field": "answer_text", "severity": "warning",
+                               "reason": f"{r['response_id']}: текст ответа совпадает с {seen_text[fp]} — повторная вставка?"})
+            seen_text.setdefault(fp, r["response_id"])
             p = prompts[r["prompt_id"]]
             r.update({"category": p["category"], "city": p["city"], "funnel_stage": p["funnel_stage"],
                       "intent": p["intent"], "_file": path.name})
@@ -66,13 +72,18 @@ def is_real_kpi_row(r: dict) -> bool:
     return r["data_type"] in C.REAL_DATA_TYPES and r["verification_status"] == "verified"
 
 
-def save_upload(name: str, content: bytes) -> Path:
-    """Store an uploaded file verbatim. Never overwrites."""
+def safe_name(name: str) -> str:
     safe = "".join(ch for ch in Path(name).name if ch.isalnum() or ch in "._-") or "upload.csv"
-    if not safe.endswith((".csv", ".jsonl")):
-        raise ValueError("only .csv / .jsonl")
-    target = UPLOAD_DIR / safe
-    if target.exists():
+    if not safe.endswith((".csv", ".jsonl")) or safe.startswith((".", "_")):
+        raise ValueError("имя файла должно оканчиваться на .csv или .jsonl и не начинаться с '.' или '_'")
+    return safe
+
+
+def save_upload(name: str, content: bytes, replace: bool = False) -> Path:
+    """Store an uploaded file verbatim. Overwrites only with replace=True (new version of the same file;
+    previous version stays in Git history)."""
+    target = UPLOAD_DIR / safe_name(name)
+    if target.exists() and not replace:
         stem, suf = target.stem, target.suffix
         target = UPLOAD_DIR / f"{stem}_{datetime.now().strftime('%Y%m%d_%H%M%S')}{suf}"
     target.write_bytes(content)

@@ -1,0 +1,13 @@
+response_id,prompt_id,query,provider,model,search_mode,timestamp,run_no,language,region_setting,answer_text,cited_urls,data_type,verification_status,collector,verified_by,evidence_link,notes
+OBS-P2-C01,R-P-ALA-01,Где купить краску для квартиры в Алматы?,chatgpt_search,,search_on,,1,ru,,,,MANUAL_VERIFIED,pending,P2,,assets/evidence/OBS-P2-C01.png,
+OBS-P2-C02,R-P-AST-02,Посоветуй магазин красок в Астане,chatgpt_search,,search_on,,1,ru,,,,MANUAL_VERIFIED,pending,P2,,assets/evidence/OBS-P2-C02.png,
+OBS-P2-C03,R-P-KAR-01,Где купить краску для квартиры в Караганде?,chatgpt_search,,search_on,,1,ru,,,,MANUAL_VERIFIED,pending,P2,,assets/evidence/OBS-P2-C03.png,
+OBS-P2-C04,R-C-ALA-01,Где купить люстру в Алматы?,chatgpt_search,,search_on,,1,ru,,,,MANUAL_VERIFIED,pending,P2,,assets/evidence/OBS-P2-C04.png,
+OBS-P2-C05,R-C-AST-01,Где купить люстру в Астане?,chatgpt_search,,search_on,,1,ru,,,,MANUAL_VERIFIED,pending,P2,,assets/evidence/OBS-P2-C05.png,
+OBS-P2-C06,R-C-KAR-01,Где купить люстру в Караганде?,chatgpt_search,,search_on,,1,ru,,,,MANUAL_VERIFIED,pending,P2,,assets/evidence/OBS-P2-C06.png,
+OBS-P2-C07,B-P-01,Какая краска лучше для детской комнаты?,chatgpt_search,,search_on,,1,ru,,,,MANUAL_VERIFIED,pending,P2,,assets/evidence/OBS-P2-C07.png,
+OBS-P2-C08,B-P-02,Какие марки интерьерной краски самые качественные?,chatgpt_search,,search_on,,1,ru,,,,MANUAL_VERIFIED,pending,P2,,assets/evidence/OBS-P2-C08.png,
+OBS-P2-C09,B-C-01,Какие бренды люстр надёжные?,chatgpt_search,,search_on,,1,ru,,,,MANUAL_VERIFIED,pending,P2,,assets/evidence/OBS-P2-C09.png,
+OBS-P2-C10,B-C-02,Какую люстру выбрать для небольшой гостиной?,chatgpt_search,,search_on,,1,ru,,,,MANUAL_VERIFIED,pending,P2,,assets/evidence/OBS-P2-C10.png,
+OBS-P2-C11,R-P-ALA-05,Где в Алматы купить краску Dulux?,chatgpt_search,,search_on,,1,ru,,,,MANUAL_VERIFIED,pending,P2,,assets/evidence/OBS-P2-C11.png,
+OBS-P2-C12,R-C-ALA-04,Где купить люстру Maytoni в Алматы?,chatgpt_search,,search_on,,1,ru,,,,MANUAL_VERIFIED,pending,P2,,assets/evidence/OBS-P2-C12.png,

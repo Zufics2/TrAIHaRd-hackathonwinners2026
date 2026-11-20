@@ -1,0 +1,6 @@
+response_id;prompt_id;query;provider;model;search_mode;timestamp;run_no;language;region_setting;answer_text;cited_urls;data_type;verification_status;collector;verified_by;evidence_link;notes
+FIX-001;R-C-AST-01;где купить люстру в астане?;chatgpt_search;gpt-5.x (как в интерфейсе);search_on;2026-11-20T11:04+05:00;1;ru;Астана, без VPN;"Вот несколько вариантов:
+1. **SVET.KZ** — шоурум на ул. Мангилик Ел, 29/2 ([svet.kz](https://svet.kz/contact/?utm_source=chatgpt.com))
+2. Kaspi Магазин — много люстр Maytoni и Eglo
+3. Центре Красок люстр нет, это магазин краски.";"https://svet.kz/contact/?utm_source=chatgpt.com, https://2gis.kz/astana/firm/70000001090884645;https://kaspi.kz/shop/c/chandeliers/";MANUAL_VERIFIED;verified;P3;P2;https://chatgpt.com/share/fixture-not-real;FIXTURE
+FIX-002;B-C-01;Какие бренды люстр надёжные?;gemini;;search_on;2026-11-20T06:04Z;1;ru;;Сенімді брендтер: Maytoni, Odeon Light және Eglo. Рекомендую Maytoni для современного интерьера.;;MANUAL_VERIFIED;pending;P3;;https://g.co/gemini/share/fixture;FIXTURE, kk+ru

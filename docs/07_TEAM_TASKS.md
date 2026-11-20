@@ -1,6 +1,15 @@
 # 07 · Команда, задачи, дедлайны
 
-Распределение **предварительное**: навыки участников P2/P3 ещё не уточнены.
+## Роли (зафиксировано 2026-11-20 13:55)
+
+| Роль | Кто |
+|---|---|
+| Основной разработчик (код, интеграция, импорт данных, merge в `main`) | **Claude Code** на MacBook #1 (P1) |
+| Эксперимент и QA | **Codex** (`codex/qa-experiments`) |
+| Research: источники, 2ГИС/Яндекс/соцсети, конкуренты, бренды, правки | **P2** (MacBook #2) |
+| Реальные наблюдения AI + питч | **P3** (Windows) |
+
+Пошаговые инструкции для P2/P3 — **`docs/16_TEAM_HANDOFF.md`**. Baseline v1 = 12 запросов из `data/prompts/baseline_v1.csv`.
 Подписки на чаты API не дают. Пока ключей нет, MODE 1 = ручной сбор (`MANUAL_VERIFIED`).
 
 ## Ветки и рабочие папки
@@ -19,7 +28,7 @@
 
 | # | Файл | Минимум | Срок |
 |---|---|---|---|
-| 1 | `data/raw/manual/P2_observations_chatgpt_search.csv` | все P0-запросы **слоя B** (retailer_discovery + bridge, 16 шт.) × 1 прогон в ChatGPT Search | 16:00 |
+| 1 | `P2_observations_chatgpt_search.csv` (из `data/templates/prefilled_P2_chatgpt_search_baseline_v1.csv`) | 12 запросов baseline v1 × ChatGPT Search; первые 3 строки — к 14:30 | 16:00 |
 | 2 | `assets/evidence/OBS-P2-*.png` | скриншот на каждый ответ | 16:00 |
 | 3 | `data/research/P2_sources.csv` | 2ГИС + Яндекс Карты + Instagram для обоих клиентов во всех трёх городах (есть / нет / расхождения NAP) | 18:30 |
 | 4 | `data/research/P2_sources.csv` (те же строки) | 3–5 конкурентов-магазинов на категорию×город: только те, кто назван AI **или** найден ≥2 независимыми источниками | 18:30 |
@@ -30,8 +39,8 @@
 
 | # | Файл | Минимум | Срок |
 |---|---|---|---|
-| 1 | `data/raw/manual/P3_observations_gemini.csv` | все P0-запросы (обоих слоёв, 22 шт.) × 1 прогон в Gemini | 16:00 |
-| 2 | `data/raw/manual/P3_observations_perplexity.csv` | P0-запросы слоя A (6 шт.) + 6 запросов слоя B | 17:30 |
+| 1 | `P3_observations_gemini.csv` (из `data/templates/prefilled_P3_gemini_baseline_v1.csv`) | 12 запросов baseline v1 × Gemini; первые 3 строки — к 14:30 | 16:00 |
+| 2 | `P3_observations_perplexity.csv` | те же 12 запросов baseline v1 × Perplexity | 17:30 |
 | 3 | повторы `run_no=2` | 12 P0-запросов у того же провайдера (для consistency) | 19:00 |
 | 4 | Верификация | проставить `verified` / `rejected` + `verified_by=P3` в файлах **P2** (и наоборот, P2 — в файлах P3): текст совпадает со скриншотом, URL открываются | непрерывно, итог 20:00 |
 | 5 | QA | 10 случайных ответов: сравнить распознанные бренды/магазины в дашборде с ручной разметкой → `data/research/P3_qa_matching.md` | 20:00 |

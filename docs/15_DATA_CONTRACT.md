@@ -109,3 +109,14 @@ SOURCE PRESENCE ≠ AI CITATION: `cited_in_response_ids` пусто, если ц
 | Результат | `data/experiments/results/<id>_result.json`: `experiment_id, target_entity, changed_doc_ids, status="CONTROLLED_EXPERIMENT", per_query[{query_id, query, role, baseline_rank, treatment_rank, baseline_top3, treatment_top3, baseline_cited, treatment_cited, baseline_entities[], treatment_entities[]}], summary{target|negative_control: {baseline|treatment: {queries, top3_rate, citation_rate, mrr}}}, raw{baseline[], treatment[]}` |
 
 Новые поля можно **добавлять**. Удалять или переименовывать — только после согласования с P1, потому что их читает `app.py` (раздел «Контролируемый эксперимент»).
+
+## 7. Уточнения v1.1 (2026-11-20 13:55) — без изменения столбцов
+
+- CSV с разделителем `;` (Excel, русская локаль) принимается.
+- `cited_urls`: разделители ` | `, пробел, перенос строки, `;`, а также запятая непосредственно перед `http`. Markdown-ссылки и обрезанные URL (`…`) — ошибка.
+- При подсчёте цитат трекинг-параметры (`utm_*`, `gclid`, `fbclid`, `yclid`, `srsltid`), `www.` и конечный `/` не различаются. Исходный URL сохраняется.
+- `evidence_link`: `https://…` (share-ссылка) или `assets/evidence/<response_id>[_N].png|jpg|jpeg|webp`. Если файла ещё нет в репозитории — предупреждение.
+- `provider=other` без `notes` — предупреждение.
+- Одинаковый текст ответа у одного prompt+provider с разными ID — предупреждение (вероятная повторная вставка).
+- Файл с тем же именем загружается как новая версия: заменяет старую целиком, только явной кнопкой.
+- Baseline v1: `data/prompts/baseline_v1.csv` (12 ID); предзаполненные листы — `data/templates/prefilled_*_baseline_v1.csv`.

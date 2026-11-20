@@ -24,7 +24,8 @@ RECOMMEND_CUES = (
     "подойд", "хороший выбор", "надёжн", "надежн", "популярн", "топ",
     "recommend", "best", "top",
 )
-NEGATIVE_CUES = ("не рекоменд", "не стоит", "избегайте", "не советую", "not recommend", "avoid")
+NEGATIVE_CUES = ("не рекоменд", "не стоит", "избегайте", "не советую", "не продает", "не продают", "нет в ассортименте",
+                 "не специализир", "не подойдет", "not recommend", "avoid", "ұсынбаймын")
 
 SOURCE_TYPES = {
     "map_directory": ("2gis.kz", "2gis.ru", "2gis.com", "go.2gis.com", "yandex.kz/maps", "yandex.ru/maps",
@@ -67,8 +68,22 @@ def normalize(text: str) -> str:
     return text.lower().replace("ё", "е")
 
 
+CYR_WORD = re.compile(r"^[а-я]+$")
+CYR_VOWEL_END = re.compile(r"[аеиоуыэюяй]$")
+
+
 def _alias_pattern(alias: str) -> re.Pattern:
-    a = re.escape(normalize(alias)).replace(r"\ ", r"[\s\-]+")
+    """Exact match for single-word aliases. In multi-word Cyrillic aliases each word may take a
+    Russian case ending ("Центр Красок" -> "Центре Красок", "Центра Красок")."""
+    words = normalize(alias).split()
+    parts = []
+    for w in words:
+        if len(words) > 1 and CYR_WORD.match(w) and len(w) >= 4:
+            stem = CYR_VOWEL_END.sub("", w)
+            parts.append(re.escape(stem) + r"[а-я]{0,3}")
+        else:
+            parts.append(re.escape(w))
+    a = r"[\s\-]+".join(parts)
     return re.compile(rf"(?<![\w.]){a}(?![\w])")
 
 
@@ -103,7 +118,22 @@ def normalize_domain(url: str) -> str:
 
 
 def clean_url(url: str) -> str:
-    return url.rstrip(".,;:!?»”")
+    return url.rstrip(".,;:!?»”*`")
+
+
+TRACKING_PARAM = re.compile(r"^(utm_[a-z]+|gclid|fbclid|yclid|srsltid)=", re.IGNORECASE)
+
+
+def url_key(url: str) -> str:
+    """Dedup key: drop fragment, tracking params (ChatGPT adds ?utm_source=chatgpt.com), www, trailing slash."""
+    try:
+        p = urlsplit(url)
+    except ValueError:
+        return url.lower()
+    query = "&".join(q for q in p.query.split("&") if q and not TRACKING_PARAM.match(q))
+    host = (p.hostname or "").lower()
+    host = host[4:] if host.startswith("www.") else host
+    return f"{host}{p.path.rstrip('/')}" + (f"?{query}" if query else "")
 
 
 def classify_source(url: str, registry: Registry) -> tuple[str, str | None]:
@@ -125,7 +155,7 @@ def extract_citations(text: str, registry: Registry, extra_urls: list[str] | Non
     out: list[Citation] = []
     for raw in list(URL_RE.findall(text)) + list(extra_urls or []):
         url = clean_url(raw.strip())
-        key = url.split("#")[0].rstrip("/").lower()
+        key = url_key(url)
         if not url or key in seen:
             continue
         seen.add(key)

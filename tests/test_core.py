@@ -106,3 +106,8 @@ def test_experiment_only_changed_doc_differs(tmp_path):
     assert q1["baseline_rank"] is None and q1["treatment_rank"] == 1
     assert q2["baseline_rank"] is None and q2["treatment_rank"] is None
     assert res["summary"]["negative_control"]["treatment"]["top3_rate"] == 0.0
+
+
+def test_list_item_with_negation_not_recommended():
+    a = analyze_answer("1. SVET.KZ — люстры\n2. Центр Красок не продает люстры, это магазин краски", REG)
+    assert a.mentions["svet_kz"].recommended and not a.mentions["centr_krasok"].recommended

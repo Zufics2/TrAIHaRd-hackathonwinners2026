@@ -1,0 +1,13 @@
+response_id,prompt_id,query,provider,model,search_mode,timestamp,run_no,language,region_setting,answer_text,cited_urls,data_type,verification_status,collector,verified_by,evidence_link,notes
+OBS-P3-G01,R-P-ALA-01,Где купить краску для квартиры в Алматы?,gemini,,search_on,,1,ru,,,,MANUAL_VERIFIED,pending,P3,,assets/evidence/OBS-P3-G01.png,
+OBS-P3-G02,R-P-AST-02,Посоветуй магазин красок в Астане,gemini,,search_on,,1,ru,,,,MANUAL_VERIFIED,pending,P3,,assets/evidence/OBS-P3-G02.png,
+OBS-P3-G03,R-P-KAR-01,Где купить краску для квартиры в Караганде?,gemini,,search_on,,1,ru,,,,MANUAL_VERIFIED,pending,P3,,assets/evidence/OBS-P3-G03.png,
+OBS-P3-G04,R-C-ALA-01,Где купить люстру в Алматы?,gemini,,search_on,,1,ru,,,,MANUAL_VERIFIED,pending,P3,,assets/evidence/OBS-P3-G04.png,
+OBS-P3-G05,R-C-AST-01,Где купить люстру в Астане?,gemini,,search_on,,1,ru,,,,MANUAL_VERIFIED,pending,P3,,assets/evidence/OBS-P3-G05.png,
+OBS-P3-G06,R-C-KAR-01,Где купить люстру в Караганде?,gemini,,search_on,,1,ru,,,,MANUAL_VERIFIED,pending,P3,,assets/evidence/OBS-P3-G06.png,
+OBS-P3-G07,B-P-01,Какая краска лучше для детской комнаты?,gemini,,search_on,,1,ru,,,,MANUAL_VERIFIED,pending,P3,,assets/evidence/OBS-P3-G07.png,
+OBS-P3-G08,B-P-02,Какие марки интерьерной краски самые качественные?,gemini,,search_on,,1,ru,,,,MANUAL_VERIFIED,pending,P3,,assets/evidence/OBS-P3-G08.png,
+OBS-P3-G09,B-C-01,Какие бренды люстр надёжные?,gemini,,search_on,,1,ru,,,,MANUAL_VERIFIED,pending,P3,,assets/evidence/OBS-P3-G09.png,
+OBS-P3-G10,B-C-02,Какую люстру выбрать для небольшой гостиной?,gemini,,search_on,,1,ru,,,,MANUAL_VERIFIED,pending,P3,,assets/evidence/OBS-P3-G10.png,
+OBS-P3-G11,R-P-ALA-05,Где в Алматы купить краску Dulux?,gemini,,search_on,,1,ru,,,,MANUAL_VERIFIED,pending,P3,,assets/evidence/OBS-P3-G11.png,
+OBS-P3-G12,R-C-ALA-04,Где купить люстру Maytoni в Алматы?,gemini,,search_on,,1,ru,,,,MANUAL_VERIFIED,pending,P3,,assets/evidence/OBS-P3-G12.png,
