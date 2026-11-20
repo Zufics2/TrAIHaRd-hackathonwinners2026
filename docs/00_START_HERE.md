@@ -125,7 +125,7 @@ python -m pytest -q
 ```
 - **`pytest`** находит файлы `tests/test_*.py` и запускает функции `test_*`.
 - **`-q`** — краткий вывод.
-- Ожидается: `12 passed` (число растёт по мере работы). Любое `failed` — **не коммитить в main**, сначала исправить.
+- Ожидается: `25 passed` (число растёт по мере работы). Любое `failed` — **не коммитить в main**, сначала исправить.
 
 ---
 
@@ -140,9 +140,11 @@ streamlit run app.py
 - `ModuleNotFoundError` → вы забыли `source .venv/bin/activate`.
 
 Что проверить в браузере:
-1. **Обзор** — таблица покрытия запросов, присутствие магазинов по городам.
-2. **Эксперимент до/после** → кнопка «Запустить» → появятся метрики и таблица.
-3. **Ответы AI и KPI** — пока пусто (N/A), пока команда не загрузит реальные ответы.
+1. **Обзор** — покрытие сегментов (сколько реальных наблюдений в каждом), присутствие магазинов по городам.
+2. **Импорт наблюдений** — загрузить `data/samples/INVALID_example.csv` → таблица ошибок «строка · поле · причина», кнопки сохранения нет.
+3. **Наблюдения AI / Реальные KPI / Источники** — N/A, пока нет verified-данных. Под каждой метрикой указано `N`.
+4. Переключатель **Режим SYNTHETIC_DEMO** в sidebar — придуманные образцы для проверки UI. Реальные данные в этом режиме скрыты.
+5. **Контролируемый эксперимент** — сохранённый результат EXP-001 и кнопка перезапуска.
 
 ---
 
@@ -156,10 +158,22 @@ cd src && python -m geolab.corpus ../data/experiments/corpus_manifest.csv && cd 
 - `FAIL ... 403` — сайт запрещает автоматический доступ. **Не обходим.** Собираем вручную или исключаем.
 - После пересборки результаты эксперимента меняются — перезапустите его и обновите журнал.
 
-### 8.2 Импорт ручных ответов AI
-1. Скопировать `data/raw/manual/_TEMPLATE.csv` → `data/raw/manual/B_answers.csv` (свой файл на каждого участника — так никто не перезапишет чужое).
-2. Заполнить по протоколу `docs/08_EXPERIMENT_PROTOCOL.md` §2.
-3. Перезапустить приложение — раздел «Данные и статусы» покажет ошибки валидации, если они есть.
+### 8.2 Импорт ответов AI (основной поток данных)
+Формат и словари: `docs/15_DATA_CONTRACT.md`. Шаблоны: `data/templates/*.csv`.
+
+Через интерфейс: раздел **«Импорт наблюдений»** → выбрать CSV/JSONL → посмотреть ошибки и предпросмотр распознавания → «Сохранить». Файл сохраняется без изменений, одноимённый не перезаписывается.
+
+Через терминал (проверка без сохранения):
+```zsh
+cd src
+../.venv/bin/python -m geolab.contract observations ../data/raw/manual/P3_observations_gemini.csv
+cd ..
+```
+- **`-m geolab.contract`** — запустить валидатор как модуль. Первый аргумент — вид данных (`observations`, `prompts`, `brand_catalog`, `sources`, `proposals`), второй — путь к файлу.
+- Ожидается последней строкой: `observations: валидных строк N, ошибок 0, ...`. Код выхода `0` = файл годен.
+- Ошибка `ModuleNotFoundError: geolab` → вы не в папке `src`.
+
+Ошибки в уже сохранённых файлах видны в разделе **«Данные и ошибки»**.
 
 ---
 
@@ -203,6 +217,8 @@ git merge feature/source-intel       # влить ветку в текущую (
 - Конфликт при merge: Git отметит файлы `<<<<<<<`. Откройте файл, оставьте нужное, затем `git add <файл>` и `git commit`.
 
 ### 9.5 GitHub
+Ветки проекта: `main` (стабильная интеграция), `feat/core-app` (P1), `codex/qa-experiments`, `research/brand-sources` (P2), `data/ai-baseline` (P3). Подробно — `docs/07_TEAM_TASKS.md`.
+
 Удалённый репозиторий уже настроен:
 ```zsh
 git remote -v
@@ -214,8 +230,13 @@ git push -u origin main
 ```
 - **`origin`** — имя удалённого репозитория, **`main`** — ветка.
 - **`-u`** — запомнить связь, дальше достаточно `git push`.
-- Git спросит логин и **Personal Access Token** (не пароль). Токен: GitHub → Settings → Developer settings → Personal access tokens → Fine-grained, доступ `Contents: Read and write` к этому репозиторию.
-- `Permission denied` / `403` — у вашего аккаунта нет прав на репозиторий `Zufics2/...`; владелец должен добавить вас в Collaborators.
+- Вход: на этом Mac Git хранит данные входа в Связке ключей (`credential.helper = osxkeychain`). Если пароль спрашивают — подходят Personal Access Token, Git Credential Manager (`brew install --cask git-credential-manager`, открывает браузер) или SSH-ключ (`git remote set-url origin git@github.com:Zufics2/TrAIHaRd-hackathonwinners2026.git`). Пароль от аккаунта GitHub **не** подходит.
+- `Permission denied` / `403` — у вашего аккаунта нет прав на запись в `Zufics2/...`. Обходить нельзя: попросите владельца репозитория добавить вас в Collaborators.
+
+Отправить свою ветку:
+```zsh
+git push -u origin feat/core-app
+```
 - **Никогда** не используйте `git push --force` в `main`.
 
 Получить изменения коллег:
@@ -226,14 +247,37 @@ git pull --rebase origin main
 
 ---
 
+### 9.6 Отдельная папка для Codex (git worktree)
+Codex работает **не** в основной папке, чтобы не мешать вашим изменениям. Worktree уже создан:
+```zsh
+git worktree list
+# .../TrAIHaRd-hackathonwinners2026  [feat/core-app]
+# .../TrAIHaRd-codex                 [codex/qa-experiments]
+```
+Если его нужно создать заново:
+```zsh
+git worktree add ../TrAIHaRd-codex codex/qa-experiments
+```
+- **`worktree add <папка> <ветка>`** — вторая рабочая папка того же репозитория на другой ветке. Одна ветка может быть открыта только в одной папке.
+
+Обновить ветку Codex до свежего `main`, а затем запустить Codex:
+```zsh
+cd ~/Desktop/TrAIHaRd-codex
+git merge main
+python3 -m venv .venv && source .venv/bin/activate && python -m pip install -r requirements.txt
+codex
+```
+- `git merge main` в папке Codex забирает стабильные изменения. В основной папке результат Codex забирают так: `git merge codex/qa-experiments`.
+- Codex правит только свои файлы (`docs/15_DATA_CONTRACT.md §5`).
+
 ## 10. Типовые ошибки
 
 | Симптом | Причина | Что делать |
 |---|---|---|
 | `command not found: streamlit` | не активирован `.venv` | `source .venv/bin/activate` |
 | `ModuleNotFoundError: geolab` | запуск модуля не из `src` | `cd src && python -m geolab...` |
-| Метрики `N/A` | нет данных в срезе | загрузите ответы / смените фильтр статуса |
-| `Ошибки импорта` в sidebar | невалидная строка CSV | раздел «Данные и статусы» покажет файл и поле |
+| Метрики `N/A` | нет verified-данных в срезе | импортируйте ответы, проставьте `verified`, проверьте фильтры этап/город |
+| `Ошибок в файлах данных` в sidebar | невалидная строка CSV | раздел «Данные и ошибки» покажет файл, строку и поле |
 | `treatment document missing` | нет файла в `corpus/treatment/` | создайте treatment с тем же `doc_id` |
 | `fatal: not a git repository` | вы не в папке проекта | `cd ~/Desktop/TrAIHaRd-hackathonwinners2026` |
 

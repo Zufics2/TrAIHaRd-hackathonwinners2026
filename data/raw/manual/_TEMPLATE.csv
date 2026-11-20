@@ -1,2 +1,0 @@
-response_id,prompt_id,query,provider,model,search_mode,timestamp,city,language,answer_text,cited_urls,status,collector,evidence_link,notes
-M-B-001,R-C-ALA-01,Где купить люстру в Алматы?,chatgpt_search,unknown,search_on,2026-11-20T15:00+05:00,almaty,ru,"<полный текст ответа без правок>",https://example.kz/a | https://example.kz/b,MANUAL_VERIFIED,B,screenshots/M-B-001.png,"новый чат, без входа в аккаунт / VPN нет"

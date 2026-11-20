@@ -10,7 +10,6 @@ from geolab.analysis import analyze_answer, classify_source, find_entity_spans, 
 from geolab.experiment import run_experiment, tokenize  # noqa: E402
 from geolab.metrics import entity_metrics, fmt, rate, AnalyzedResponse  # noqa: E402
 from geolab.registry import load_registry  # noqa: E402
-from geolab.store import ValidationError, validate_record  # noqa: E402
 
 REG = load_registry()
 
@@ -80,13 +79,6 @@ def test_entity_metrics_denominators():
     assert m["citation_rate"] == 0.0  # 1 answer with citations, none Maytoni-owned
     s = entity_metrics(items, "svet_kz")
     assert s["top3_rate"] == 0.0 and s["citation_rate"] == 1.0
-
-
-def test_validate_record_rejects_bad_status():
-    base = dict(response_id="r1", prompt_id="p", query="q", provider="x", timestamp="t", answer_text="a")
-    with pytest.raises(ValidationError):
-        validate_record({**base, "status": "MAYBE"})
-    assert validate_record({**base, "status": "REAL", "cited_urls": "https://a.kz | https://b.kz"})["cited_urls"] == ["https://a.kz", "https://b.kz"]
 
 
 def test_tokenize_stems_russian_forms():

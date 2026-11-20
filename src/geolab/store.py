@@ -1,84 +1,79 @@
-"""Loading prompts and AI responses. Provenance statuses are never mixed silently."""
+"""Loading prompts and AI observations. Provenance types are never mixed silently.
+
+Real-world KPIs use ONLY rows with data_type in REAL_DATA_TYPES and verification_status == "verified".
+SYNTHETIC_DEMO rows live in data/samples/ and are loaded only on explicit request.
+"""
 from __future__ import annotations
 
-import csv
-import json
+from datetime import datetime
 from pathlib import Path
 
 import pandas as pd
 
+from . import contract as C
 from .registry import ROOT
 
-STATUSES = ("REAL", "MANUAL_VERIFIED", "CONTROLLED_EXPERIMENT", "SYNTHETIC_DEMO")
+STATUSES = C.DATA_TYPE
 PROMPTS_PATH = ROOT / "data" / "prompts" / "prompts.csv"
-RESPONSES_DIRS = (ROOT / "data" / "raw" / "manual", ROOT / "data" / "raw" / "api")
-
-RESPONSE_FIELDS = (
-    "response_id", "prompt_id", "query", "provider", "model", "search_mode", "timestamp",
-    "city", "language", "answer_text", "cited_urls", "status", "collector", "evidence_link", "notes",
-)
-REQUIRED = ("response_id", "prompt_id", "query", "provider", "timestamp", "answer_text", "status")
-
-
-class ValidationError(ValueError):
-    pass
+REAL_DIRS = (ROOT / "data" / "raw" / "manual", ROOT / "data" / "raw" / "api")
+SAMPLES_DIR = ROOT / "data" / "samples"
+UPLOAD_DIR = ROOT / "data" / "raw" / "manual"
 
 
 def load_prompts(path: Path = PROMPTS_PATH) -> pd.DataFrame:
     return pd.read_csv(path, dtype=str).fillna("")
 
 
-def _split_urls(v) -> list[str]:
-    if isinstance(v, list):
-        return [u.strip() for u in v if u and u.strip()]
-    if not v:
-        return []
-    return [u.strip() for u in str(v).replace("|", " ").replace(",", " ").split() if u.strip().startswith("http")]
+def prompts_index() -> dict[str, dict]:
+    return {r["prompt_id"]: r for r in load_prompts().to_dict("records")}
 
 
-def validate_record(rec: dict) -> dict:
-    missing = [f for f in REQUIRED if not str(rec.get(f, "")).strip()]
-    if missing:
-        raise ValidationError(f"{rec.get('response_id', '?')}: missing {missing}")
-    if rec["status"] not in STATUSES:
-        raise ValidationError(f"{rec['response_id']}: bad status {rec['status']!r}; allowed {STATUSES}")
-    out = {f: rec.get(f, "") for f in RESPONSE_FIELDS}
-    out["cited_urls"] = _split_urls(rec.get("cited_urls"))
+def _files(dirs) -> list[Path]:
+    out = []
+    for d in dirs:
+        d = Path(d)
+        if d.exists():
+            out += [p for p in sorted(d.glob("*")) if p.suffix in (".csv", ".jsonl") and not p.name.startswith("_")]
     return out
 
 
-def read_response_file(path: Path) -> list[dict]:
-    path = Path(path)
-    if path.suffix == ".jsonl":
-        rows = [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
-    elif path.suffix == ".csv":
-        with path.open(encoding="utf-8-sig", newline="") as fh:
-            rows = list(csv.DictReader(fh))
-    else:
-        return []
-    return [validate_record(r) for r in rows]
-
-
-def load_responses(dirs=RESPONSES_DIRS) -> tuple[list[dict], list[str]]:
-    """Returns (records, errors). Bad rows are reported, not dropped silently."""
+def load_observations(include_samples: bool = False) -> tuple[list[dict], list[dict]]:
+    """Returns (records, issues). Issues carry file, row, field, severity, reason."""
+    prompts = prompts_index()
     recs: list[dict] = []
-    errors: list[str] = []
+    issues: list[dict] = []
     seen: set[str] = set()
-    for d in dirs:
-        d = Path(d)
-        if not d.exists():
-            continue
-        for p in sorted(d.glob("*")):
-            if p.name.startswith("_") or p.suffix not in (".jsonl", ".csv"):
+    sources = [(p, False) for p in _files(REAL_DIRS)]
+    if include_samples:
+        sources += [(p, True) for p in _files([SAMPLES_DIR]) if "observations" in p.name]
+    for path, synthetic_ok in sources:
+        valid, iss = C.validate_file("observations", path, prompts=prompts, allow_synthetic=synthetic_ok, existing_keys=seen)
+        issues += [{"file": path.name, **i.as_dict()} for i in iss]
+        for r in valid:
+            if synthetic_ok and r["data_type"] != "SYNTHETIC_DEMO":
+                issues.append({"file": path.name, "row": "-", "field": "data_type", "severity": "error",
+                               "reason": "в data/samples допускается только SYNTHETIC_DEMO"})
                 continue
-            try:
-                for r in read_response_file(p):
-                    if r["response_id"] in seen:
-                        errors.append(f"{p.name}: duplicate response_id {r['response_id']}")
-                        continue
-                    seen.add(r["response_id"])
-                    r["_file"] = p.name
-                    recs.append(r)
-            except (ValidationError, json.JSONDecodeError) as exc:
-                errors.append(f"{p.name}: {exc}")
-    return recs, errors
+            seen.add(r["response_id"])
+            p = prompts[r["prompt_id"]]
+            r.update({"category": p["category"], "city": p["city"], "funnel_stage": p["funnel_stage"],
+                      "intent": p["intent"], "_file": path.name})
+            recs.append(r)
+    return recs, issues
+
+
+def is_real_kpi_row(r: dict) -> bool:
+    return r["data_type"] in C.REAL_DATA_TYPES and r["verification_status"] == "verified"
+
+
+def save_upload(name: str, content: bytes) -> Path:
+    """Store an uploaded file verbatim. Never overwrites."""
+    safe = "".join(ch for ch in Path(name).name if ch.isalnum() or ch in "._-") or "upload.csv"
+    if not safe.endswith((".csv", ".jsonl")):
+        raise ValueError("only .csv / .jsonl")
+    target = UPLOAD_DIR / safe
+    if target.exists():
+        stem, suf = target.stem, target.suffix
+        target = UPLOAD_DIR / f"{stem}_{datetime.now().strftime('%Y%m%d_%H%M%S')}{suf}"
+    target.write_bytes(content)
+    return target

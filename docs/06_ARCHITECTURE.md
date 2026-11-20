@@ -20,7 +20,8 @@ app.py  (Streamlit: фильтры клиент / этап / город / ста
   ↓
 src/geolab
   ├─ registry.py   Brand/Manufacturer/Retailer/City registry  ← data/registry/entities.json
-  ├─ store.py      Prompt Dataset + Response Collector/Importer ← data/prompts, data/raw/{manual,api}
+  ├─ contract.py   Data contract: словари + построчный валидатор (CLI и UI)
+  ├─ store.py      Prompt Dataset + Observation loader/upload ← data/prompts, data/raw/{manual,api}, data/samples
   ├─ analysis.py   Citation Extractor, Source Classifier, Entity Matcher, ranking parser
   ├─ metrics.py    Metrics Calculator, Source table, Share of Voice
   ├─ corpus.py     сбор публичных страниц (robots.txt) → corpus/baseline
@@ -45,17 +46,7 @@ CITY (almaty | astana | karaganda | national)
 
 ## Контракт данных между участниками
 
-| Папка | Кто пишет | Формат |
-|---|---|---|
-| `data/prompts/prompts.csv` | A (структура), C (ревью естественности) | CSV, поля из ТЗ PART XIV |
-| `data/raw/manual/<инициал>_*.csv` | B, C — **каждый свой файл** | шаблон `_TEMPLATE.csv` |
-| `data/raw/api/*.jsonl` | A (если появится API) | те же поля, `status=REAL` |
-| `data/registry/entities.json` | B добавляет конкурентов, A ревьюит | JSON |
-| `data/experiments/corpus_manifest.csv` | B добавляет URL конкурентов | CSV |
-| `data/experiments/corpus/treatment/*.json` | A + B | тот же `doc_id`, что в baseline |
-| `data/processed/recommendations.json` | B пишет, A валидирует | JSON, поля PART XVIII |
-
-Статусы ответов: `REAL` (API), `MANUAL_VERIFIED` (ручной сбор из интерфейса), `CONTROLLED_EXPERIMENT`, `SYNTHETIC_DEMO`. Невалидный статус = ошибка импорта, строка не попадает в метрики.
+Вынесен в [15_DATA_CONTRACT.md](15_DATA_CONTRACT.md): словари, шаблоны, валидатор (`python -m geolab.contract`), правило KPI, владельцы файлов, интерфейс experiment engine.
 
 ## Детерминированность
 

@@ -1,0 +1,7 @@
+response_id,prompt_id,query,provider,model,search_mode,timestamp,run_no,language,region_setting,answer_text,cited_urls,data_type,verification_status,collector,verified_by,evidence_link,notes
+SYN-001,R-C-ALA-01,Где купить люстру в Алматы?,other,n/a,search_on,2026-11-20T12:00+05:00,1,ru,n/a,"[SYNTHETIC DEMO] Варианты:
+1. SVET.KZ — большой выбор, https://svet.kz/katalog/lyustry/
+2. Kaspi — маркетплейс https://kaspi.kz/
+3. Satu.kz — объявления
+Среди брендов часто называют Maytoni и Eglo.",https://svet.kz/katalog/lyustry/ | https://2gis.kz/almaty/firm/70000001043802009,SYNTHETIC_DEMO,pending,DEMO,,,"SYNTHETIC — придуманный текст для проверки UI, НЕ измерение"
+SYN-002,B-P-01,Какая краска лучше для детской комнаты?,other,n/a,search_on,2026-11-20T12:05+05:00,1,ru,n/a,[SYNTHETIC DEMO] Для детской обычно советуют моющиеся матовые краски. Рекомендую обратить внимание на Tikkurila и Dulux. Не рекомендую Hammerite — она для металла.,,SYNTHETIC_DEMO,pending,DEMO,,,"SYNTHETIC — придуманный текст для проверки UI, НЕ измерение"

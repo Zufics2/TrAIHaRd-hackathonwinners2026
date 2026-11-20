@@ -16,11 +16,12 @@ python -m pytest -q
 streamlit run app.py
 ```
 
-Подробно: [docs/00_START_HERE.md](docs/00_START_HERE.md). Состояние: [docs/01_PROGRESS_LOG.md](docs/01_PROGRESS_LOG.md).
+Подробно: [docs/00_START_HERE.md](docs/00_START_HERE.md). Формат данных: [docs/15_DATA_CONTRACT.md](docs/15_DATA_CONTRACT.md). Состояние: [docs/01_PROGRESS_LOG.md](docs/01_PROGRESS_LOG.md).
 
 ## Принципы
 
+- Реальные KPI — только verified-наблюдения `REAL_SEARCH`/`MANUAL_VERIFIED`; при малой выборке показывается N.
 - Все KPI считает детерминированный Python; неопределённое значение = N/A, не 0.
-- Статусы данных `REAL` / `MANUAL_VERIFIED` / `CONTROLLED_EXPERIMENT` / `SYNTHETIC_DEMO` не смешиваются.
+- Статусы данных `REAL_SEARCH` / `MANUAL_VERIFIED` / `CONTROLLED_EXPERIMENT` / `SYNTHETIC_DEMO` не смешиваются.
 - Контролируемый эксперимент — BM25-симуляция извлечения, а не замер ChatGPT. Это подписано везде, где он показан.
 - Production-сайты клиентов не изменяются; правки — предложения в `data/processed/recommendations.json`.

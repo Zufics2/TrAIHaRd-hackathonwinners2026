@@ -87,7 +87,7 @@ def source_table(items: list[AnalyzedResponse], registry: Registry) -> pd.DataFr
                 "source_type": c.source_type if c else "no_citation",
                 "source_owner": registry.entities[c.owner_entity].name if c and c.owner_entity else "",
                 "evidence_status": "explicit_citation" if c else "unknown_origin",
-                "data_status": it.record["status"],
+                "data_type": it.record["data_type"], "verification": it.record["verification_status"],
             })
     return pd.DataFrame(rows)
 
