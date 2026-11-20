@@ -110,6 +110,13 @@ SOURCE PRESENCE ≠ AI CITATION: `cited_in_response_ids` пусто, если ц
 
 Новые поля можно **добавлять**. Удалять или переименовывать — только после согласования с P1, потому что их читает `app.py` (раздел «Контролируемый эксперимент»).
 
+**Аддитивные расширения Codex Mission 001 (интегрированы 2026-11-20, Sprint 004):**
+- конфиг: необязательный `corpus_subdir` (относительный путь внутри `data/experiments/`, по умолчанию `corpus`), проверяется `validate_experiment`; функции `validate_experiment(exp)`, `resolve_corpus(exp, corpus_dir)`; CLI `python -m geolab.experiment <EXP-ID>`;
+- `per_query[*].baseline_page_rank / treatment_page_rank` — позиция изменённой страницы (не владельца);
+- `summary.*.*.changed_page_mrr`;
+- `evidence`: `software`, `config` + `config_sha256`, `retrieval` (BM25 k1=1.5, b=0.75, epsilon=0.25, tokenizer, tie-break), `documents.{baseline,treatment}[]` с `sha256`, `negative_control_entity_ranks_unchanged`, `scope`.
+- `top3_rate` в UI называется **Hit@3**; `citation_rate` — **Citation Rate**. Формулы не менялись.
+
 ## 7. Уточнения v1.1 (2026-11-20 13:55) — без изменения столбцов
 
 - CSV с разделителем `;` (Excel, русская локаль) принимается.

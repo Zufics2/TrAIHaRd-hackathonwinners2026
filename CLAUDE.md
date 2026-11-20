@@ -47,7 +47,7 @@ git push origin feat/core-app        # явная ветка, без флаго�
 | Владелец | Пути |
 |---|---|
 | Claude Code | `app.py`, `src/geolab/{registry,analysis,metrics,store,contract,corpus}.py`, `tests/test_core.py`, `tests/test_contract.py`, `tests/test_real_path.py`, `tests/fixtures/`, `data/registry/`, `data/prompts/`, `data/templates/`, `data/samples/`, `data/processed/`, `docs/00,01,06,07,15,16`, `CLAUDE.md`, `AGENTS.md`, `scripts/` |
-| Codex | `src/geolab/experiment.py`, `data/experiments/**`, `tests/test_experiment*.py`, `tests/test_qa_*.py`, `qa/`, `docs/08_EXPERIMENT_PROTOCOL.md`, `docs/CODEX_*.md` |
+| Codex | `src/geolab/experiment.py`, `data/experiments/**`, `tests/test_experiment*.py`, `tests/test_qa_*.py` (в `feat/core-app` `test_qa_adversarial.py` адаптирован Claude в Sprint 004 — Codex должен взять эту версию), `qa/`, `docs/08_EXPERIMENT_PROTOCOL.md`, `docs/CODEX_*.md` |
 | P2 | `data/research/P2_*`, `data/raw/manual/P2_*`, `assets/evidence/OBS-P2-*` |
 | P3 | `data/raw/manual/P3_*`, `assets/evidence/OBS-P3-*` |
 | Участник (автор коммита 4c87ae6) | `.idea/`, `main.py` — не удалять и не править |
