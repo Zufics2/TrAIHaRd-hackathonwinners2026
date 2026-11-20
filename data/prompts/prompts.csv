@@ -1,0 +1,44 @@
+prompt_id,query,category,city,language,funnel_stage,intent,brand_type,test_group,priority,notes
+R-P-ALA-01,Где купить краску для квартиры в Алматы?,paint,almaty,ru,retailer_discovery,local,unbranded,retail,P0,
+R-P-ALA-02,Посоветуй хороший магазин красок в Алматы,paint,almaty,ru,retailer_discovery,local,unbranded,retail,P0,
+R-P-ALA-03,Где в Алматы купить интерьерную краску с колеровкой?,paint,almaty,ru,retailer_discovery,transactional,unbranded,retail,P0,
+R-P-ALA-04,Где купить моющуюся краску для кухни в Алматы?,paint,almaty,ru,retailer_discovery,transactional,unbranded,retail,P1,
+R-P-ALA-05,Где в Алматы купить краску Dulux?,paint,almaty,ru,bridge,brand-aware,competitor-branded,bridge,P0,бренд из ассортимента клиента
+R-P-ALA-06,Центр Красок №1 в Алматы — какие отзывы и что там продают?,paint,almaty,ru,retailer_discovery,brand-aware,branded,branded,P1,branded control
+R-P-AST-01,Где купить краску для стен в Астане?,paint,astana,ru,retailer_discovery,local,unbranded,retail,P0,
+R-P-AST-02,Посоветуй магазин красок в Астане,paint,astana,ru,retailer_discovery,local,unbranded,retail,P0,
+R-P-AST-03,Где в Астане купить краску для детской комнаты?,paint,astana,ru,retailer_discovery,transactional,unbranded,retail,P1,
+R-P-AST-04,Где купить Tikkurila в Астане?,paint,astana,ru,bridge,brand-aware,competitor-branded,bridge,P1,бренд не подтверждён в ассортименте клиента
+R-P-AST-05,Какие магазины лакокрасочных материалов есть в Астане?,paint,astana,ru,retailer_discovery,category-aware,unbranded,retail,P1,
+R-P-KAR-01,Где купить краску для квартиры в Караганде?,paint,karaganda,ru,retailer_discovery,local,unbranded,retail,P0,присутствие клиента в Караганде не подтверждено
+R-P-KAR-02,Магазин красок в Караганде — что посоветуешь?,paint,karaganda,ru,retailer_discovery,local,unbranded,retail,P0,
+R-P-KAR-03,Где купить краску для спальни в Караганде с доставкой?,paint,karaganda,ru,retailer_discovery,transactional,unbranded,retail,P1,
+R-P-KAR-04,Можно ли заказать краску Dulux с доставкой в Караганду?,paint,karaganda,ru,bridge,brand-aware,competitor-branded,bridge,P1,
+R-C-ALA-01,Где купить люстру в Алматы?,chandelier,almaty,ru,retailer_discovery,local,unbranded,retail,P0,
+R-C-ALA-02,Посоветуй магазин люстр и светильников в Алматы,chandelier,almaty,ru,retailer_discovery,local,unbranded,retail,P0,
+R-C-ALA-03,Где в Алматы купить люстру для гостиной с гарантией?,chandelier,almaty,ru,retailer_discovery,transactional,unbranded,retail,P0,
+R-C-ALA-04,Где купить люстру Maytoni в Алматы?,chandelier,almaty,ru,bridge,brand-aware,competitor-branded,bridge,P0,бренд из ассортимента клиента
+R-C-ALA-05,SVET.KZ — хороший магазин? Отзывы,chandelier,almaty,ru,retailer_discovery,brand-aware,branded,branded,P1,branded control
+R-C-AST-01,Где купить люстру в Астане?,chandelier,astana,ru,retailer_discovery,local,unbranded,retail,P0,
+R-C-AST-02,Магазины освещения в Астане — что посоветуешь?,chandelier,astana,ru,retailer_discovery,local,unbranded,retail,P0,
+R-C-AST-03,Где в Астане купить люстру для спальни?,chandelier,astana,ru,retailer_discovery,transactional,unbranded,retail,P1,
+R-C-AST-04,Где купить светильники Odeon Light в Астане?,chandelier,astana,ru,bridge,brand-aware,competitor-branded,bridge,P1,
+R-C-KAR-01,Где купить люстру в Караганде?,chandelier,karaganda,ru,retailer_discovery,local,unbranded,retail,P0,присутствие клиента в Караганде не подтверждено
+R-C-KAR-02,Магазин люстр в Караганде — посоветуй,chandelier,karaganda,ru,retailer_discovery,local,unbranded,retail,P0,
+R-C-KAR-03,Можно ли заказать люстру с доставкой в Караганду?,chandelier,karaganda,ru,retailer_discovery,transactional,unbranded,retail,P1,
+R-C-KAR-04,Где купить люстру Arte Lamp в Караганде?,chandelier,karaganda,ru,bridge,brand-aware,competitor-branded,bridge,P2,
+R-P-KZ-01,Где купить краску для стен в Казахстане онлайн?,paint,national,ru,retailer_discovery,transactional,unbranded,retail,P1,
+R-C-KZ-01,Лучшие интернет-магазины люстр в Казахстане,chandelier,national,ru,retailer_discovery,comparison,unbranded,retail,P1,
+B-P-01,Какая краска лучше для детской комнаты?,paint,national,ru,brand_discovery,problem-aware,unbranded,brand,P0,
+B-P-02,Какие марки интерьерной краски самые качественные?,paint,national,ru,brand_discovery,comparison,unbranded,brand,P0,
+B-P-03,Как выбрать моющуюся краску для стен на кухне?,paint,national,ru,brand_discovery,informational,unbranded,brand,P0,
+B-P-04,Какую краску выбрать для спальни — матовую или полуматовую?,paint,national,ru,brand_discovery,informational,unbranded,brand,P1,
+B-P-05,Dulux или Tikkurila — что лучше для стен?,paint,national,ru,brand_discovery,comparison,competitor-branded,brand,P1,
+B-P-06,Какая краска подходит для ванной комнаты?,paint,national,ru,brand_discovery,problem-aware,unbranded,brand,P1,
+B-P-07,Лучшие бренды краски для потолка,paint,national,ru,brand_discovery,comparison,unbranded,brand,P2,
+B-C-01,Какие бренды люстр надёжные?,chandelier,national,ru,brand_discovery,comparison,unbranded,brand,P0,
+B-C-02,Какую люстру выбрать для небольшой гостиной?,chandelier,national,ru,brand_discovery,problem-aware,unbranded,brand,P0,
+B-C-03,Какие производители люстр делают хорошие современные модели?,chandelier,national,ru,brand_discovery,category-aware,unbranded,brand,P0,
+B-C-04,Maytoni или Odeon Light — какой бренд лучше?,chandelier,national,ru,brand_discovery,comparison,competitor-branded,brand,P1,
+B-C-05,Какая люстра подойдёт для спальни с низким потолком?,chandelier,national,ru,brand_discovery,problem-aware,unbranded,brand,P1,
+B-C-06,Какие светодиодные люстры лучше для квартиры?,chandelier,national,ru,brand_discovery,category-aware,unbranded,brand,P2,

@@ -1,0 +1,515 @@
+{
+  "_meta": {
+    "description": "Реестр сущностей. LEVEL 1 = manufacturer/product brand, LEVEL 2 = retailer. Поле evidence — откуда известна связь. status: verified | observed | candidate_unverified.",
+    "updated": "2026-11-20T13:30+05:00",
+    "owner": "Workstream A (структура) / Workstream B (наполнение)"
+  },
+  "retailers": [
+    {
+      "id": "centr_krasok",
+      "name": "Центр Красок №1",
+      "is_client": true,
+      "category": "paint",
+      "domains": [
+        "centr-krasok.kz"
+      ],
+      "aliases": [
+        "Центр Красок №1",
+        "Центр Красок #1",
+        "Центр Красок",
+        "centr-krasok.kz",
+        "centr-krasok",
+        "Centr Krasok"
+      ],
+      "legal_entity": "ТОО «ЭКСПОНЕНТА1» (указано в футере сайта, 2026-11-20)",
+      "cities": {
+        "almaty": {
+          "status": "observed",
+          "evidence": "centr-krasok.kz/about/contacts/: г. Алматы, ул. Кабдолова 1/8, блок 1, 1 ряд, линия D, бутики 14 и 21; 10:00-20:00"
+        },
+        "astana": {
+          "status": "observed",
+          "evidence": "centr-krasok.kz/about/contacts/: г. Астана, ул. Мангилик Ел, 29/2; 10:00-20:00"
+        },
+        "karaganda": {
+          "status": "unconfirmed",
+          "evidence": "Нет адреса; /about/delivery/ не упоминает Караганду (2026-11-20)"
+        }
+      },
+      "status": "observed"
+    },
+    {
+      "id": "svet_kz",
+      "name": "SVET.KZ",
+      "is_client": true,
+      "category": "chandelier",
+      "domains": [
+        "svet.kz"
+      ],
+      "aliases": [
+        "SVET.KZ",
+        "svet.kz",
+        "Свет.кз",
+        "Свет кз",
+        "Svet kz"
+      ],
+      "cities": {
+        "almaty": {
+          "status": "observed",
+          "evidence": "svet.kz: ул. Кабдолова 1/8 (Блок 1, бутики 28,32,35,26а); пр. Жибек Жолы 135/10а; 2gis.kz/almaty/firm/70000001043802009, 70000001043802177"
+        },
+        "astana": {
+          "status": "observed",
+          "evidence": "svet.kz: ул. Мангилик Ел 29/2; 2gis.kz/astana/.../firm/70000001090884645"
+        },
+        "karaganda": {
+          "status": "delivery_only_claimed",
+          "evidence": "svet.kz/katalog/lyustry/: «Отправляем в любой город Казахстана — в Караганду ... транспортной компанией, срок от 1 дня» (self-claim, 2026-11-20). Магазина нет."
+        }
+      },
+      "status": "observed"
+    },
+    {
+      "id": "kaspi",
+      "name": "Kaspi Магазин",
+      "is_client": false,
+      "category": "marketplace",
+      "domains": [
+        "kaspi.kz"
+      ],
+      "aliases": [
+        "Kaspi",
+        "Каспи",
+        "kaspi.kz"
+      ],
+      "cities": {},
+      "status": "candidate_unverified"
+    },
+    {
+      "id": "satu",
+      "name": "Satu.kz",
+      "is_client": false,
+      "category": "marketplace",
+      "domains": [
+        "satu.kz"
+      ],
+      "aliases": [
+        "Satu",
+        "Сату",
+        "satu.kz"
+      ],
+      "cities": {},
+      "status": "candidate_unverified"
+    },
+    {
+      "id": "e_katalog",
+      "name": "E-katalog",
+      "is_client": false,
+      "category": "marketplace",
+      "domains": [
+        "e-katalog.kz"
+      ],
+      "aliases": [
+        "E-katalog",
+        "Е-каталог",
+        "e-katalog.kz"
+      ],
+      "cities": {},
+      "status": "candidate_unverified"
+    },
+    {
+      "id": "olx",
+      "name": "OLX",
+      "is_client": false,
+      "category": "marketplace",
+      "domains": [
+        "olx.kz"
+      ],
+      "aliases": [
+        "OLX",
+        "ОЛХ",
+        "olx.kz"
+      ],
+      "cities": {},
+      "status": "candidate_unverified"
+    }
+  ],
+  "manufacturers": [
+    {
+      "id": "dulux",
+      "name": "Dulux",
+      "category": "paint",
+      "aliases": [
+        "Dulux",
+        "Дулюкс"
+      ],
+      "sold_by": {
+        "centr_krasok": "observed: centr-krasok.kz/catalog/dulux/"
+      },
+      "status": "observed"
+    },
+    {
+      "id": "luxium",
+      "name": "Luxium",
+      "category": "paint",
+      "aliases": [
+        "Luxium",
+        "Люксиум"
+      ],
+      "sold_by": {
+        "centr_krasok": "observed: product URLs /catalog/interernye_bw/kraska_luxium_*"
+      },
+      "status": "observed"
+    },
+    {
+      "id": "masterline",
+      "name": "Masterline",
+      "category": "paint",
+      "aliases": [
+        "Masterline",
+        "Мастерлайн"
+      ],
+      "sold_by": {
+        "centr_krasok": "observed: /catalog/export_7_bw/kraska_masterline_export_7_*"
+      },
+      "status": "observed"
+    },
+    {
+      "id": "hammerite",
+      "name": "Hammerite",
+      "category": "paint",
+      "aliases": [
+        "Hammerite",
+        "Хаммерайт"
+      ],
+      "sold_by": {
+        "centr_krasok": "observed: /catalog/hammerite/"
+      },
+      "status": "observed"
+    },
+    {
+      "id": "oikos",
+      "name": "Oikos",
+      "category": "paint",
+      "aliases": [
+        "Oikos",
+        "Ойкос"
+      ],
+      "sold_by": {
+        "centr_krasok": "observed: /catalog/grunty_oikos/"
+      },
+      "status": "observed"
+    },
+    {
+      "id": "dufa",
+      "name": "Dufa",
+      "category": "paint",
+      "aliases": [
+        "Dufa",
+        "Дюфа"
+      ],
+      "sold_by": {
+        "centr_krasok": "observed: /catalog/dufa/"
+      },
+      "status": "observed"
+    },
+    {
+      "id": "tikkurila",
+      "name": "Tikkurila",
+      "category": "paint",
+      "aliases": [
+        "Tikkurila",
+        "Тиккурила"
+      ],
+      "sold_by": {},
+      "status": "watchlist"
+    },
+    {
+      "id": "caparol",
+      "name": "Caparol",
+      "category": "paint",
+      "aliases": [
+        "Caparol",
+        "Капарол"
+      ],
+      "sold_by": {},
+      "status": "watchlist"
+    },
+    {
+      "id": "alpina",
+      "name": "Alpina",
+      "category": "paint",
+      "aliases": [
+        "Alpina",
+        "Альпина"
+      ],
+      "sold_by": {},
+      "status": "watchlist"
+    },
+    {
+      "id": "little_greene",
+      "name": "Little Greene",
+      "category": "paint",
+      "aliases": [
+        "Little Greene"
+      ],
+      "sold_by": {},
+      "status": "watchlist"
+    },
+    {
+      "id": "jotun",
+      "name": "Jotun",
+      "category": "paint",
+      "aliases": [
+        "Jotun",
+        "Йотун"
+      ],
+      "sold_by": {},
+      "status": "watchlist"
+    },
+    {
+      "id": "sherwin_williams",
+      "name": "Sherwin-Williams",
+      "category": "paint",
+      "aliases": [
+        "Sherwin-Williams",
+        "Sherwin Williams"
+      ],
+      "sold_by": {},
+      "status": "watchlist"
+    },
+    {
+      "id": "maytoni",
+      "name": "Maytoni",
+      "category": "chandelier",
+      "aliases": [
+        "Maytoni",
+        "Майтони"
+      ],
+      "sold_by": {
+        "svet_kz": "observed: svet.kz/brands/maytoni/; meta description claims 'официальный дилер Maytoni' (self-claim)"
+      },
+      "status": "observed"
+    },
+    {
+      "id": "arte_lamp",
+      "name": "Arte Lamp",
+      "category": "chandelier",
+      "aliases": [
+        "Arte Lamp",
+        "Артэ Ламп",
+        "Арте Ламп"
+      ],
+      "sold_by": {
+        "svet_kz": "observed: svet.kz/brands/arte-lamp/"
+      },
+      "status": "observed"
+    },
+    {
+      "id": "crystal_lux",
+      "name": "Crystal Lux",
+      "category": "chandelier",
+      "aliases": [
+        "Crystal Lux",
+        "Кристал Люкс"
+      ],
+      "sold_by": {
+        "svet_kz": "observed: svet.kz/brands/crystal-lux/"
+      },
+      "status": "observed"
+    },
+    {
+      "id": "divinare",
+      "name": "Divinare",
+      "category": "chandelier",
+      "aliases": [
+        "Divinare"
+      ],
+      "sold_by": {
+        "svet_kz": "observed: svet.kz/brands/divinare/"
+      },
+      "status": "observed"
+    },
+    {
+      "id": "eglo",
+      "name": "Eglo",
+      "category": "chandelier",
+      "aliases": [
+        "Eglo",
+        "Эгло"
+      ],
+      "sold_by": {
+        "svet_kz": "observed: svet.kz/brands/eglo/"
+      },
+      "status": "observed"
+    },
+    {
+      "id": "favourite",
+      "name": "Favourite",
+      "category": "chandelier",
+      "aliases": [
+        "Favourite"
+      ],
+      "sold_by": {
+        "svet_kz": "observed: svet.kz/brands/favourite/"
+      },
+      "status": "observed"
+    },
+    {
+      "id": "lightstar",
+      "name": "Lightstar",
+      "category": "chandelier",
+      "aliases": [
+        "Lightstar",
+        "Лайтстар"
+      ],
+      "sold_by": {
+        "svet_kz": "observed: svet.kz/brands/lightstar/"
+      },
+      "status": "observed"
+    },
+    {
+      "id": "lumion",
+      "name": "Lumion",
+      "category": "chandelier",
+      "aliases": [
+        "Lumion"
+      ],
+      "sold_by": {
+        "svet_kz": "observed: svet.kz/brands/lumion/"
+      },
+      "status": "observed"
+    },
+    {
+      "id": "lussole",
+      "name": "Lussole",
+      "category": "chandelier",
+      "aliases": [
+        "Lussole"
+      ],
+      "sold_by": {
+        "svet_kz": "observed: svet.kz/brands/lussole/"
+      },
+      "status": "observed"
+    },
+    {
+      "id": "odeon_light",
+      "name": "Odeon Light",
+      "category": "chandelier",
+      "aliases": [
+        "Odeon Light",
+        "Одеон Лайт"
+      ],
+      "sold_by": {
+        "svet_kz": "observed: svet.kz/brands/odeon-light/"
+      },
+      "status": "observed"
+    },
+    {
+      "id": "st_luce",
+      "name": "ST Luce",
+      "category": "chandelier",
+      "aliases": [
+        "ST Luce",
+        "ST-Luce"
+      ],
+      "sold_by": {
+        "svet_kz": "observed: svet.kz/brands/st-luce/"
+      },
+      "status": "observed"
+    },
+    {
+      "id": "citilux",
+      "name": "Citilux",
+      "category": "chandelier",
+      "aliases": [
+        "Citilux",
+        "Ситилюкс"
+      ],
+      "sold_by": {},
+      "status": "watchlist"
+    },
+    {
+      "id": "freya",
+      "name": "Freya",
+      "category": "chandelier",
+      "aliases": [
+        "Freya"
+      ],
+      "sold_by": {},
+      "status": "watchlist"
+    },
+    {
+      "id": "novotech",
+      "name": "Novotech",
+      "category": "chandelier",
+      "aliases": [
+        "Novotech"
+      ],
+      "sold_by": {},
+      "status": "watchlist"
+    },
+    {
+      "id": "sonex",
+      "name": "Sonex",
+      "category": "chandelier",
+      "aliases": [
+        "Sonex"
+      ],
+      "sold_by": {},
+      "status": "watchlist"
+    },
+    {
+      "id": "ideal_lux",
+      "name": "Ideal Lux",
+      "category": "chandelier",
+      "aliases": [
+        "Ideal Lux"
+      ],
+      "sold_by": {},
+      "status": "watchlist"
+    },
+    {
+      "id": "preciosa",
+      "name": "Preciosa",
+      "category": "chandelier",
+      "aliases": [
+        "Preciosa"
+      ],
+      "sold_by": {},
+      "status": "watchlist"
+    }
+  ],
+  "cities": {
+    "almaty": {
+      "name": "Алматы",
+      "aliases": [
+        "Алматы",
+        "Алма-Ата",
+        "Almaty"
+      ]
+    },
+    "astana": {
+      "name": "Астана",
+      "aliases": [
+        "Астана",
+        "Astana",
+        "Нур-Султан"
+      ]
+    },
+    "karaganda": {
+      "name": "Караганда",
+      "aliases": [
+        "Караганда",
+        "Караганды",
+        "Караганде",
+        "Karaganda",
+        "Qaragandy"
+      ]
+    },
+    "national": {
+      "name": "Казахстан (без города)",
+      "aliases": []
+    }
+  }
+}

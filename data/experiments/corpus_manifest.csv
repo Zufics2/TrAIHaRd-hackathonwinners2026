@@ -1,0 +1,16 @@
+doc_id,entity_id,url,source_type,added_by,notes
+ck_home,centr_krasok,https://centr-krasok.kz/,client_site,A,главная
+ck_kids,centr_krasok,https://centr-krasok.kz/catalog/dlya_detskoy/,client_site,A,категория для детской
+ck_kitchen,centr_krasok,https://centr-krasok.kz/catalog/dlya_kukhni_i_vannoy/,client_site,A,категория кухня/ванная
+ck_contacts,centr_krasok,https://centr-krasok.kz/about/contacts/,client_site,A,контакты
+ck_delivery,centr_krasok,https://centr-krasok.kz/about/delivery/,client_site,A,доставка
+ck_dulux,centr_krasok,https://centr-krasok.kz/catalog/dulux/,client_site,A,бренд-страница Dulux у ретейлера
+svet_home,svet_kz,https://svet.kz/,client_site,A,главная
+svet_lyustry,svet_kz,https://svet.kz/katalog/lyustry/,client_site,A,категория люстры
+svet_contact,svet_kz,https://svet.kz/contact/,client_site,A,контакты
+svet_maytoni,svet_kz,https://svet.kz/brands/maytoni/,client_site,A,бренд-страница Maytoni у ретейлера
+satu_paint_ala,satu,https://satu.kz/almaty/Kraski.html,marketplace,A,кандидат из web-поиска 2026-11-20
+satu_lyustry,satu,https://satu.kz/Elektrik-lyustru.html,marketplace,A,кандидат из web-поиска 2026-11-20
+ekat_lyustry,e_katalog,https://e-katalog.kz/k754.htm,marketplace,A,агрегатор; кандидат из web-поиска
+olx_paint_ala,olx,https://www.olx.kz/dom-i-sad/alma-ata/q-краска/,marketplace,A,объявления; кандидат
+olx_lyustry,olx,https://www.olx.kz/q-люстра/,marketplace,A,объявления; кандидат

@@ -1,0 +1,54 @@
+{
+  "experiment_id": "EXP-001",
+  "target_entity": "centr_krasok",
+  "changed_doc_ids": [
+    "ck_kids"
+  ],
+  "top_k": 5,
+  "hypothesis": "Тонкая категория «Для детской» (655 символов, без города и адресов) плохо извлекается по запросам «краска для детской + город». Добавление только подтверждённых фактов (товары, города, адреса) повышает её позицию в retrieval без продвижения по нерелевантным запросам.",
+  "linked_issue": "CK-005",
+  "queries": [
+    {
+      "query_id": "T1",
+      "query": "Где в Астане купить краску для детской комнаты?",
+      "role": "target",
+      "prompt_id": "R-P-AST-03"
+    },
+    {
+      "query_id": "T2",
+      "query": "краска для детской купить Алматы",
+      "role": "target",
+      "prompt_id": ""
+    },
+    {
+      "query_id": "T3",
+      "query": "Какая краска лучше для детской комнаты?",
+      "role": "target",
+      "prompt_id": "B-P-01"
+    },
+    {
+      "query_id": "T4",
+      "query": "Где купить краску для квартиры в Алматы?",
+      "role": "target",
+      "prompt_id": "R-P-ALA-01"
+    },
+    {
+      "query_id": "N1",
+      "query": "Где купить люстру в Алматы?",
+      "role": "negative_control",
+      "prompt_id": "R-C-ALA-01"
+    },
+    {
+      "query_id": "N2",
+      "query": "Где в Астане купить люстру для спальни?",
+      "role": "negative_control",
+      "prompt_id": "R-C-AST-03"
+    },
+    {
+      "query_id": "N3",
+      "query": "Можно ли заказать люстру с доставкой в Караганду?",
+      "role": "negative_control",
+      "prompt_id": "R-C-KAR-03"
+    }
+  ]
+}
