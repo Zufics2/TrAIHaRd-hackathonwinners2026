@@ -127,3 +127,12 @@
 **DONE:** `CLAUDE.md`, `AGENTS.md`; `scripts/git-hooks/pre-push` (не установлен; проверен на одноразовом репозитории, первые два прогона были недействительны из-за zsh word-splitting в тестовой обвязке, валиден третий — под `/bin/sh`); инструкции про push/merge в `main` в `docs/00` и `docs/07` заменены на PR-процесс.
 
 **PENDING CAPTAIN:** установка hook, branch protection на GitHub (владелец), перенос этих файлов в `main` через PR, решение о личном пути в истории, ревью ветки Codex.
+
+---
+
+## 2026-11-20 14:11 (Asia/Almaty) · pre-push hook установлен (разрешение капитана)
+
+- До установки: `pre-push` не существовал, `core.hooksPath` не задан (local/global/system/worktree). Оба worktree используют `.git/hooks`.
+- Установлен `/Users/<user>/Desktop/TrAIHaRd-hackathonwinners2026/.git/hooks/pre-push` (`cp -n`, побайтно = `scripts/git-hooks/pre-push`).
+- Проверка — настоящий `git push` из обоих worktree в одноразовый bare-репозиторий в scratchpad (не GitHub): `main`, `HEAD:main`, `feat/core-app:main`, `--all`, `--mirror`, `--force …:main` → заблокированы, ничего не записано; `feat/core-app` (основная папка) и `codex/qa-experiments` (папка Codex) → проходят.
+- `pytest` 32 passed; удалённые ветки не изменились (`ls-remote`: main `f9f03a5`, feat `cb86e46`).

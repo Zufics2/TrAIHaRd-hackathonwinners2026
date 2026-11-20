@@ -58,7 +58,7 @@ Force push, rebase, reset, удаления веток и тегов **не вы
 ## 7. Меры предотвращения
 
 1. **`CLAUDE.md` и `AGENTS.md`** (в `feat/core-app`) — постоянный список запрещённых операций, владельцы веток и каталогов, чек-лист перед push.
-2. **Локальный hook `scripts/git-hooks/pre-push`** (лежит в репозитории, **не установлен**). Блокирует любой push, который создаёт, обновляет или удаляет `main`/`master`.
+2. **Локальный hook `scripts/git-hooks/pre-push`** — **установлен 2026-11-20 14:11 с разрешения капитана** в `.git/hooks/pre-push` (общий для основной папки и worktree Codex; sha256 `9a0037df…6fea3e`). Блокирует любой push, который создаёт, обновляет или удаляет `main`/`master`.
    - Проверен на одноразовом репозитории в scratchpad: блокирует `origin main`, `HEAD:main`, `feat:main`, `refs/heads/main`, `:main`, `--force … :main`, `--all`, `--mirror`; пропускает `origin feat` и `--tags`.
    - Override для разрешённого капитаном случая: `GEOLAB_ALLOW_PROTECTED_PUSH=yes git push origin main`.
    - Установка (после разрешения капитана): `cp scripts/git-hooks/pre-push .git/hooks/pre-push && chmod +x .git/hooks/pre-push`. Hooks общие для всех worktree этого клона, поэтому защита распространится и на папку Codex.
@@ -73,7 +73,6 @@ Force push, rebase, reset, удаления веток и тегов **не вы
 
 ## 8. Требует согласия капитана
 
-- Установка hook в `.git/hooks/`.
 - Любое изменение `main`: merge, push, PR. В том числе перенос `CLAUDE.md`/`AGENTS.md` и этого отчёта в `main`.
 - Решение по личному пути в истории (оставить или переписать через force push; рекомендация — оставить).
 - Rollback `main` к `4c87ae6` или `d513b1f` (не рекомендуется: потерянных данных нет, rollback потребует force push).
