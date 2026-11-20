@@ -1,0 +1,13 @@
+{
+  "commit": "72942e9416f8f7c7d2155f113ca5a5e38dcf2410",
+  "QA007_case_distinct_citations": 2,
+  "legacy_store_exports_missing": [
+    "ValidationError",
+    "load_responses",
+    "read_response_file",
+    "validate_record"
+  ],
+  "app_syntax": "PASS",
+  "app_corpus_count_uses_legacy_directory": true,
+  "scope": "Read-only source comparison and isolated in-memory citation check. Not a full integrated test suite."
+}

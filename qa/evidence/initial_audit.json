@@ -1,0 +1,190 @@
+{
+  "repeat_equal": true,
+  "saved_equal": true,
+  "summary": {
+    "target": {
+      "baseline": {
+        "queries": 4,
+        "top3_rate": 1.0,
+        "citation_rate": 1.0,
+        "mrr": 0.75
+      },
+      "treatment": {
+        "queries": 4,
+        "top3_rate": 1.0,
+        "citation_rate": 1.0,
+        "mrr": 1.0
+      }
+    },
+    "negative_control": {
+      "baseline": {
+        "queries": 3,
+        "top3_rate": 0.3333333333333333,
+        "citation_rate": 0.3333333333333333,
+        "mrr": 0.16666666666666666
+      },
+      "treatment": {
+        "queries": 3,
+        "top3_rate": 0.3333333333333333,
+        "citation_rate": 0.3333333333333333,
+        "mrr": 0.16666666666666666
+      }
+    }
+  },
+  "prompts": 43,
+  "manufacturers": 29,
+  "assortment": 17,
+  "responses": 0,
+  "corpus": {
+    "centr_krasok": 6,
+    "satu": 2,
+    "svet_kz": 4
+  },
+  "reproductions": {
+    "numbered_prose": {
+      "text": "1. Откройте сайт Dulux.\n2. Проверьте время работы SVET.KZ.",
+      "has_ranking": true,
+      "mentions": {
+        "svet_kz": {
+          "entity_id": "svet_kz",
+          "level": "retailer",
+          "first_pos": 50,
+          "count": 1,
+          "recommended": true,
+          "rank": 2
+        },
+        "dulux": {
+          "entity_id": "dulux",
+          "level": "manufacturer",
+          "first_pos": 17,
+          "count": 1,
+          "recommended": true,
+          "rank": 1
+        }
+      }
+    },
+    "neutral_bullet": {
+      "text": "В ответе встречаются названия:\n- Dulux\n- Maytoni",
+      "has_ranking": false,
+      "mentions": {
+        "dulux": {
+          "entity_id": "dulux",
+          "level": "manufacturer",
+          "first_pos": 33,
+          "count": 1,
+          "recommended": true,
+          "rank": null
+        },
+        "maytoni": {
+          "entity_id": "maytoni",
+          "level": "manufacturer",
+          "first_pos": 41,
+          "count": 1,
+          "recommended": true,
+          "rank": null
+        }
+      }
+    },
+    "mixed_levels": {
+      "text": "1. Dulux продаётся в Центр Красок №1\n2. Maytoni продаётся в SVET.KZ",
+      "has_ranking": true,
+      "mentions": {
+        "centr_krasok": {
+          "entity_id": "centr_krasok",
+          "level": "retailer",
+          "first_pos": 21,
+          "count": 1,
+          "recommended": true,
+          "rank": null
+        },
+        "svet_kz": {
+          "entity_id": "svet_kz",
+          "level": "retailer",
+          "first_pos": 60,
+          "count": 1,
+          "recommended": true,
+          "rank": null
+        },
+        "dulux": {
+          "entity_id": "dulux",
+          "level": "manufacturer",
+          "first_pos": 3,
+          "count": 1,
+          "recommended": true,
+          "rank": 1
+        },
+        "maytoni": {
+          "entity_id": "maytoni",
+          "level": "manufacturer",
+          "first_pos": 40,
+          "count": 1,
+          "recommended": true,
+          "rank": 2
+        }
+      }
+    },
+    "negative_english": {
+      "text": "I do not recommend Dulux.",
+      "has_ranking": false,
+      "mentions": {
+        "dulux": {
+          "entity_id": "dulux",
+          "level": "manufacturer",
+          "first_pos": 19,
+          "count": 1,
+          "recommended": false,
+          "rank": null
+        }
+      }
+    },
+    "plain_word": {
+      "text": "Это мой favourite цвет.",
+      "has_ranking": false,
+      "mentions": {
+        "favourite": {
+          "entity_id": "favourite",
+          "level": "manufacturer",
+          "first_pos": 8,
+          "count": 1,
+          "recommended": false,
+          "rank": null
+        }
+      }
+    },
+    "spoof_source": [
+      "map_directory",
+      null
+    ],
+    "relative_citation": [
+      {
+        "url": "/catalog/x",
+        "domain": "",
+        "source_type": "other_web",
+        "owner_entity": null
+      },
+      {
+        "url": "javascript:alert(1)",
+        "domain": "",
+        "source_type": "other_web",
+        "owner_entity": null
+      }
+    ],
+    "invalid_timestamp": {
+      "response_id": "r",
+      "prompt_id": "NONEXISTENT",
+      "query": "wrong",
+      "provider": "unknown",
+      "model": "",
+      "search_mode": "",
+      "timestamp": "yesterday",
+      "city": "",
+      "language": "",
+      "answer_text": "x",
+      "cited_urls": [],
+      "status": "REAL",
+      "collector": "",
+      "evidence_link": "",
+      "notes": ""
+    }
+  }
+}

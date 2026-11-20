@@ -1,0 +1,38 @@
+[
+  {
+    "url": "https://megastroy.kz/catalog/lakokrasochnaya_produktsiya/vodnodispersionnye_kraski/258604/",
+    "robots_url": "https://megastroy.kz/robots.txt",
+    "robots": "User-Agent: *\r\nDisallow: /auth*\r\nDisallow: /basket*\r\nDisallow: /order*\r\nDisallow: /personal/\r\nDisallow: /search/\r\nDisallow: /test/\r\nDisallow: /ajax/\r\nDisallow: *index.php*\r\nDisallow: /*show_include_exec_time=\r\nDisallow: /*show_page_exec_time=\r\nDisallow: /*show_sql_stat=\r\nDisallow: *bitrix*\r\nDisallow: /*clear_cache=\r\nDisallow: /*clear_cache_session=\r\nDisallow: /*ADD_TO_COMPARE_LIST\r\nDisallow: /*ORDER_BY\r\nDisallow: /*print*\r\nDisallow: /*action*\r\nDisallow: /*register=\r\nDisallow: /*password*\r\nDisallow: /*login=\r\nDisallow: /*type=\r\nDisallow: /*sort=\r\nDisallow: /*order=\r\nDisallow: /*logout=\r\nDisallow: /*auth=\r\nDisallow: /*backurl=\r\nDisallow: /*back_url=\r\nDisallow: /*BACKURL=\r\nDisallow: /*BACK_URL=\r\nDisallow: /*back_url_admin=\r\nDisallow: /*?utm_source=\r\nDisallow: *?arrFilter*\r\nDisallow: /*?PAGEN\r\nDisallow: /*?display\r\nDisallow: /*?linerow\r\nDisallow: /filter\r\nDisallow: /apply\r\nCrawl-delay: 20\r\nClean-param: page&sort\r\nSitemap: https://megastroy.kz/sitemap.xml\r\nHost: megastroy.kz\r\nSitemap: http://megastroy.kz/sitemap.xml\r\n",
+    "robots_sha256": "f02017c1eece011642837f339347a3becd2b9dbcacdfdba59c1e582ecadc0f99",
+    "http_status": 200,
+    "title": "Краска Dulux Ultra Resist Для детской BW 2,25л купить по выгодной цене в Казахстане | Megastroy.kz",
+    "chars": 14871,
+    "preview": "Краска Dulux Ultra Resist Для детской BW 2,25л купить по выгодной цене в Казахстане | Megastroy.kz Интернет-магазин представительского класса Каталог СТРОИТЕЛЬНЫЕ МАТЕРИАЛЫ СТРОИТЕЛЬНЫЕ СМЕСИ, ЦЕМЕНТ, ГРУНТОВКА СТРОИТЕЛЬСТВО СТЕН И ПЕРЕГОРОДОК ГИПСОКАРТОН И КОМПЛЕКТУЮЩИЕ ДВП, ДСП, ПЛИТЫ OSB, ФАНЕРА,",
+    "status": "saved",
+    "response_sha256": "6688b4e67360aaa832e666423c4096856bba45c4531de7f76c8e2ad1451a01f9"
+  },
+  {
+    "url": "https://neostrim.kz/catalog/interer-i-otdelka/lakokrasochnye-materialy/kraski-vodoemulsionnye/kraska-dlya-sten-i-potolkov/",
+    "robots_url": "https://neostrim.kz/robots.txt",
+    "robots": "User-Agent: *\nDisallow: */index.php\nDisallow: /bitrix/\nDisallow: /*show_include_exec_time=\nDisallow: /*show_page_exec_time=\nDisallow: /*show_sql_stat=\nDisallow: /*bitrix_include_areas=\nDisallow: /*clear_cache=\nDisallow: /*clear_cache_session=\nDisallow: /*ADD_TO_COMPARE_LIST\nDisallow: /*ORDER_BY\nDisallow: /*?print=\nDisallow: /*&print=\nDisallow: /*print_course=\nDisallow: /*?action=\nDisallow: /*&action=\nDisallow: /*register=\nDisallow: /*forgot_password=\nDisallow: /*change_password=\nDisallow: /*login=\nDisallow: /*logout=\nDisallow: /*auth=\nDisallow: /*backurl=\nDisallow: /*back_url=\nDisallow: /*BACKURL=\nDisallow: /*BACK_URL=\nDisallow: /*back_url_admin=\nDisallow: /*?bxajaxid=\nDisallow: /*&bxajaxid=\nDisallow: /*?view_result=\nDisallow: /*&view_result=\nDisallow: /personal/\nDisallow: /oplata-i-dostavka/\nDisallow: /kak-sdelat-zakaz/\nDisallow: /search/\nDisallow: /auth/\nDisallow: /login/\nDisallow: /return/\nDisallow: *?arrFilter_P1_MIN=*\nDisallow: /policy/\nDisallow: /favorites/\nDisallow: *?SECTION_CODE_PATH=*\nDisallow: *?view=*\nDisallow: *?sort=*\nDisallow: *&sort=*\nDisallow: *?set_filter=*\nDisallow: *?q=*\nDisallow: *&set_filter=*\nDisallow: *&SECTION_CODE_PATH=*\nDisallow: /services/rental/promyshlennyy-pylesos/kompaktnyy-prom-pylesos-vc-20l-x-230v-hilti/\nAllow: /bitrix/components/\nAllow: /bitrix/cache/\nAllow: /bitrix/js/\nAllow: /bitrix/templates/\nAllow: /bitrix/panel/\nHost: https://neostrim.kz/\nSitemap: https://neostrim.kz/sitemap.xml\n",
+    "robots_sha256": "f3025de721f75c1a0e27928ec9ba4c36889937ed4185efe25175d4a2d5813de1",
+    "http_status": 200,
+    "title": "Краска для стен моющаяся | Краска для потолка – Neostrim.kz",
+    "chars": 12738,
+    "preview": "Краска для стен моющаяся | Краска для потолка – Neostrim.kz Главная Каталог Интерьер и отделка Лакокрасочные материалы Краски водоэмульсионные Краска для стен и потолков Краска для стен и потолков Сначала дорогие Сначала дешевые По популярности Краски Dulux 91 товар Краски Marshall 29 товаров Ваш вы",
+    "status": "saved",
+    "response_sha256": "116fc6939030c6bc39a6d58a5c5a6ead9ca85c633c40bedd84246ff6ba7f11ed"
+  },
+  {
+    "url": "https://kraska.kz/almaty/catalog/lakokrasochnye_materialy/kraski_emali/",
+    "robots_url": "https://kraska.kz/robots.txt",
+    "robots": "User-Agent: *\r\nSitemap: https://kraska.kz/sitemap.xml\r\nAllow: /bitrix/components/\r\nAllow: /bitrix/cache/\r\nAllow: /bitrix/js/\r\nAllow: /bitrix/templates/\r\nAllow: /bitrix/panel/\r\nHost: kraska.kz\r\nDisallow: */index.php\r\nDisallow: */index.php\r\nDisallow: /bitrix/\r\nDisallow: /*show_include_exec_time=\r\nDisallow: /*show_page_exec_time=\r\nDisallow: /*show_sql_stat=\r\nDisallow: /*bitrix_include_areas=\r\nDisallow: /*clear_cache=\r\nDisallow: /*clear_cache_session=\r\nDisallow: /*ADD_TO_COMPARE_LIST\r\nDisallow: /*ORDER_BY\r\nDisallow: /*PAGEN\r\nDisallow: /*?print=\r\nDisallow: /*&print=\r\nDisallow: /*print_course=\r\nDisallow: /*?action=\r\nDisallow: /*&action=\r\nDisallow: /*register=\r\nDisallow: /*forgot_password=\r\nDisallow: /*change_password=\r\nDisallow: /*login=\r\nDisallow: /*logout=\r\nDisallow: /*auth=\r\nDisallow: /*backurl=\r\nDisallow: /*back_url=\r\nDisallow: /*BACKURL=\r\nDisallow: /*BACK_URL=\r\nDisallow: /*back_url_admin=\r\nDisallow: /*?utm_source=\r\nDisallow: /*?bxajaxid=\r\nDisallow: /*&bxajaxid=\r\nDisallow: /*?view_result=\r\nDisallow: /*&view_result=\r\nDisallow: /favorites/\r\nDisallow: /catalog/compare/\r\nDisallow: /personal/cart/\r\nDisallow: /create_order_mobile/\r\nDisallow: */filter/\r\nDisallow: /catalog/compare/\r\nDisallow: /personal/cart/\r\nDisallow: /favorites/\r\nDisallow: /create_order_mobile\r\nDisallow: ?tag_\r\nDisallow: /*?clearCity=\r\nDisallow: /*?redirect=\r\nDisallow: /*?sphrase_id=\r\nDisallow: /*?view_as=",
+    "robots_sha256": "0b004bf6c24dda81c60d91e98aa5b3451a091a8adb22b71e711ae20bd31ad25d",
+    "http_status": 200,
+    "title": "Краски, эмали купить в Алматы с доставкой по РК — KRASKA.KZ",
+    "chars": 5232,
+    "preview": "Краски, эмали купить в Алматы с доставкой по РК — KRASKA.KZ Каталог Сравнение Избранное Корзина Лакокрасочные материалы Антикоррозийные краски Грунтовки Дорожная разметка Краски, эмали Лаки Огнезащитные краски Термостойкие краски Фасадные краски Резиновые краски Главная Каталог Гидроизоляция Напольн",
+    "status": "saved",
+    "response_sha256": "6594bb5838359117ed1733dbd093d80f2a1a712acf5917547453f2f8c71e3f79"
+  }
+]

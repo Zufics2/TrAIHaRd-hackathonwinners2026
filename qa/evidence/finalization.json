@@ -1,0 +1,162 @@
+{
+  "branch": "codex/qa-experiments",
+  "tested_base": "0740ac1141519cb3a0f3f7da79719558f42f4540",
+  "compared_claude_commit": "72942e9416f8f7c7d2155f113ca5a5e38dcf2410",
+  "pytest": "...................................xxxxxxxxx........                     [100%]\n=========================== short test summary info ============================\nXFAIL tests/test_qa_adversarial.py::test_brand_as_common_word_requires_context - QA-009: common English word matches manufacturer Favourite\nXFAIL tests/test_qa_adversarial.py::test_numbered_instructions_not_ranking - QA-001: numbered instructions classified as ranked recommendations\nXFAIL tests/test_qa_adversarial.py::test_neutral_list_not_recommendation - QA-002: neutral bullets classified as recommendations\nXFAIL tests/test_qa_adversarial.py::test_source_host_not_query - QA-003: URL substring source spoofing\nXFAIL tests/test_qa_adversarial.py::test_extra_citations_require_absolute_http - QA-004: unsafe and relative extra citations accepted\nXFAIL tests/test_qa_adversarial.py::test_bad_timestamp_rejected - QA-005: invalid timestamp and nonexistent prompt accepted\nXFAIL tests/test_qa_adversarial.py::test_alias_cache_tracks_registry_changes - QA-006: entity ID cache outlives registry aliases\nXFAIL tests/test_qa_adversarial.py::test_url_case_sensitive_paths - QA-007: case-sensitive URL paths merged\nXFAIL tests/test_qa_adversarial.py::test_jsonl_non_object_reported - QA-008: malformed JSON shape raises uncaught AttributeError\n43 passed, 9 xfailed in 0.29s\n",
+  "corpus_documents": [
+    {
+      "doc_id": "ck_contacts",
+      "entity_id": "centr_krasok",
+      "url": "https://centr-krasok.kz/about/contacts/",
+      "fetched_at": "2026-11-20T08:18:34+00:00",
+      "provenance": "fetched_public_page"
+    },
+    {
+      "doc_id": "ck_delivery",
+      "entity_id": "centr_krasok",
+      "url": "https://centr-krasok.kz/about/delivery/",
+      "fetched_at": "2026-11-20T08:18:36+00:00",
+      "provenance": "fetched_public_page"
+    },
+    {
+      "doc_id": "ck_dulux",
+      "entity_id": "centr_krasok",
+      "url": "https://centr-krasok.kz/catalog/dulux/",
+      "fetched_at": "2026-11-20T08:18:39+00:00",
+      "provenance": "fetched_public_page"
+    },
+    {
+      "doc_id": "ck_home",
+      "entity_id": "centr_krasok",
+      "url": "https://centr-krasok.kz/",
+      "fetched_at": "2026-11-20T08:18:28+00:00",
+      "provenance": "fetched_public_page"
+    },
+    {
+      "doc_id": "ck_kids",
+      "entity_id": "centr_krasok",
+      "url": "https://centr-krasok.kz/catalog/dlya_detskoy/",
+      "fetched_at": "2026-11-20T08:18:30+00:00",
+      "provenance": "fetched_public_page"
+    },
+    {
+      "doc_id": "ck_kitchen",
+      "entity_id": "centr_krasok",
+      "url": "https://centr-krasok.kz/catalog/dlya_kukhni_i_vannoy/",
+      "fetched_at": "2026-11-20T08:18:32+00:00",
+      "provenance": "fetched_public_page"
+    },
+    {
+      "doc_id": "kraska_paint",
+      "entity_id": "kraska",
+      "url": "https://kraska.kz/almaty/catalog/lakokrasochnye_materialy/kraski_emali/",
+      "fetched_at": "2026-11-20T08:43:13.065751+00:00",
+      "provenance": "fetched_public_page; bounded research snapshot; not independent product verification"
+    },
+    {
+      "doc_id": "megastroy_kids",
+      "entity_id": "megastroy",
+      "url": "https://megastroy.kz/catalog/lakokrasochnaya_produktsiya/vodnodispersionnye_kraski/258604/",
+      "fetched_at": "2026-11-20T08:43:08.477446+00:00",
+      "provenance": "fetched_public_page; bounded research snapshot; not independent product verification"
+    },
+    {
+      "doc_id": "neostrim_paint",
+      "entity_id": "neostrim",
+      "url": "https://neostrim.kz/catalog/interer-i-otdelka/lakokrasochnye-materialy/kraski-vodoemulsionnye/kraska-dlya-sten-i-potolkov/",
+      "fetched_at": "2026-11-20T08:43:10.216443+00:00",
+      "provenance": "fetched_public_page; bounded research snapshot; not independent product verification"
+    },
+    {
+      "doc_id": "satu_lyustry",
+      "entity_id": "satu",
+      "url": "https://satu.kz/Elektrik-lyustru.html",
+      "fetched_at": "2026-11-20T08:18:53+00:00",
+      "provenance": "fetched_public_page"
+    },
+    {
+      "doc_id": "satu_paint_ala",
+      "entity_id": "satu",
+      "url": "https://satu.kz/almaty/Kraski.html",
+      "fetched_at": "2026-11-20T08:18:49+00:00",
+      "provenance": "fetched_public_page"
+    },
+    {
+      "doc_id": "svet_contact",
+      "entity_id": "svet_kz",
+      "url": "https://svet.kz/contact/",
+      "fetched_at": "2026-11-20T08:18:44+00:00",
+      "provenance": "fetched_public_page"
+    },
+    {
+      "doc_id": "svet_home",
+      "entity_id": "svet_kz",
+      "url": "https://svet.kz/",
+      "fetched_at": "2026-11-20T08:18:41+00:00",
+      "provenance": "fetched_public_page"
+    },
+    {
+      "doc_id": "svet_lyustry",
+      "entity_id": "svet_kz",
+      "url": "https://svet.kz/katalog/lyustry/",
+      "fetched_at": "2026-11-20T08:18:43+00:00",
+      "provenance": "fetched_public_page"
+    },
+    {
+      "doc_id": "svet_maytoni",
+      "entity_id": "svet_kz",
+      "url": "https://svet.kz/brands/maytoni/",
+      "fetched_at": "2026-11-20T08:18:46+00:00",
+      "provenance": "fetched_public_page"
+    }
+  ],
+  "reproducibility": "saved plus two reruns identical",
+  "summary": {
+    "target": {
+      "baseline": {
+        "queries": 4,
+        "top3_rate": 0.75,
+        "citation_rate": 1.0,
+        "mrr": 0.47916666666666663,
+        "changed_page_mrr": 0.3958333333333333
+      },
+      "treatment": {
+        "queries": 4,
+        "top3_rate": 1.0,
+        "citation_rate": 1.0,
+        "mrr": 0.6666666666666666,
+        "changed_page_mrr": 0.6666666666666666
+      }
+    },
+    "negative_control": {
+      "baseline": {
+        "queries": 5,
+        "top3_rate": 0.2,
+        "citation_rate": 0.2,
+        "mrr": 0.1,
+        "changed_page_mrr": 0.0
+      },
+      "treatment": {
+        "queries": 5,
+        "top3_rate": 0.2,
+        "citation_rate": 0.2,
+        "mrr": 0.1,
+        "changed_page_mrr": 0.0
+      }
+    }
+  },
+  "hook_path": "~/Desktop/TrAIHaRd-hackathonwinners2026/.git/hooks/pre-push",
+  "core_hooksPath": "unset in both worktrees",
+  "hook_stdin_tests": {
+    "main_update": 1,
+    "head_to_main": 1,
+    "main_delete": 1,
+    "feat_core_app": 0,
+    "codex_qa": 0,
+    "mixed_contains_main": 1,
+    "empty": 0
+  },
+  "hook_modified": false,
+  "secret_signature_matches": [],
+  "scope": "geolab imports + app AST; interactive UI NOT_RUN; secret signatures are not a full security audit"
+}
