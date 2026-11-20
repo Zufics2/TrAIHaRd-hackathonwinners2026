@@ -278,13 +278,25 @@ elif page == "Контролируемый эксперимент":
     if not exps:
         st.info("Эксперименты не описаны (data/experiments/EXP-*.json).")
     else:
-        exp_id = st.selectbox("Эксперимент", exps)
+        exp_id = st.selectbox("Эксперимент", exps, index=len(exps) - 1)
         exp = X.load_experiment(exp_id)
-        corpus = sorted((X.EXP_DIR / "corpus" / "baseline").glob("*.json"))
-        owners = {json.loads(p.read_text(encoding="utf-8"))["entity_id"] for p in corpus}
-        st.markdown(f"**Гипотеза:** {exp.get('hypothesis', '')}\n\n**Изменённые документы:** {', '.join(exp['changed_doc_ids'])}")
-        st.info(f"Ограничение корпуса: {len(corpus)} документов, {len(owners)} владельцев "
-                f"({', '.join(sorted(owners))}). Конкурентов-магазинов мало, поэтому Top-3 насыщается и не показывает эффект.")
+        try:
+            corpus_dir = X.resolve_corpus(exp, None)
+            corpus = [json.loads(p.read_text(encoding="utf-8")) for p in sorted((corpus_dir / "baseline").glob("*.json"))]
+        except (ValueError, OSError, json.JSONDecodeError) as exc:
+            st.error(f"Корпус эксперимента недоступен: {exc}")
+            st.stop()
+        owners = sorted({d["entity_id"] for d in corpus})
+        roles = [q["role"] for q in exp["queries"]]
+        n_target, n_neg = roles.count("target"), roles.count("negative_control")
+        st.markdown(f"**Гипотеза:** {exp.get('hypothesis', '')}\n\n"
+                    f"**Изменённые документы (treatment):** {', '.join(exp['changed_doc_ids'])} · "
+                    f"**корпус:** `{corpus_dir.relative_to(ROOT)}`")
+        c1, c2, c3, c4 = st.columns(4)
+        c1.metric("Документов в корпусе", len(corpus))
+        c2.metric("Владельцев документов", len(owners), help=", ".join(owners))
+        c3.metric("Целевых запросов", n_target)
+        c4.metric("Negative controls", n_neg)
         saved = X.EXP_DIR / "results" / f"{exp_id}_result.json"
         if st.button("Перезапустить baseline и treatment", type="primary"):
             try:
@@ -298,21 +310,40 @@ elif page == "Контролируемый эксперимент":
             st.caption(f"Показан сохранённый результат: {saved.relative_to(ROOT)}")
         if res and res["experiment_id"] == exp_id:
             s = res["summary"]
-            tq, nq = s["target"]["baseline"]["queries"], s["negative_control"]["baseline"]["queries"]
-            c1, c2, c3, c4 = st.columns(4)
+            st.subheader("Целевые запросы: baseline → treatment")
+            c1, c2, c3 = st.columns(3)
             bm, tm = s["target"]["baseline"].get("mrr"), s["target"]["treatment"].get("mrr")
-            metric_n(c1, "MRR, целевые запросы", f"{fmt(bm, False)} → {fmt(tm, False)}", tq,
-                     "Mean Reciprocal Rank: среднее 1/позиция клиента (0, если его нет). Это НЕ средняя позиция.")
+            metric_n(c1, "MRR владельца", f"{fmt(bm, False)} → {fmt(tm, False)}", s["target"]["baseline"]["queries"],
+                     "Mean Reciprocal Rank: среднее 1/позиция первого документа клиента в top-k (0, если нет). Это НЕ средняя позиция.")
             bt, tt = s["target"]["baseline"]["top3_rate"], s["target"]["treatment"]["top3_rate"]
-            metric_n(c2, "Top-3, целевые", f"{fmt(bt)} → {fmt(tt)}", tq, "насыщен при малом корпусе — не является результатом улучшения")
+            metric_n(c2, "Hit@3", f"{fmt(bt)} → {fmt(tt)}", s["target"]["baseline"]["queries"],
+                     "доля целевых запросов, где клиент в первых 3 владельцах (поле top3_rate)")
             bc, tc = s["target"]["baseline"]["citation_rate"], s["target"]["treatment"]["citation_rate"]
-            metric_n(c3, "Цитирование клиента, целевые", f"{fmt(bc)} → {fmt(tc)}", tq)
-            nb, nt = s["negative_control"]["baseline"]["top3_rate"], s["negative_control"]["treatment"]["top3_rate"]
-            metric_n(c4, "Negative control Top-3", f"{fmt(nb)} → {fmt(nt)}", nq, "рост здесь = ухудшение релевантности")
+            metric_n(c3, "Citation Rate", f"{fmt(bc)} → {fmt(tc)}", s["target"]["baseline"]["queries"],
+                     "доля целевых запросов, где документ клиента попал в top-k цитат. Не путать с Hit@3.")
+            if "changed_page_mrr" in s["target"]["baseline"]:
+                st.caption(f"MRR изменённой страницы: {fmt(s['target']['baseline']['changed_page_mrr'], False)} → "
+                           f"{fmt(s['target']['treatment']['changed_page_mrr'], False)}")
+            st.subheader("Negative controls (рост = ухудшение релевантности)")
+            n = s["negative_control"]
+            c1, c2, c3 = st.columns(3)
+            metric_n(c1, "MRR · controls", f"{fmt(n['baseline'].get('mrr'), False)} → {fmt(n['treatment'].get('mrr'), False)}", n["baseline"]["queries"])
+            metric_n(c2, "Hit@3 · controls", f"{fmt(n['baseline']['top3_rate'])} → {fmt(n['treatment']['top3_rate'])}", n["baseline"]["queries"])
+            metric_n(c3, "Citation Rate · controls", f"{fmt(n['baseline']['citation_rate'])} → {fmt(n['treatment']['citation_rate'])}", n["baseline"]["queries"])
             df = pd.DataFrame(res["per_query"])
             for col in ("baseline_entities", "treatment_entities"):
                 df[col] = df[col].map(lambda v: ", ".join(v))
             st.dataframe(df, hide_index=True, width="stretch")
+            ev = res.get("evidence", {})
+            lim = [f"Корпус: {len(corpus)} документов, {len(owners)} владельцев — малая exploratory-выборка без qrels и holdout; статистического обобщения нет.",
+                   f"Целевых запросов {n_target}, negative controls {n_neg}: одна смена позиции меняет MRR/Hit@3 на десятки п.п.",
+                   "Лексический BM25 ≠ семантический поиск, query fan-out и знания модели о брендах в реальных AI-поисковиках.",
+                   "Treatment — неопубликованное предложение (production не изменён); эффект на внешние AI не измерен."]
+            if ev:
+                lim.append(f"Entity ranks negative controls неизменны: {ev.get('negative_control_entity_ranks_unchanged')}. Scope: {ev.get('scope', '')}.")
+            else:
+                lim.append("Сохранённый результат создан до добавления evidence-блока (hash/provenance) — перезапустите для полной трассировки.")
+            st.markdown("**Ограничения доказательств**\n\n" + "\n".join(f"- {x}" for x in lim))
 
 elif page == "Данные и ошибки":
     st.header("Происхождение данных и ошибки импорта")

@@ -83,6 +83,8 @@ def test_dashboard_shows_verified_fixture(tmp_path, monkeypatch):
     assert not at.exception
     vals = {m.label: m.value for m in at.metric}
     assert vals["Mention rate"] == "100%" and vals["Top-3 rate"] == "100%"
+    assert any("Малая выборка: N = 1" in w.value for w in at.warning)          # small-sample flag
+    assert not any("MRR" in k or "Hit@3" in k for k in vals)                     # no experiment metrics in real KPIs
     at.sidebar.selectbox[1].set_value("brand_discovery").run()
     assert not at.exception and not at.metric  # FIX-002 is pending -> no KPI, N/A info
     assert any("pending" in w.value for w in at.warning)
@@ -96,3 +98,18 @@ def test_replace_same_file_version(tmp_path, monkeypatch):
     import pytest
     with pytest.raises(ValueError):
         store.save_upload("_hidden.csv", b"x")
+
+
+def test_dashboard_experiment_page_uses_selected_corpus():
+    from streamlit.testing.v1 import AppTest
+    at = AppTest.from_file(str(ROOT / "app.py"), default_timeout=30).run()
+    at.sidebar.radio[0].set_value("Контролируемый эксперимент").run()
+    for exp_id, docs, owners, neg, hit3 in [("EXP-001-COMPETITIVE-v1", 15, 6, 5, "75% → 100%"), ("EXP-001", 12, 3, 3, "100% → 100%")]:
+        sel = next(s for s in at.selectbox if s.label == "Эксперимент")
+        sel.set_value(exp_id).run()
+        assert not at.exception
+        m = {x.label: x.value for x in at.metric}
+        assert m["Документов в корпусе"] == str(docs) and m["Владельцев документов"] == str(owners)
+        assert m["Negative controls"] == str(neg) and m["Целевых запросов"] == "4"
+        assert m["Hit@3"] == hit3 and m["Citation Rate"] == "100% → 100%"
+        assert m["Hit@3 · controls"] == ("20% → 20%" if neg == 5 else "33% → 33%")
