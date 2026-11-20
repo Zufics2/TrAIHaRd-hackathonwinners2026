@@ -19,6 +19,7 @@ class Entity:
     domains: tuple[str, ...] = ()
     is_client: bool = False
     status: str = "observed"
+    case_sensitive: bool = False  # alias is also a common word: match only as written (e.g. "Favourite")
     sold_by: dict = field(default_factory=dict, hash=False, compare=False)
     cities: dict = field(default_factory=dict, hash=False, compare=False)
 
@@ -54,6 +55,7 @@ def load_registry(path: Path = REGISTRY_PATH) -> Registry:
             id=r["id"], name=r["name"], level="retailer", category=r.get("category", ""),
             aliases=tuple(r.get("aliases", [])), domains=tuple(r.get("domains", [])),
             is_client=bool(r.get("is_client")), status=r.get("status", "observed"),
+            case_sensitive=bool(r.get("case_sensitive", False)),
             cities=r.get("cities", {}),
         )
     for m in raw.get("manufacturers", []):
@@ -63,5 +65,6 @@ def load_registry(path: Path = REGISTRY_PATH) -> Registry:
             id=m["id"], name=m["name"], level="manufacturer", category=m.get("category", ""),
             aliases=tuple(m.get("aliases", [])), domains=tuple(m.get("domains", [])),
             status=m.get("status", "observed"), sold_by=m.get("sold_by", {}),
+            case_sensitive=bool(m.get("case_sensitive", False)),
         )
     return Registry(entities=ents, cities=raw.get("cities", {}))

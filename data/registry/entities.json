@@ -353,7 +353,9 @@
       "sold_by": {
         "svet_kz": "observed: svet.kz/brands/favourite/"
       },
-      "status": "observed"
+      "status": "observed",
+      "case_sensitive": true,
+      "note": "'favourite' is a common English word; matched case-sensitively (QA-009)"
     },
     {
       "id": "lightstar",

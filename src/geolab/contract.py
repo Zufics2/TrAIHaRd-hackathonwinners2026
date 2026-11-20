@@ -290,6 +290,9 @@ def read_rows(name: str, content: bytes) -> tuple[list[tuple[int, dict]], list[I
             except json.JSONDecodeError as exc:
                 issues.append(Issue(i, "*", "error", f"невалидный JSON: {exc.msg}"))
                 continue
+            if not isinstance(obj, dict):
+                issues.append(Issue(i, "*", "error", f"строка JSONL должна быть объектом {{...}}, получено {type(obj).__name__}"))
+                continue
             if isinstance(obj.get("cited_urls"), list):
                 obj["cited_urls"] = " | ".join(obj["cited_urls"])
             rows.append((i, {k: "" if v is None else str(v) for k, v in obj.items()}))

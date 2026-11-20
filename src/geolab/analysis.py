@@ -27,15 +27,43 @@ RECOMMEND_CUES = (
 NEGATIVE_CUES = ("не рекоменд", "не стоит", "избегайте", "не советую", "не продает", "не продают", "нет в ассортименте",
                  "не специализир", "не подойдет", "not recommend", "avoid", "ұсынбаймын")
 
+# Each needle is "host-suffix" or "host-suffix/path-prefix"; matched against the parsed host and path only,
+# never against the query string (https://evil.example/?next=https://2gis.kz/ is NOT a map directory).
 SOURCE_TYPES = {
-    "map_directory": ("2gis.kz", "2gis.ru", "2gis.com", "go.2gis.com", "yandex.kz/maps", "yandex.ru/maps",
-                      "maps.google", "maps.app.goo.gl", "google.com/maps"),
-    "marketplace": ("kaspi.kz", "wildberries", "ozon.", "satu.kz", "market.kz", "olx.kz", "flip.kz", "halykmarket"),
+    "map_directory": ("2gis.kz", "2gis.ru", "2gis.com", "yandex.kz/maps", "yandex.ru/maps", "yandex.com/maps",
+                      "maps.google.com", "maps.app.goo.gl", "google.com/maps", "google.kz/maps", "goo.gl/maps"),
+    "marketplace": ("kaspi.kz", "wildberries.ru", "wildberries.kz", "wb.ru", "ozon.ru", "ozon.kz", "satu.kz", "market.kz",
+                    "olx.kz", "flip.kz", "halykmarket.kz", "e-katalog.kz"),
     "social": ("instagram.com", "facebook.com", "youtube.com", "youtu.be", "tiktok.com", "t.me", "vk.com",
-               "pinterest.", "dzen.ru"),
-    "review_q&a": ("otzovik", "irecommend", "yell.kz", "flamp", "reddit.com", "otzyvy"),
+               "pinterest.com", "dzen.ru", "threads.net"),
+    "review_q&a": ("otzovik.com", "irecommend.ru", "yell.kz", "flamp.kz", "flamp.ru", "reddit.com"),
     "encyclopedia": ("wikipedia.org",),
 }
+
+
+def _host_path(url: str) -> tuple[str, str]:
+    try:
+        p = urlsplit(url)
+        host = (p.hostname or "").lower().rstrip(".")
+    except ValueError:
+        return "", ""
+    return (host[4:] if host.startswith("www.") else host), (p.path or "/").lower()
+
+
+def _needle_match(host: str, path: str, needle: str) -> bool:
+    nh, _, np_ = needle.partition("/")
+    if not (host == nh or host.endswith("." + nh)):
+        return False
+    return not np_ or path.startswith("/" + np_)
+
+
+def is_web_url(url: str) -> bool:
+    """Absolute http(s) URL with a host. Rejects javascript:, data:, relative paths (QA-004)."""
+    try:
+        p = urlsplit(url.strip())
+    except ValueError:
+        return False
+    return p.scheme in ("http", "https") and bool(p.hostname)
 
 
 @dataclass
@@ -87,20 +115,37 @@ def _alias_pattern(alias: str) -> re.Pattern:
     return re.compile(rf"(?<![\w.]){a}(?![\w])")
 
 
-_PATTERN_CACHE: dict[str, list[re.Pattern]] = {}
+# Keyed by everything that defines the patterns, so a registry edit with the same id never reuses stale
+# patterns (QA-006).
+_PATTERN_CACHE: dict[tuple, list[re.Pattern]] = {}
+
+
+def _cs_pattern(alias: str) -> re.Pattern:
+    a = re.escape(alias.replace("ё", "е")).replace(r"\ ", r"[\s\-]+")
+    return re.compile(rf"(?<![\w.]){a}(?![\w])")
+
+
+def _patterns(entity: Entity) -> list[tuple[re.Pattern, bool]]:
+    key = (entity.id, entity.name, entity.aliases, entity.domains, entity.case_sensitive)
+    pats = _PATTERN_CACHE.get(key)
+    if pats is None:
+        aliases = sorted(set(entity.aliases) | {entity.name} | set(entity.domains), key=len, reverse=True)
+        # Brands that are also common words ("favourite") match only in their written case (QA-009);
+        # domains are always case-insensitive.
+        pats = [(_cs_pattern(a), True) if entity.case_sensitive and a not in entity.domains else (_alias_pattern(a), False)
+                for a in aliases if a]
+        _PATTERN_CACHE[key] = pats
+    return pats
 
 
 def find_entity_spans(text: str, entity: Entity) -> list[int]:
-    pats = _PATTERN_CACHE.get(entity.id)
-    if pats is None:
-        aliases = sorted(set(entity.aliases) | {entity.name} | set(entity.domains), key=len, reverse=True)
-        pats = [_alias_pattern(a) for a in aliases if a]
-        _PATTERN_CACHE[entity.id] = pats
+    pats = _patterns(entity)
     norm = normalize(text)
+    raw = text.replace("ё", "е")  # same length as norm, positions align
     hits: set[int] = set()
     covered: list[tuple[int, int]] = []
-    for p in pats:  # longest alias first; skip overlaps so "Центр Красок №1" counts once
-        for m in p.finditer(norm):
+    for p, cs in pats:  # longest alias first; skip overlaps so "Центр Красок №1" counts once
+        for m in p.finditer(raw if cs else norm):
             if any(s <= m.start() < e for s, e in covered):
                 continue
             covered.append((m.start(), m.end()))
@@ -139,9 +184,9 @@ def url_key(url: str) -> str:
 def classify_source(url: str, registry: Registry) -> tuple[str, str | None]:
     domain = normalize_domain(url)
     owner = registry.entity_for_domain(domain)
-    low = url.lower()
+    host, path = _host_path(url)
     for stype, needles in SOURCE_TYPES.items():
-        if any(n in low for n in needles):
+        if any(_needle_match(host, path, n) for n in needles):
             return stype, owner.id if owner else None
     if owner is not None:
         if owner.level == "retailer":
@@ -155,8 +200,10 @@ def extract_citations(text: str, registry: Registry, extra_urls: list[str] | Non
     out: list[Citation] = []
     for raw in list(URL_RE.findall(text)) + list(extra_urls or []):
         url = clean_url(raw.strip())
+        if not is_web_url(url):
+            continue
         key = url_key(url)
-        if not url or key in seen:
+        if key in seen:
             continue
         seen.add(key)
         stype, owner = classify_source(url, registry)
@@ -164,53 +211,97 @@ def extract_citations(text: str, registry: Registry, extra_urls: list[str] | Non
     return out
 
 
+SENT_BOUNDARY = re.compile(r"[.!?…](?=\s|$)|\n")
+# Words that introduce a list of suggestions (in addition to RECOMMEND_CUES).
+LIST_INTRO_CUES = ("вариант", "можно купить", "купить можно", "где купить", "стоит рассмотреть", "рассмотрите",
+                   "подойдут", "подходят", "советую", "посмотрите", "обратите внимание", "options", "consider")
+MARKUP_LEAD = re.compile(r"^[\s*_#>\[\]`\"'«“(]+")
+
+
 def _sentence_around(text: str, pos: int) -> str:
-    start = max(text.rfind(".", 0, pos), text.rfind("\n", 0, pos)) + 1
-    ends = [i for i in (text.find(".", pos), text.find("\n", pos)) if i != -1]
-    end = min(ends) if ends else len(text)
-    return text[start:end]
+    """Sentence containing pos. A dot inside a token (svet.kz) is not a boundary."""
+    start = 0
+    for m in SENT_BOUNDARY.finditer(text, 0, pos):
+        start = m.end()
+    m = SENT_BOUNDARY.search(text, pos)
+    return text[start:m.start() if m else len(text)]
+
+
+def _head_entity(item: str, entities: list[Entity]) -> str | None:
+    """Entity that the list item is ABOUT: it must open the item (at most one word before it, e.g.
+    "Магазин SVET.KZ"). "Откройте сайт Dulux" is an instruction, not an item about Dulux (QA-001)."""
+    best: tuple[int, str] | None = None
+    for e in entities:
+        spans = find_entity_spans(item, e)
+        if not spans:
+            continue
+        prefix = MARKUP_LEAD.sub("", item[:spans[0]])
+        if len(re.findall(r"\w+", prefix)) <= 1 and (best is None or spans[0] < best[0]):
+            best = (spans[0], e.id)
+    return best[1] if best else None
+
+
+def _list_items(text: str) -> list[dict]:
+    """Numbered/bulleted items with the line that introduces their list."""
+    items, intro = [], ""
+    for line in text.splitlines():
+        m = NUMBERED_RE.match(line) or BULLET_RE.match(line)
+        if m:
+            items.append({"text": m.groups()[-1], "numbered": bool(NUMBERED_RE.match(line)), "intro": intro})
+        elif line.strip():
+            intro = line
+    return items
 
 
 def parse_ranking(text: str, registry: Registry, entities: list[Entity]) -> list[str]:
-    """Entities in order of an explicit numbered list. Only the first entity per item counts."""
+    """Entities heading the items of an explicit numbered list, in list order."""
     ranked: list[str] = []
-    for line in text.splitlines():
-        m = NUMBERED_RE.match(line)
-        if not m:
-            continue
-        item = m.group(2)
-        best: tuple[int, str] | None = None
-        for e in entities:
-            spans = find_entity_spans(item, e)
-            if spans and (best is None or spans[0] < best[0]):
-                best = (spans[0], e.id)
-        if best and best[1] not in ranked:
-            ranked.append(best[1])
+    for it in _list_items(text):
+        if it["numbered"]:
+            head = _head_entity(it["text"], entities)
+            if head and head not in ranked:
+                ranked.append(head)
     return ranked
 
 
+def _has(text: str, cues) -> bool:
+    t = normalize(text)
+    return any(c in t for c in cues)
+
+
 def analyze_answer(text: str, registry: Registry, cited_urls: list[str] | None = None) -> AnswerAnalysis:
+    """Ranking: >=2 numbered items each headed by an entity. Recommendation (heuristic):
+    a recommendation cue in the entity's sentence, OR the entity heads an item of a list whose
+    introduction suggests options / of an explicit ranking without a neutral intro.
+    Neutral lists ("Упомянутые названия:") and negated items are not recommendations (QA-002)."""
     entities = list(registry.entities.values())
     res = AnswerAnalysis()
-    numbered_lines = [ln for ln in text.splitlines() if NUMBERED_RE.match(ln)]
-    res.has_ranking = len(numbered_lines) >= 2
+    items = _list_items(text)
+    for it in items:
+        it["head"] = _head_entity(it["text"], entities)
+    ranked = [it["head"] for it in items if it["numbered"] and it["head"]]
+    res.has_ranking = len(ranked) >= 2
     if res.has_ranking:
-        res.ranked_entities = parse_ranking(text, registry, entities)
-    list_lines = numbered_lines + [ln for ln in text.splitlines() if BULLET_RE.match(ln)]
+        res.ranked_entities = list(dict.fromkeys(ranked))
     norm_text = normalize(text)
     for e in entities:
         spans = find_entity_spans(text, e)
         if not spans:
             continue
         recommended = False
-        for pos in spans:
-            sent = _sentence_around(norm_text, pos)
-            if any(c in sent for c in NEGATIVE_CUES):
+        for it in items:
+            if it["head"] != e.id or _has(it["text"], NEGATIVE_CUES):
                 continue
-            in_list = any(find_entity_spans(ln, e) for ln in list_lines)
-            if in_list or any(c in sent for c in RECOMMEND_CUES):
+            intro_ok = _has(it["intro"], RECOMMEND_CUES + LIST_INTRO_CUES) and not _has(it["intro"], NEGATIVE_CUES)
+            if intro_ok or (it["numbered"] and res.has_ranking and not it["intro"].strip()):
                 recommended = True
                 break
+        if not recommended:
+            for pos in spans:
+                sent = _sentence_around(norm_text, pos)
+                if not any(c in sent for c in NEGATIVE_CUES) and any(c in sent for c in RECOMMEND_CUES):
+                    recommended = True
+                    break
         rank = res.ranked_entities.index(e.id) + 1 if e.id in res.ranked_entities else None
         res.mentions[e.id] = Mention(e.id, e.level, spans[0], len(spans), recommended, rank)
     res.citations = extract_citations(text, registry, cited_urls)
