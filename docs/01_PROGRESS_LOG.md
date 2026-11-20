@@ -54,7 +54,7 @@
 
 ---
 
-## 2026-11-20 13:40–14:10 (Asia/Almaty) · Directive 002: data contract + real-data ingestion
+## 2026-11-20 13:25–13:45 (Asia/Almaty) · Directive 002: data contract + real-data ingestion
 
 **OWNER:** P1 / Claude Code · ветка `feat/core-app`
 
